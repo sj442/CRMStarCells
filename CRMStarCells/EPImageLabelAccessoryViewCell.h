@@ -17,6 +17,9 @@ static NSString* EPImageLabelAccessoryViewCellIdentifier = @"ImageLabelAccessory
 @property (weak, nonatomic) UILabel *subTitleLabel;
 @property (weak, nonatomic) UILabel *descriptionLabel;
 @property (weak, nonatomic) UILabel *accessoryLabel;
+@property CGFloat contentWidth;
+
++(CGFloat)contentLabelWidth;
 
 - (void)configureWithTitle:(NSString *)title subTitle:(NSString *)subTitle descriptionText:(NSString *)descriptionText accessoryText:(NSString *)accessoryText;
 

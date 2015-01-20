@@ -13,5 +13,9 @@
 
 @property (weak, nonatomic) UILabel *titleLabel;
 @property (weak, nonatomic) UILabel *activityLabel;
+@property CGFloat contentWidth;
+
+- (void)configureWithTitle:(NSString *)title activityText:(NSString *)activityText;
+
 
 @end

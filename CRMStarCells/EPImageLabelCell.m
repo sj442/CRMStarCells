@@ -10,6 +10,17 @@
 
 @implementation EPImageLabelCell
 
+- (void)layoutSubviews
+{
+  [super layoutSubviews];
+  CGRect frame = self.clockImageView.frame;
+  frame.origin.y = CGRectGetMaxY(self.contentView.frame)-22;
+  self.clockImageView.frame = frame;
+  frame = self.timeLabel.frame;
+  frame.origin.y = CGRectGetMaxY(self.contentView.frame) -24;
+  self.timeLabel.frame = frame;
+}
+
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
   self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];

@@ -20,6 +20,8 @@
 		3FAED1E01A6D820D00E18FEA /* clock.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FAED1DF1A6D820D00E18FEA /* clock.png */; };
 		3FAED1E61A6D85FD00E18FEA /* EPTitleTextImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FAED1E51A6D85FD00E18FEA /* EPTitleTextImageCell.m */; };
 		3FAED1E81A6DA4E500E18FEA /* sampleContentImage.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 3FAED1E71A6DA4E500E18FEA /* sampleContentImage.jpeg */; };
+		3FB9858C1A6EEE9B0078CB86 /* EPImageLabelActivityImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB9858B1A6EEE9B0078CB86 /* EPImageLabelActivityImageCell.m */; };
+		3FB9858F1A6EF1600078CB86 /* EPImageLabelActivityLabelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB9858E1A6EF1600078CB86 /* EPImageLabelActivityLabelCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +59,10 @@
 		3FAED1E41A6D85FD00E18FEA /* EPTitleTextImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EPTitleTextImageCell.h; sourceTree = "<group>"; };
 		3FAED1E51A6D85FD00E18FEA /* EPTitleTextImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPTitleTextImageCell.m; sourceTree = "<group>"; };
 		3FAED1E71A6DA4E500E18FEA /* sampleContentImage.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sampleContentImage.jpeg; sourceTree = "<group>"; };
+		3FB9858A1A6EEE9B0078CB86 /* EPImageLabelActivityImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EPImageLabelActivityImageCell.h; sourceTree = "<group>"; };
+		3FB9858B1A6EEE9B0078CB86 /* EPImageLabelActivityImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPImageLabelActivityImageCell.m; sourceTree = "<group>"; };
+		3FB9858D1A6EF1600078CB86 /* EPImageLabelActivityLabelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EPImageLabelActivityLabelCell.h; sourceTree = "<group>"; };
+		3FB9858E1A6EF1600078CB86 /* EPImageLabelActivityLabelCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPImageLabelActivityLabelCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +114,10 @@
 				3F81163A1A6EA222001CAB49 /* EPImageLabelAccessoryViewCell.m */,
 				3F81163C1A6EB18D001CAB49 /* EPImageLabelActivityCell.h */,
 				3F81163D1A6EB18D001CAB49 /* EPImageLabelActivityCell.m */,
+				3FB9858A1A6EEE9B0078CB86 /* EPImageLabelActivityImageCell.h */,
+				3FB9858B1A6EEE9B0078CB86 /* EPImageLabelActivityImageCell.m */,
+				3FB9858D1A6EF1600078CB86 /* EPImageLabelActivityLabelCell.h */,
+				3FB9858E1A6EF1600078CB86 /* EPImageLabelActivityLabelCell.m */,
 				3FAED1E41A6D85FD00E18FEA /* EPTitleTextImageCell.h */,
 				3FAED1E51A6D85FD00E18FEA /* EPTitleTextImageCell.m */,
 				3FAED1DC1A6D78EA00E18FEA /* NSString+EP.h */,
@@ -251,8 +261,10 @@
 				3F81163B1A6EA222001CAB49 /* EPImageLabelAccessoryViewCell.m in Sources */,
 				3FAED1E61A6D85FD00E18FEA /* EPTitleTextImageCell.m in Sources */,
 				3F81163E1A6EB18D001CAB49 /* EPImageLabelActivityCell.m in Sources */,
+				3FB9858F1A6EF1600078CB86 /* EPImageLabelActivityLabelCell.m in Sources */,
 				3FAED1B31A6D5E3600E18FEA /* AppDelegate.m in Sources */,
 				3FAED1D81A6D639C00E18FEA /* EPImageLabelCell.m in Sources */,
+				3FB9858C1A6EEE9B0078CB86 /* EPImageLabelActivityImageCell.m in Sources */,
 				3FAED1D51A6D635300E18FEA /* ImageLabelTableViewController.m in Sources */,
 				3FAED1DE1A6D78EA00E18FEA /* NSString+EP.m in Sources */,
 				3FAED1B01A6D5E3600E18FEA /* main.m in Sources */,

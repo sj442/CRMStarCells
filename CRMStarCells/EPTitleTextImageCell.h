@@ -18,6 +18,8 @@ static NSString* EPTitleTextImageCellIdentifier = @"TitleTextImage";
 @property (weak, nonatomic) UILabel *contentLabel;
 @property CGFloat contentWidth;
 
++(CGFloat)contentLabelWidth;
+
 - (void)configureWithTitle:(NSString *)title contentText:(NSString *)contentText contentImage:(UIImage *)contentImage time:(NSString *)time;
 
 - (void)congifureWithTitle:(NSString *)title image:(UIImage *)image time:(NSString *)time;

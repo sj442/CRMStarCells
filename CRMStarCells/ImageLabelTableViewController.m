@@ -10,6 +10,8 @@
 #import "EPImageLabelCell.h"
 #import "EPTitleTextImageCell.h"
 #import "EPImageLabelAccessoryViewCell.h"
+#import "EPImageLabelActivityLabelCell.h"
+#import "NSString+EP.h"
 
 @interface ImageLabelTableViewController ()
 
@@ -23,6 +25,7 @@
   [self.tableView registerClass:[EPImageLabelCell class] forCellReuseIdentifier:EPImageLabelCellIdentifier];
   [self.tableView registerClass:[EPTitleTextImageCell class] forCellReuseIdentifier:EPTitleTextImageCellIdentifier];
   [self.tableView registerClass:[EPImageLabelAccessoryViewCell class] forCellReuseIdentifier:EPImageLabelAccessoryViewCellIdentifier];
+  [self.tableView registerClass:[EPImageLabelActivityLabelCell class] forCellReuseIdentifier:EPImageLabelActivityLabelCellIdentifier];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -34,7 +37,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 4;
+    return 5;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -70,10 +73,10 @@
     }
     NSString *title = @"Aaliyah Cramer";
     NSString *time = @"just now";
-    NSString *fullText = @"This sounded a very good reason, and Alice was quite pleased to know it. 'I never thought of that before!' She inquisitively said.";
+    NSString *fullText = @"This sounded a very good reason, and Alice was quite pleased to know it. sdhds nbcsad shskdjh dashjdsa sdkhsjdfkhds dshdsdhdskl dcsdsv djhsdskjh sdfsdf dfsd dfsdsd vdfd kvjdklfjs";
     [cell configureWithTitle:title contentText:fullText contentImage:nil time:time];
     return cell;
-  } else {
+  } else if (indexPath.section ==3) {
     EPImageLabelAccessoryViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:EPImageLabelAccessoryViewCellIdentifier];
     if (!cell) {
       cell = [[EPImageLabelAccessoryViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:EPImageLabelAccessoryViewCellIdentifier];
@@ -81,15 +84,36 @@
     NSString *title = @"Aaliyah Cramer";
     [cell configureWithTitle:title subTitle:@"GE Corporate Pilot" descriptionText:@"This sounded a very good reason, and Alice was quite pleased to know it. 'I never thought of that before!' She inquisitively said." accessoryText:@"$15K"];
     return cell;
+  } else {
+    EPImageLabelActivityLabelCell *cell = [self.tableView dequeueReusableCellWithIdentifier:EPImageLabelActivityLabelCellIdentifier];
+    if (!cell) {
+      cell = [[EPImageLabelActivityLabelCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:EPImageLabelActivityLabelCellIdentifier];
+    }
+    NSString *title = @"Aaliyah Cramer";
+    [cell configureWithTitle:title activityText:@"Qualified Peter Verrillo" score:@3.5 OutOf:@"out of 4"];
+    return cell;
   }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  if (indexPath.section ==3) {
-    return 130;
+  if (indexPath.section ==0) {
+    return (17+18+11)+100+ (14+18) ;
+  } else if (indexPath.section == 1) {
+    NSString *fullText = @"This sounded a very good reason, and Alice was quite pleased to know it. 'I never thought of that before!' She inquisitively said.";
+    CGFloat height = [fullText heightForTextHavingWidth:[EPTitleTextImageCell contentLabelWidth] font:[UIFont systemFontOfSize:14] maxLines:3];
+    return (17+18+11)+11+100+ (14+18) +height;
+  } else if (indexPath.section ==2) {
+    NSString *fullText = @"This sounded a very good reason, and Alice was quite pleased to know it. sdhds nbcsad shskdjh dashjdsa sdkhsjdfkhds dshdsdhdskl dcsdsv djhsdskjh sdfsdf dfsd dfsdsd vdfd kvjdklfjs";
+    CGFloat height = [fullText heightForTextHavingWidth:[EPTitleTextImageCell contentLabelWidth] font:[UIFont systemFontOfSize:14] maxLines:4];
+    return (17+18+5) +height+ (14+18);
+  } else if (indexPath.section == 3) {
+    NSString *text = @"This sounded a very good reason, and Alice was quite pleased to know it. 'I never thought of that before!' She inquisitively said.";
+    CGFloat height = [text heightForTextHavingWidth:[EPImageLabelAccessoryViewCell contentLabelWidth] font:[UIFont systemFontOfSize:12] maxLines:2];
+    return (17+18+5) + 17+ 3 + height + (14+ 18);
+  } else {
+    return (18+11+17)+(14+18)+17;
   }
-  return 380;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
