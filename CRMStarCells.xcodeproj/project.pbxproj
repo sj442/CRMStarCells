@@ -7,13 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F81163B1A6EA222001CAB49 /* EPImageLabelAccessoryViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F81163A1A6EA222001CAB49 /* EPImageLabelAccessoryViewCell.m */; };
+		3F81163E1A6EB18D001CAB49 /* EPImageLabelActivityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F81163D1A6EB18D001CAB49 /* EPImageLabelActivityCell.m */; };
 		3FAED1B01A6D5E3600E18FEA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FAED1AF1A6D5E3600E18FEA /* main.m */; };
 		3FAED1B31A6D5E3600E18FEA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FAED1B21A6D5E3600E18FEA /* AppDelegate.m */; };
-		3FAED1B61A6D5E3600E18FEA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FAED1B51A6D5E3600E18FEA /* ViewController.m */; };
-		3FAED1B91A6D5E3600E18FEA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FAED1B71A6D5E3600E18FEA /* Main.storyboard */; };
 		3FAED1BB1A6D5E3600E18FEA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FAED1BA1A6D5E3600E18FEA /* Images.xcassets */; };
 		3FAED1BE1A6D5E3600E18FEA /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FAED1BC1A6D5E3600E18FEA /* LaunchScreen.xib */; };
 		3FAED1CA1A6D5E3600E18FEA /* CRMStarCellsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FAED1C91A6D5E3600E18FEA /* CRMStarCellsTests.m */; };
+		3FAED1D51A6D635300E18FEA /* ImageLabelTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FAED1D41A6D635300E18FEA /* ImageLabelTableViewController.m */; };
+		3FAED1D81A6D639C00E18FEA /* EPImageLabelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FAED1D71A6D639C00E18FEA /* EPImageLabelCell.m */; };
+		3FAED1DE1A6D78EA00E18FEA /* NSString+EP.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FAED1DD1A6D78EA00E18FEA /* NSString+EP.m */; };
+		3FAED1E01A6D820D00E18FEA /* clock.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FAED1DF1A6D820D00E18FEA /* clock.png */; };
+		3FAED1E61A6D85FD00E18FEA /* EPTitleTextImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FAED1E51A6D85FD00E18FEA /* EPTitleTextImageCell.m */; };
+		3FAED1E81A6DA4E500E18FEA /* sampleContentImage.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 3FAED1E71A6DA4E500E18FEA /* sampleContentImage.jpeg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,19 +33,30 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3F8116391A6EA222001CAB49 /* EPImageLabelAccessoryViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EPImageLabelAccessoryViewCell.h; sourceTree = "<group>"; };
+		3F81163A1A6EA222001CAB49 /* EPImageLabelAccessoryViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPImageLabelAccessoryViewCell.m; sourceTree = "<group>"; };
+		3F81163C1A6EB18D001CAB49 /* EPImageLabelActivityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EPImageLabelActivityCell.h; sourceTree = "<group>"; };
+		3F81163D1A6EB18D001CAB49 /* EPImageLabelActivityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPImageLabelActivityCell.m; sourceTree = "<group>"; };
 		3FAED1AA1A6D5E3600E18FEA /* CRMStarCells.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CRMStarCells.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FAED1AE1A6D5E3600E18FEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3FAED1AF1A6D5E3600E18FEA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3FAED1B11A6D5E3600E18FEA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3FAED1B21A6D5E3600E18FEA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		3FAED1B41A6D5E3600E18FEA /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		3FAED1B51A6D5E3600E18FEA /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		3FAED1B81A6D5E3600E18FEA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3FAED1BA1A6D5E3600E18FEA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		3FAED1BD1A6D5E3600E18FEA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		3FAED1C31A6D5E3600E18FEA /* CRMStarCellsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CRMStarCellsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FAED1C81A6D5E3600E18FEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3FAED1C91A6D5E3600E18FEA /* CRMStarCellsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CRMStarCellsTests.m; sourceTree = "<group>"; };
+		3FAED1D31A6D635300E18FEA /* ImageLabelTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageLabelTableViewController.h; sourceTree = "<group>"; };
+		3FAED1D41A6D635300E18FEA /* ImageLabelTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageLabelTableViewController.m; sourceTree = "<group>"; };
+		3FAED1D61A6D639C00E18FEA /* EPImageLabelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EPImageLabelCell.h; sourceTree = "<group>"; };
+		3FAED1D71A6D639C00E18FEA /* EPImageLabelCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPImageLabelCell.m; sourceTree = "<group>"; };
+		3FAED1DC1A6D78EA00E18FEA /* NSString+EP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+EP.h"; sourceTree = "<group>"; };
+		3FAED1DD1A6D78EA00E18FEA /* NSString+EP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+EP.m"; sourceTree = "<group>"; };
+		3FAED1DF1A6D820D00E18FEA /* clock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clock.png; sourceTree = "<group>"; };
+		3FAED1E41A6D85FD00E18FEA /* EPTitleTextImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EPTitleTextImageCell.h; sourceTree = "<group>"; };
+		3FAED1E51A6D85FD00E18FEA /* EPTitleTextImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPTitleTextImageCell.m; sourceTree = "<group>"; };
+		3FAED1E71A6DA4E500E18FEA /* sampleContentImage.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sampleContentImage.jpeg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,11 +100,22 @@
 			children = (
 				3FAED1B11A6D5E3600E18FEA /* AppDelegate.h */,
 				3FAED1B21A6D5E3600E18FEA /* AppDelegate.m */,
-				3FAED1B41A6D5E3600E18FEA /* ViewController.h */,
-				3FAED1B51A6D5E3600E18FEA /* ViewController.m */,
-				3FAED1B71A6D5E3600E18FEA /* Main.storyboard */,
+				3FAED1D31A6D635300E18FEA /* ImageLabelTableViewController.h */,
+				3FAED1D41A6D635300E18FEA /* ImageLabelTableViewController.m */,
+				3FAED1D61A6D639C00E18FEA /* EPImageLabelCell.h */,
+				3FAED1D71A6D639C00E18FEA /* EPImageLabelCell.m */,
+				3F8116391A6EA222001CAB49 /* EPImageLabelAccessoryViewCell.h */,
+				3F81163A1A6EA222001CAB49 /* EPImageLabelAccessoryViewCell.m */,
+				3F81163C1A6EB18D001CAB49 /* EPImageLabelActivityCell.h */,
+				3F81163D1A6EB18D001CAB49 /* EPImageLabelActivityCell.m */,
+				3FAED1E41A6D85FD00E18FEA /* EPTitleTextImageCell.h */,
+				3FAED1E51A6D85FD00E18FEA /* EPTitleTextImageCell.m */,
+				3FAED1DC1A6D78EA00E18FEA /* NSString+EP.h */,
+				3FAED1DD1A6D78EA00E18FEA /* NSString+EP.m */,
 				3FAED1BA1A6D5E3600E18FEA /* Images.xcassets */,
 				3FAED1BC1A6D5E3600E18FEA /* LaunchScreen.xib */,
+				3FAED1DF1A6D820D00E18FEA /* clock.png */,
+				3FAED1E71A6DA4E500E18FEA /* sampleContentImage.jpeg */,
 				3FAED1AD1A6D5E3600E18FEA /* Supporting Files */,
 			);
 			path = CRMStarCells;
@@ -199,9 +227,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3FAED1B91A6D5E3600E18FEA /* Main.storyboard in Resources */,
+				3FAED1E01A6D820D00E18FEA /* clock.png in Resources */,
 				3FAED1BE1A6D5E3600E18FEA /* LaunchScreen.xib in Resources */,
 				3FAED1BB1A6D5E3600E18FEA /* Images.xcassets in Resources */,
+				3FAED1E81A6DA4E500E18FEA /* sampleContentImage.jpeg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,8 +248,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3FAED1B61A6D5E3600E18FEA /* ViewController.m in Sources */,
+				3F81163B1A6EA222001CAB49 /* EPImageLabelAccessoryViewCell.m in Sources */,
+				3FAED1E61A6D85FD00E18FEA /* EPTitleTextImageCell.m in Sources */,
+				3F81163E1A6EB18D001CAB49 /* EPImageLabelActivityCell.m in Sources */,
 				3FAED1B31A6D5E3600E18FEA /* AppDelegate.m in Sources */,
+				3FAED1D81A6D639C00E18FEA /* EPImageLabelCell.m in Sources */,
+				3FAED1D51A6D635300E18FEA /* ImageLabelTableViewController.m in Sources */,
+				3FAED1DE1A6D78EA00E18FEA /* NSString+EP.m in Sources */,
 				3FAED1B01A6D5E3600E18FEA /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -244,14 +278,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		3FAED1B71A6D5E3600E18FEA /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3FAED1B81A6D5E3600E18FEA /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		3FAED1BC1A6D5E3600E18FEA /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -412,6 +438,7 @@
 				3FAED1CF1A6D5E3600E18FEA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3FAED1D01A6D5E3600E18FEA /* Build configuration list for PBXNativeTarget "CRMStarCellsTests" */ = {
 			isa = XCConfigurationList;
@@ -420,6 +447,7 @@
 				3FAED1D21A6D5E3600E18FEA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
