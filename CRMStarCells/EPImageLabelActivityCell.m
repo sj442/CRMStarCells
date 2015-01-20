@@ -16,7 +16,6 @@
   self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
   if (self) {
     self.contentWidth = [[UIScreen mainScreen] bounds].size.width;
-    NSLog(@"profile image view width %f", self.profileImageView.frame.size.width);
     UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(self.profileImageView.frame)+9, 17, 150, 18)];
     titleLabel.font = [UIFont boldSystemFontOfSize:14];
     [self.contentView addSubview:titleLabel];

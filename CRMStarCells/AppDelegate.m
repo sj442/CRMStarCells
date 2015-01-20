@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "ImageLabelTableViewController.h"
+#import  "MessagesTableViewController.h"
 
 @interface AppDelegate ()
 
@@ -22,8 +23,10 @@
   self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
   self.window.backgroundColor = [UIColor whiteColor];
   [self.window makeKeyAndVisible];
-  ImageLabelTableViewController *tableVC = [[ImageLabelTableViewController alloc]init];
-  self.window.rootViewController = tableVC;
+  
+  MessagesTableViewController *messagesTVC = [[MessagesTableViewController alloc]init];
+  //ImageLabelTableViewController *tableVC = [[ImageLabelTableViewController alloc]init];
+  self.window.rootViewController = messagesTVC;
   return YES;
 }
 
