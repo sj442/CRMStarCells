@@ -32,6 +32,8 @@
 		3FB985A91A702DC50078CB86 /* sampleContentImage2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3FB985A81A702DC50078CB86 /* sampleContentImage2.jpg */; };
 		3FB985AC1A7033D60078CB86 /* EPRightTextMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB985AB1A7033D60078CB86 /* EPRightTextMessageCell.m */; };
 		3FB985AF1A7038190078CB86 /* EPRightTextGroupMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB985AE1A7038190078CB86 /* EPRightTextGroupMessageCell.m */; };
+		3FB985B21A703DD00078CB86 /* EPRightImageMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB985B11A703DD00078CB86 /* EPRightImageMessageCell.m */; };
+		3FB985B51A703E740078CB86 /* EPRightImageGroupMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB985B41A703E740078CB86 /* EPRightImageGroupMessageCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +94,10 @@
 		3FB985AB1A7033D60078CB86 /* EPRightTextMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPRightTextMessageCell.m; sourceTree = "<group>"; };
 		3FB985AD1A7038190078CB86 /* EPRightTextGroupMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EPRightTextGroupMessageCell.h; sourceTree = "<group>"; };
 		3FB985AE1A7038190078CB86 /* EPRightTextGroupMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPRightTextGroupMessageCell.m; sourceTree = "<group>"; };
+		3FB985B01A703DD00078CB86 /* EPRightImageMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EPRightImageMessageCell.h; sourceTree = "<group>"; };
+		3FB985B11A703DD00078CB86 /* EPRightImageMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPRightImageMessageCell.m; sourceTree = "<group>"; };
+		3FB985B31A703E740078CB86 /* EPRightImageGroupMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EPRightImageGroupMessageCell.h; sourceTree = "<group>"; };
+		3FB985B41A703E740078CB86 /* EPRightImageGroupMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPRightImageGroupMessageCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +173,10 @@
 				3FB985AB1A7033D60078CB86 /* EPRightTextMessageCell.m */,
 				3FB985AD1A7038190078CB86 /* EPRightTextGroupMessageCell.h */,
 				3FB985AE1A7038190078CB86 /* EPRightTextGroupMessageCell.m */,
+				3FB985B01A703DD00078CB86 /* EPRightImageMessageCell.h */,
+				3FB985B11A703DD00078CB86 /* EPRightImageMessageCell.m */,
+				3FB985B31A703E740078CB86 /* EPRightImageGroupMessageCell.h */,
+				3FB985B41A703E740078CB86 /* EPRightImageGroupMessageCell.m */,
 				3FAED1DC1A6D78EA00E18FEA /* NSString+EP.h */,
 				3FAED1DD1A6D78EA00E18FEA /* NSString+EP.m */,
 				3FAED1BA1A6D5E3600E18FEA /* Images.xcassets */,
@@ -318,8 +328,10 @@
 				3FB9858C1A6EEE9B0078CB86 /* EPImageLabelActivityImageCell.m in Sources */,
 				3FB985951A6F04610078CB86 /* MessagesTableViewController.m in Sources */,
 				3FB985AF1A7038190078CB86 /* EPRightTextGroupMessageCell.m in Sources */,
+				3FB985B21A703DD00078CB86 /* EPRightImageMessageCell.m in Sources */,
 				3FAED1D51A6D635300E18FEA /* ImageLabelTableViewController.m in Sources */,
 				3FB985A11A70102D0078CB86 /* EPLeftTextGroupMessageCell.m in Sources */,
+				3FB985B51A703E740078CB86 /* EPRightImageGroupMessageCell.m in Sources */,
 				3FB985A41A7027650078CB86 /* EPLeftImageMessageCell.m in Sources */,
 				3FB9859E1A6FFE000078CB86 /* EPLeftTextMessageCell.m in Sources */,
 				3FAED1DE1A6D78EA00E18FEA /* NSString+EP.m in Sources */,

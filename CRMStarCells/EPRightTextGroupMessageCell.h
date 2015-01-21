@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "EPLeftTextGroupMessageCell.h"
 
-@interface EPRightTextGroupMessageCell : UITableViewCell
+static NSString* EPRightTextGroupMessageCellIdentifier = @"RightTextGroupMessageCellIdentifier";
+
+@interface EPRightTextGroupMessageCell : EPLeftTextGroupMessageCell
 
 @end

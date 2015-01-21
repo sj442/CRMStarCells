@@ -1,14 +1,14 @@
 //
-//  EPRightTextMessageCell.m
+//  EPRightImageGroupMessageCell.m
 //  CRMStarCells
 //
 //  Created by Sunayna Jain on 1/21/15.
 //  Copyright (c) 2015 Enhatch. All rights reserved.
 //
 
-#import "EPRightTextMessageCell.h"
+#import "EPRightImageGroupMessageCell.h"
 
-@implementation EPRightTextMessageCell
+@implementation EPRightImageGroupMessageCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -18,12 +18,16 @@
     frame.origin.x = self.contentWidth -59;
     self.profileImageView.frame =frame;
     frame = self.dateLabel.frame;
-    self.dateLabel.textAlignment = NSTextAlignmentRight;
     frame.origin.x = self.contentWidth - 69;
     self.dateLabel.frame = frame;
-    frame = self.messageLabel.frame;
-    frame.origin.x = 15;
-    self.messageLabel.frame= frame;
+    self.dateLabel.textAlignment = NSTextAlignmentRight;
+    frame = self.messageImageView.frame;
+    frame.origin.x = self.contentWidth-59-15-150;
+    self.messageImageView.frame= frame;
+    frame = self.nameLabel.frame;
+    frame.origin.x = self.contentWidth - 179;
+    self.nameLabel.textAlignment = NSTextAlignmentRight;
+    self.nameLabel.frame =frame;
   }
   return self;
 }

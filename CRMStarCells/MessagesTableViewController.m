@@ -14,6 +14,9 @@
 #import "EPLeftImageMessageCell.h"
 #import "EPLeftImageGroupMessageCell.h"
 #import "EPRightTextMessageCell.h"
+#import "EPRightTextGroupMessageCell.h"
+#import "EPRightImageMessageCell.h"
+#import "EPRightImageGroupMessageCell.h"
 
 @interface MessagesTableViewController ()
 
@@ -29,6 +32,10 @@
   [self.tableView registerClass:[EPLeftImageMessageCell class] forCellReuseIdentifier:EPLeftImageMessageCellIdentifier];
   [self.tableView registerClass:[EPLeftImageGroupMessageCell class] forCellReuseIdentifier:EPLeftImageGroupMessageCellIdentifier];
   [self.tableView registerClass:[EPRightTextMessageCell class] forCellReuseIdentifier:EPRightTextMessageCellIdentifier];
+  [self.tableView registerClass:[EPRightTextGroupMessageCell class] forCellReuseIdentifier:EPRightTextGroupMessageCellIdentifier];
+  [self.tableView registerClass:[EPRightImageMessageCell class] forCellReuseIdentifier:EPRightImageMessageCellIdentifier];
+  [self.tableView registerClass:[EPRightImageGroupMessageCell class] forCellReuseIdentifier:EPRightImageGroupMessageCellIdentifier];
+  
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -44,7 +51,7 @@
    
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
   // Return the number of sections.
-  return 6;
+  return 9;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -89,12 +96,34 @@
     }
     [cell configureWithName:@"Sunayna Jain" profileImage:nil time:@"15:35" messageImage:[UIImage imageNamed:@"sampleContentImage2.jpg"]];
     return cell;
-  } else {
+  } else if (indexPath.section == 5){
     EPRightTextMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:EPRightTextMessageCellIdentifier];
     if (!cell) {
       cell = [[EPRightTextMessageCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:EPRightTextMessageCellIdentifier];
     }
     [cell configureWithProfileImage:nil time:@"12:46 PM" message:@"fmds fsdsdgdfdasfrg ksdfjsdlkn vdljkasl;dxmsl;c sdjas;ldj dljasl;dksc dsjdsl;m jksdl;sdfjdlkjdlkvndkljd"];
+    return cell;
+  }
+  else if (indexPath.section == 6) {
+    EPRightTextGroupMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:EPRightTextGroupMessageCellIdentifier];
+    if (!cell) {
+      cell = [[EPRightTextGroupMessageCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:EPRightTextGroupMessageCellIdentifier];
+    }
+    [cell configureWithName:@"Sunayna Jain" profileImage:nil time:@"13:55 PM" message:@"fmds fsdsdgdfdasfrg ksdfjsdlkn vdljkasl;dxmsl;c sdjas;ldj dljasl;dksc dsjdsl;m jksdl;sdfjdlkjdlkvndkljd"];
+    return cell;
+  } else if (indexPath.section == 7) {
+    EPRightImageMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:EPRightImageMessageCellIdentifier];
+    if (!cell) {
+      cell = [[EPRightImageMessageCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:EPRightImageMessageCellIdentifier];
+    }
+    [cell configureWithProfileImage:nil time:@"12:57 PM" messageImage:[UIImage imageNamed:@"sampleContentImage2.jpg"]];
+    return cell;
+  } else {
+    EPRightImageGroupMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:EPRightImageGroupMessageCellIdentifier];
+    if (!cell) {
+      cell = [[EPRightImageGroupMessageCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:EPRightImageGroupMessageCellIdentifier];
+    }
+    [cell configureWithName:@"Sunayna Jain" profileImage:nil time:@"9:24 PM" messageImage:[UIImage imageNamed:@"sampleContentImage.jpeg"]];
     return cell;
   }
 }
@@ -126,6 +155,7 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
   UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.tableView.frame), 30)];
+  view.backgroundColor = [UIColor whiteColor];
   UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(0, 10, CGRectGetWidth(self.tableView.frame), 2)];
   lineView.backgroundColor = [UIColor grayColor];
   [view addSubview:lineView];
