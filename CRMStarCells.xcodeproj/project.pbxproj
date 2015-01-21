@@ -25,6 +25,13 @@
 		3FB985921A6F00D50078CB86 /* EPMessageSummaryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB985911A6F00D50078CB86 /* EPMessageSummaryCell.m */; };
 		3FB985951A6F04610078CB86 /* MessagesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB985941A6F04610078CB86 /* MessagesTableViewController.m */; };
 		3FB9859B1A6F0B440078CB86 /* EPMessageLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB9859A1A6F0B440078CB86 /* EPMessageLabel.m */; };
+		3FB9859E1A6FFE000078CB86 /* EPLeftTextMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB9859D1A6FFE000078CB86 /* EPLeftTextMessageCell.m */; };
+		3FB985A11A70102D0078CB86 /* EPLeftTextGroupMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB985A01A70102D0078CB86 /* EPLeftTextGroupMessageCell.m */; };
+		3FB985A41A7027650078CB86 /* EPLeftImageMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB985A31A7027650078CB86 /* EPLeftImageMessageCell.m */; };
+		3FB985A71A702AB70078CB86 /* EPLeftImageGroupMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB985A61A702AB70078CB86 /* EPLeftImageGroupMessageCell.m */; };
+		3FB985A91A702DC50078CB86 /* sampleContentImage2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3FB985A81A702DC50078CB86 /* sampleContentImage2.jpg */; };
+		3FB985AC1A7033D60078CB86 /* EPRightTextMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB985AB1A7033D60078CB86 /* EPRightTextMessageCell.m */; };
+		3FB985AF1A7038190078CB86 /* EPRightTextGroupMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB985AE1A7038190078CB86 /* EPRightTextGroupMessageCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +79,19 @@
 		3FB985941A6F04610078CB86 /* MessagesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagesTableViewController.m; sourceTree = "<group>"; };
 		3FB985991A6F0B440078CB86 /* EPMessageLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EPMessageLabel.h; sourceTree = "<group>"; };
 		3FB9859A1A6F0B440078CB86 /* EPMessageLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPMessageLabel.m; sourceTree = "<group>"; };
+		3FB9859C1A6FFE000078CB86 /* EPLeftTextMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EPLeftTextMessageCell.h; sourceTree = "<group>"; };
+		3FB9859D1A6FFE000078CB86 /* EPLeftTextMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPLeftTextMessageCell.m; sourceTree = "<group>"; };
+		3FB9859F1A70102D0078CB86 /* EPLeftTextGroupMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EPLeftTextGroupMessageCell.h; sourceTree = "<group>"; };
+		3FB985A01A70102D0078CB86 /* EPLeftTextGroupMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPLeftTextGroupMessageCell.m; sourceTree = "<group>"; };
+		3FB985A21A7027650078CB86 /* EPLeftImageMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EPLeftImageMessageCell.h; sourceTree = "<group>"; };
+		3FB985A31A7027650078CB86 /* EPLeftImageMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPLeftImageMessageCell.m; sourceTree = "<group>"; };
+		3FB985A51A702AB70078CB86 /* EPLeftImageGroupMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EPLeftImageGroupMessageCell.h; sourceTree = "<group>"; };
+		3FB985A61A702AB70078CB86 /* EPLeftImageGroupMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPLeftImageGroupMessageCell.m; sourceTree = "<group>"; };
+		3FB985A81A702DC50078CB86 /* sampleContentImage2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sampleContentImage2.jpg; sourceTree = "<group>"; };
+		3FB985AA1A7033D60078CB86 /* EPRightTextMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EPRightTextMessageCell.h; sourceTree = "<group>"; };
+		3FB985AB1A7033D60078CB86 /* EPRightTextMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPRightTextMessageCell.m; sourceTree = "<group>"; };
+		3FB985AD1A7038190078CB86 /* EPRightTextGroupMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EPRightTextGroupMessageCell.h; sourceTree = "<group>"; };
+		3FB985AE1A7038190078CB86 /* EPRightTextGroupMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPRightTextGroupMessageCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,12 +155,25 @@
 				3FB985941A6F04610078CB86 /* MessagesTableViewController.m */,
 				3FB985991A6F0B440078CB86 /* EPMessageLabel.h */,
 				3FB9859A1A6F0B440078CB86 /* EPMessageLabel.m */,
+				3FB9859C1A6FFE000078CB86 /* EPLeftTextMessageCell.h */,
+				3FB9859D1A6FFE000078CB86 /* EPLeftTextMessageCell.m */,
+				3FB9859F1A70102D0078CB86 /* EPLeftTextGroupMessageCell.h */,
+				3FB985A01A70102D0078CB86 /* EPLeftTextGroupMessageCell.m */,
+				3FB985A21A7027650078CB86 /* EPLeftImageMessageCell.h */,
+				3FB985A31A7027650078CB86 /* EPLeftImageMessageCell.m */,
+				3FB985A51A702AB70078CB86 /* EPLeftImageGroupMessageCell.h */,
+				3FB985A61A702AB70078CB86 /* EPLeftImageGroupMessageCell.m */,
+				3FB985AA1A7033D60078CB86 /* EPRightTextMessageCell.h */,
+				3FB985AB1A7033D60078CB86 /* EPRightTextMessageCell.m */,
+				3FB985AD1A7038190078CB86 /* EPRightTextGroupMessageCell.h */,
+				3FB985AE1A7038190078CB86 /* EPRightTextGroupMessageCell.m */,
 				3FAED1DC1A6D78EA00E18FEA /* NSString+EP.h */,
 				3FAED1DD1A6D78EA00E18FEA /* NSString+EP.m */,
 				3FAED1BA1A6D5E3600E18FEA /* Images.xcassets */,
 				3FAED1BC1A6D5E3600E18FEA /* LaunchScreen.xib */,
 				3FAED1DF1A6D820D00E18FEA /* clock.png */,
 				3FAED1E71A6DA4E500E18FEA /* sampleContentImage.jpeg */,
+				3FB985A81A702DC50078CB86 /* sampleContentImage2.jpg */,
 				3FAED1AD1A6D5E3600E18FEA /* Supporting Files */,
 			);
 			path = CRMStarCells;
@@ -253,6 +286,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3FAED1E01A6D820D00E18FEA /* clock.png in Resources */,
+				3FB985A91A702DC50078CB86 /* sampleContentImage2.jpg in Resources */,
 				3FAED1BE1A6D5E3600E18FEA /* LaunchScreen.xib in Resources */,
 				3FAED1BB1A6D5E3600E18FEA /* Images.xcassets in Resources */,
 				3FAED1E81A6DA4E500E18FEA /* sampleContentImage.jpeg in Resources */,
@@ -275,6 +309,7 @@
 			files = (
 				3F81163B1A6EA222001CAB49 /* EPImageLabelAccessoryViewCell.m in Sources */,
 				3FAED1E61A6D85FD00E18FEA /* EPTitleTextImageCell.m in Sources */,
+				3FB985AC1A7033D60078CB86 /* EPRightTextMessageCell.m in Sources */,
 				3F81163E1A6EB18D001CAB49 /* EPImageLabelActivityCell.m in Sources */,
 				3FB9858F1A6EF1600078CB86 /* EPImageLabelActivityLabelCell.m in Sources */,
 				3FAED1B31A6D5E3600E18FEA /* AppDelegate.m in Sources */,
@@ -282,9 +317,14 @@
 				3FB9859B1A6F0B440078CB86 /* EPMessageLabel.m in Sources */,
 				3FB9858C1A6EEE9B0078CB86 /* EPImageLabelActivityImageCell.m in Sources */,
 				3FB985951A6F04610078CB86 /* MessagesTableViewController.m in Sources */,
+				3FB985AF1A7038190078CB86 /* EPRightTextGroupMessageCell.m in Sources */,
 				3FAED1D51A6D635300E18FEA /* ImageLabelTableViewController.m in Sources */,
+				3FB985A11A70102D0078CB86 /* EPLeftTextGroupMessageCell.m in Sources */,
+				3FB985A41A7027650078CB86 /* EPLeftImageMessageCell.m in Sources */,
+				3FB9859E1A6FFE000078CB86 /* EPLeftTextMessageCell.m in Sources */,
 				3FAED1DE1A6D78EA00E18FEA /* NSString+EP.m in Sources */,
 				3FAED1B01A6D5E3600E18FEA /* main.m in Sources */,
+				3FB985A71A702AB70078CB86 /* EPLeftImageGroupMessageCell.m in Sources */,
 				3FB985921A6F00D50078CB86 /* EPMessageSummaryCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

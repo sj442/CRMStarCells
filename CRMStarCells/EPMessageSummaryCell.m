@@ -4,7 +4,6 @@
 //
 //  Created by Sunayna Jain on 1/20/15.
 //  Copyright (c) 2015 Enhatch. All rights reserved.
-//
 
 #import "EPMessageSummaryCell.h"
 
@@ -51,8 +50,6 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
 @end
