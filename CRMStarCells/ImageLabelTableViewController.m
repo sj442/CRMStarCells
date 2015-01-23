@@ -56,7 +56,7 @@ static NSString* EPUpdateNoteTableViewCellIdentifier = @"EPUpdateNoteTableViewCe
 {
   NSString *title = @"Aaliyah Cramer";
   NSString *time = @"just now";
-  NSString *fullText = @"This sounded a very good reason, and Alice was quite pleased to know it. 'I never thought of that before!' She inquisitively said.";
+  NSString *fullText = @"This sounded a very good reason, and Alice was quite pleased to know it. 'I never thought of that before!' she inquisitively said.";
   UIImage *image1 = [UIImage imageNamed:@"sampleContentImage.jpeg"];
   UIImage *image2 = [UIImage imageNamed:@"sampleContentImage2.jpg"];
   if (indexPath.row ==0) {
@@ -170,15 +170,15 @@ static NSString* EPUpdateNoteTableViewCellIdentifier = @"EPUpdateNoteTableViewCe
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  NSString *fullText = @"This sounded a very good reason, and Alice was quite pleased to know it. 'I never thought of that before!' She inquisitively said.";
-  CGFloat height = [fullText heightForTextHavingWidth:[[EPUpdateNoteTableViewCell class] contentLabelWidthInTableViewWithWidth:CGRectGetWidth(self.tableView.frame)] font:[UIFont systemFontOfSize:12] maxLines:4];
+  NSString *fullText = @"This sounded a very good reason, and Alice was quite pleased to know it. 'I never thought of that before!' she inquisitively said.";
+  CGFloat height = [fullText heightForTextHavingWidth:[[EPUpdateNoteTableViewCell class] contentLabelWidthInTableViewWithWidth:CGRectGetWidth(self.tableView.frame)] font:[UIFont systemFontOfSize:14] maxLines:4];
   if (indexPath.row == 0) {
     return [[EPUpdateNoteTableViewCell class] recommnendedHeight]+height;
   } else if (indexPath.row ==1) {
     return [[EPUpdateNoteTableViewCell class] recommnendedHeight]+100;
   } else if (indexPath.row ==2) {
-    height = [fullText heightForTextHavingWidth:[[EPUpdateNoteTableViewCell class] contentLabelWidthInTableViewWithWidth:CGRectGetWidth(self.tableView.frame)] font:[UIFont systemFontOfSize:12] maxLines:3];
-    return [[EPUpdateNoteTableViewCell class] recommnendedHeight]+100+ height;
+    height = [fullText heightForTextHavingWidth:[[EPUpdateNoteTableViewCell class] contentLabelWidthInTableViewWithWidth:CGRectGetWidth(self.tableView.frame)] font:[UIFont systemFontOfSize:14] maxLines:3];
+    return [[EPUpdateNoteTableViewCell class] recommnendedHeight]+100+ height+10;
   } else if (indexPath.row ==3) {
     return [[EPUpdateOpportunityTableViewCell class] recommendedHeight];
   } else if (indexPath.row == 4) {

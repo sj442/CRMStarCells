@@ -77,7 +77,7 @@
   
   CGRect frame = CGRectZero;
   frame.origin.x = CGRectGetMaxX(self.userImageView.frame)+9;
-  frame.origin.y = CGRectGetMaxY(self.primaryLabel.frame) +5;
+  frame.origin.y = CGRectGetMaxY(self.primaryLabel.frame)+5;
   frame.size.width = CGRectGetWidth(self.contentView.frame) -63-15;
   frame.size.height = 44;
   self.contentLabel.frame = frame;
@@ -106,7 +106,7 @@
 
 + (CGFloat)recommnendedHeight
 {
-  return MAX(16+44+5+24+10, 17+18+10+16+10);
+  return 17+18+10+16+10+10;
 }
 
 @end
