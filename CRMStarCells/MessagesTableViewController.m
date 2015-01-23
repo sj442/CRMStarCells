@@ -35,6 +35,7 @@
   [self.tableView registerClass:[EPRightTextGroupMessageCell class] forCellReuseIdentifier:EPRightTextGroupMessageCellIdentifier];
   [self.tableView registerClass:[EPRightImageMessageCell class] forCellReuseIdentifier:EPRightImageMessageCellIdentifier];
   [self.tableView registerClass:[EPRightImageGroupMessageCell class] forCellReuseIdentifier:EPRightImageGroupMessageCellIdentifier];
+  self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
   
 }
 
@@ -51,12 +52,15 @@
    
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
   // Return the number of sections.
-  return 9;
+  return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
   // Return the number of rows in the section.
-  return 1;
+  if (section ==0) {
+    return 1;
+  }
+  return 8;
 }
 
 
@@ -68,35 +72,35 @@
     }
     [cell configureWithName:@"Anna Blum" message:@"Hi!dsdkjdaskdhs djhaskj" time:@"Sunday" read:NO];
     return cell;
-  } else if (indexPath.section ==1) {
+  } else if (indexPath.row == 1) {
     EPLeftTextMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:EPLeftTextMessageCellIdentifier];
     if (!cell) {
       cell = [[EPLeftTextMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:EPLeftTextMessageCellIdentifier];
     }
     [cell configureWithProfileImage:nil time:@"1:09 PM" message:@"this much I thought proper to tell you kdjfslk sddj dskdln dhsjc dksljc dhsl  dlkdndjk dcsdklcjsdlkcd dchdjlslkch cdskhc"];
     return cell;
-  } else if (indexPath.section ==2) {
+  } else if (indexPath.row ==2) {
     EPLeftTextGroupMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:EPLeftTextGroupMessageCellIdentifier];
     if (!cell) {
       cell = [[EPLeftTextGroupMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:EPLeftTextGroupMessageCellIdentifier];
     }
     [cell configureWithName:@"Sunayna Jain" profileImage:nil time:@"12:30 PM" message:@"fmds fsdsdgdfdasfrg ksdfjsdlkn vdljkasl;dxmsl;c sdjas;ldj dljasl;dksc dsjdsl;m jksdl;sdfjdlkjdlkvndkljd"];
     return cell;
-  } else if (indexPath.section ==3) {
+  } else if (indexPath.row ==3) {
     EPLeftImageMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:EPLeftImageMessageCellIdentifier];
     if (!cell) {
       cell = [[EPLeftImageMessageCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:EPLeftImageMessageCellIdentifier];
     }
     [cell configureWithProfileImage:nil time:@"1:40 PM" messageImage:[UIImage imageNamed:@"sampleContentImage.jpeg"]];
     return cell;
-  } else if (indexPath.section == 4) {
+  } else if (indexPath.row == 4) {
     EPLeftImageGroupMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:EPLeftImageGroupMessageCellIdentifier];
     if (!cell) {
       cell = [[EPLeftImageGroupMessageCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:EPLeftImageGroupMessageCellIdentifier];
     }
     [cell configureWithName:@"Sunayna Jain" profileImage:nil time:@"15:35" messageImage:[UIImage imageNamed:@"sampleContentImage2.jpg"]];
     return cell;
-  } else if (indexPath.section == 5){
+  } else if (indexPath.row == 5){
     EPRightTextMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:EPRightTextMessageCellIdentifier];
     if (!cell) {
       cell = [[EPRightTextMessageCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:EPRightTextMessageCellIdentifier];
@@ -104,14 +108,14 @@
     [cell configureWithProfileImage:nil time:@"12:46 PM" message:@"fmds fsdsdgdfdasfrg ksdfjsdlkn vdljkasl;dxmsl;c sdjas;ldj dljasl;dksc dsjdsl;m jksdl;sdfjdlkjdlkvndkljd"];
     return cell;
   }
-  else if (indexPath.section == 6) {
+  else if (indexPath.row == 6) {
     EPRightTextGroupMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:EPRightTextGroupMessageCellIdentifier];
     if (!cell) {
       cell = [[EPRightTextGroupMessageCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:EPRightTextGroupMessageCellIdentifier];
     }
     [cell configureWithName:@"Sunayna Jain" profileImage:nil time:@"13:55 PM" message:@"fmds fsdsdgdfdasfrg ksdfjsdlkn vdljkasl;dxmsl;c sdjas;ldj dljasl;dksc dsjdsl;m jksdl;sdfjdlkjdlkvndkljd"];
     return cell;
-  } else if (indexPath.section == 7) {
+  } else if (indexPath.row == 7) {
     EPRightImageMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:EPRightImageMessageCellIdentifier];
     if (!cell) {
       cell = [[EPRightImageMessageCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:EPRightImageMessageCellIdentifier];
@@ -132,15 +136,15 @@
 {
   if (indexPath.section ==0) {
     return 15+22+9+32+10;
-  } else if (indexPath.section ==1) {
+  } else if (indexPath.row ==1) {
     NSString *message = @"this much I thought proper to tell you kdjfslk sddj dskdln dhsjc dksljc dhsl  dlkdndjk dcsdklcjsdlkcd dchdjlslkch cdskhc";
     CGFloat height = [message heightForTextHavingWidth:[EPLeftTextMessageCell messageLabelWidth]-20 font:[UIFont systemFontOfSize:13]];
     return MAX(15+44+5+16+5, 15+height+15+20);
-  } else if (indexPath.section ==2) {
+  } else if (indexPath.row ==2) {
     NSString *message = @"fmds fsdsdgdfdasfrg ksdfjsdlkn vdljkasl;dxmsl;c sdjas;ldj dljasl;dksc dsjdsl;m jksdl;sdfjdlkjdlkvndkljd";
     CGFloat height = [message heightForTextHavingWidth:[EPLeftTextMessageCell messageLabelWidth]-20 font:[UIFont systemFontOfSize:13]];
     return MAX(15+44+5+16+5, 5+14+2+height+15+20);
-  } else if (indexPath.section == 3){
+  } else if (indexPath.row == 3){
     return 15+100+15;
   } else {
     return 5+14+2+100+15;

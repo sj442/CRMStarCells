@@ -21,8 +21,9 @@
     iv.backgroundColor = [UIColor redColor];
     [self.contentView addSubview:iv];
     self.profileImageView = iv;
-    UILabel *date = [[UILabel alloc]initWithFrame:CGRectMake(15, CGRectGetMaxY(self.profileImageView.frame)+5, 54, 16)];
+    UILabel *date = [[UILabel alloc]initWithFrame:CGRectMake(15, CGRectGetMaxY(self.profileImageView.frame)+5, 44, 16)];
     date.font = [UIFont systemFontOfSize:12];
+    date.adjustsFontSizeToFitWidth = YES;
     date.textColor = [UIColor grayColor];
     [self.contentView addSubview:date];
     self.dateLabel = date;

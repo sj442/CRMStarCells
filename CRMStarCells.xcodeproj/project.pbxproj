@@ -7,21 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3F81163B1A6EA222001CAB49 /* EPImageLabelAccessoryViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F81163A1A6EA222001CAB49 /* EPImageLabelAccessoryViewCell.m */; };
-		3F81163E1A6EB18D001CAB49 /* EPImageLabelActivityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F81163D1A6EB18D001CAB49 /* EPImageLabelActivityCell.m */; };
+		3F81163B1A6EA222001CAB49 /* EPUpdateOpportunityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F81163A1A6EA222001CAB49 /* EPUpdateOpportunityTableViewCell.m */; };
+		3F81163E1A6EB18D001CAB49 /* EPUpdateCommonTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F81163D1A6EB18D001CAB49 /* EPUpdateCommonTableViewCell.m */; };
 		3FAED1B01A6D5E3600E18FEA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FAED1AF1A6D5E3600E18FEA /* main.m */; };
 		3FAED1B31A6D5E3600E18FEA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FAED1B21A6D5E3600E18FEA /* AppDelegate.m */; };
 		3FAED1BB1A6D5E3600E18FEA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FAED1BA1A6D5E3600E18FEA /* Images.xcassets */; };
 		3FAED1BE1A6D5E3600E18FEA /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FAED1BC1A6D5E3600E18FEA /* LaunchScreen.xib */; };
 		3FAED1CA1A6D5E3600E18FEA /* CRMStarCellsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FAED1C91A6D5E3600E18FEA /* CRMStarCellsTests.m */; };
 		3FAED1D51A6D635300E18FEA /* ImageLabelTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FAED1D41A6D635300E18FEA /* ImageLabelTableViewController.m */; };
-		3FAED1D81A6D639C00E18FEA /* EPImageLabelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FAED1D71A6D639C00E18FEA /* EPImageLabelCell.m */; };
+		3FAED1D81A6D639C00E18FEA /* EPUpdateBaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FAED1D71A6D639C00E18FEA /* EPUpdateBaseTableViewCell.m */; };
 		3FAED1DE1A6D78EA00E18FEA /* NSString+EP.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FAED1DD1A6D78EA00E18FEA /* NSString+EP.m */; };
 		3FAED1E01A6D820D00E18FEA /* clock.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FAED1DF1A6D820D00E18FEA /* clock.png */; };
-		3FAED1E61A6D85FD00E18FEA /* EPTitleTextImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FAED1E51A6D85FD00E18FEA /* EPTitleTextImageCell.m */; };
+		3FAED1E61A6D85FD00E18FEA /* EPUpdateNoteTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FAED1E51A6D85FD00E18FEA /* EPUpdateNoteTableViewCell.m */; };
 		3FAED1E81A6DA4E500E18FEA /* sampleContentImage.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 3FAED1E71A6DA4E500E18FEA /* sampleContentImage.jpeg */; };
-		3FB9858C1A6EEE9B0078CB86 /* EPImageLabelActivityImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB9858B1A6EEE9B0078CB86 /* EPImageLabelActivityImageCell.m */; };
-		3FB9858F1A6EF1600078CB86 /* EPImageLabelActivityLabelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB9858E1A6EF1600078CB86 /* EPImageLabelActivityLabelCell.m */; };
+		3FB9858C1A6EEE9B0078CB86 /* EPUpdateAccessoryImageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB9858B1A6EEE9B0078CB86 /* EPUpdateAccessoryImageTableViewCell.m */; };
+		3FB9858F1A6EF1600078CB86 /* EPUpdateQualifyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB9858E1A6EF1600078CB86 /* EPUpdateQualifyTableViewCell.m */; };
 		3FB985921A6F00D50078CB86 /* EPMessageSummaryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB985911A6F00D50078CB86 /* EPMessageSummaryCell.m */; };
 		3FB985951A6F04610078CB86 /* MessagesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB985941A6F04610078CB86 /* MessagesTableViewController.m */; };
 		3FB9859B1A6F0B440078CB86 /* EPMessageLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB9859A1A6F0B440078CB86 /* EPMessageLabel.m */; };
@@ -47,10 +47,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3F8116391A6EA222001CAB49 /* EPImageLabelAccessoryViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EPImageLabelAccessoryViewCell.h; sourceTree = "<group>"; };
-		3F81163A1A6EA222001CAB49 /* EPImageLabelAccessoryViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPImageLabelAccessoryViewCell.m; sourceTree = "<group>"; };
-		3F81163C1A6EB18D001CAB49 /* EPImageLabelActivityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EPImageLabelActivityCell.h; sourceTree = "<group>"; };
-		3F81163D1A6EB18D001CAB49 /* EPImageLabelActivityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPImageLabelActivityCell.m; sourceTree = "<group>"; };
+		3F8116391A6EA222001CAB49 /* EPUpdateOpportunityTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EPUpdateOpportunityTableViewCell.h; sourceTree = "<group>"; };
+		3F81163A1A6EA222001CAB49 /* EPUpdateOpportunityTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPUpdateOpportunityTableViewCell.m; sourceTree = "<group>"; };
+		3F81163C1A6EB18D001CAB49 /* EPUpdateCommonTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EPUpdateCommonTableViewCell.h; sourceTree = "<group>"; };
+		3F81163D1A6EB18D001CAB49 /* EPUpdateCommonTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPUpdateCommonTableViewCell.m; sourceTree = "<group>"; };
 		3FAED1AA1A6D5E3600E18FEA /* CRMStarCells.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CRMStarCells.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FAED1AE1A6D5E3600E18FEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3FAED1AF1A6D5E3600E18FEA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -63,18 +63,18 @@
 		3FAED1C91A6D5E3600E18FEA /* CRMStarCellsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CRMStarCellsTests.m; sourceTree = "<group>"; };
 		3FAED1D31A6D635300E18FEA /* ImageLabelTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageLabelTableViewController.h; sourceTree = "<group>"; };
 		3FAED1D41A6D635300E18FEA /* ImageLabelTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageLabelTableViewController.m; sourceTree = "<group>"; };
-		3FAED1D61A6D639C00E18FEA /* EPImageLabelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EPImageLabelCell.h; sourceTree = "<group>"; };
-		3FAED1D71A6D639C00E18FEA /* EPImageLabelCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPImageLabelCell.m; sourceTree = "<group>"; };
+		3FAED1D61A6D639C00E18FEA /* EPUpdateBaseTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EPUpdateBaseTableViewCell.h; sourceTree = "<group>"; };
+		3FAED1D71A6D639C00E18FEA /* EPUpdateBaseTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPUpdateBaseTableViewCell.m; sourceTree = "<group>"; };
 		3FAED1DC1A6D78EA00E18FEA /* NSString+EP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+EP.h"; sourceTree = "<group>"; };
 		3FAED1DD1A6D78EA00E18FEA /* NSString+EP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+EP.m"; sourceTree = "<group>"; };
 		3FAED1DF1A6D820D00E18FEA /* clock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clock.png; sourceTree = "<group>"; };
-		3FAED1E41A6D85FD00E18FEA /* EPTitleTextImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EPTitleTextImageCell.h; sourceTree = "<group>"; };
-		3FAED1E51A6D85FD00E18FEA /* EPTitleTextImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPTitleTextImageCell.m; sourceTree = "<group>"; };
+		3FAED1E41A6D85FD00E18FEA /* EPUpdateNoteTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EPUpdateNoteTableViewCell.h; sourceTree = "<group>"; };
+		3FAED1E51A6D85FD00E18FEA /* EPUpdateNoteTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPUpdateNoteTableViewCell.m; sourceTree = "<group>"; };
 		3FAED1E71A6DA4E500E18FEA /* sampleContentImage.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sampleContentImage.jpeg; sourceTree = "<group>"; };
-		3FB9858A1A6EEE9B0078CB86 /* EPImageLabelActivityImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EPImageLabelActivityImageCell.h; sourceTree = "<group>"; };
-		3FB9858B1A6EEE9B0078CB86 /* EPImageLabelActivityImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPImageLabelActivityImageCell.m; sourceTree = "<group>"; };
-		3FB9858D1A6EF1600078CB86 /* EPImageLabelActivityLabelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EPImageLabelActivityLabelCell.h; sourceTree = "<group>"; };
-		3FB9858E1A6EF1600078CB86 /* EPImageLabelActivityLabelCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPImageLabelActivityLabelCell.m; sourceTree = "<group>"; };
+		3FB9858A1A6EEE9B0078CB86 /* EPUpdateAccessoryImageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EPUpdateAccessoryImageTableViewCell.h; sourceTree = "<group>"; };
+		3FB9858B1A6EEE9B0078CB86 /* EPUpdateAccessoryImageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPUpdateAccessoryImageTableViewCell.m; sourceTree = "<group>"; };
+		3FB9858D1A6EF1600078CB86 /* EPUpdateQualifyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EPUpdateQualifyTableViewCell.h; sourceTree = "<group>"; };
+		3FB9858E1A6EF1600078CB86 /* EPUpdateQualifyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPUpdateQualifyTableViewCell.m; sourceTree = "<group>"; };
 		3FB985901A6F00D50078CB86 /* EPMessageSummaryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EPMessageSummaryCell.h; sourceTree = "<group>"; };
 		3FB985911A6F00D50078CB86 /* EPMessageSummaryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPMessageSummaryCell.m; sourceTree = "<group>"; };
 		3FB985931A6F04610078CB86 /* MessagesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagesTableViewController.h; sourceTree = "<group>"; };
@@ -143,18 +143,18 @@
 				3FAED1B21A6D5E3600E18FEA /* AppDelegate.m */,
 				3FAED1D31A6D635300E18FEA /* ImageLabelTableViewController.h */,
 				3FAED1D41A6D635300E18FEA /* ImageLabelTableViewController.m */,
-				3FAED1D61A6D639C00E18FEA /* EPImageLabelCell.h */,
-				3FAED1D71A6D639C00E18FEA /* EPImageLabelCell.m */,
-				3F8116391A6EA222001CAB49 /* EPImageLabelAccessoryViewCell.h */,
-				3F81163A1A6EA222001CAB49 /* EPImageLabelAccessoryViewCell.m */,
-				3F81163C1A6EB18D001CAB49 /* EPImageLabelActivityCell.h */,
-				3F81163D1A6EB18D001CAB49 /* EPImageLabelActivityCell.m */,
-				3FB9858A1A6EEE9B0078CB86 /* EPImageLabelActivityImageCell.h */,
-				3FB9858B1A6EEE9B0078CB86 /* EPImageLabelActivityImageCell.m */,
-				3FB9858D1A6EF1600078CB86 /* EPImageLabelActivityLabelCell.h */,
-				3FB9858E1A6EF1600078CB86 /* EPImageLabelActivityLabelCell.m */,
-				3FAED1E41A6D85FD00E18FEA /* EPTitleTextImageCell.h */,
-				3FAED1E51A6D85FD00E18FEA /* EPTitleTextImageCell.m */,
+				3FAED1D61A6D639C00E18FEA /* EPUpdateBaseTableViewCell.h */,
+				3FAED1D71A6D639C00E18FEA /* EPUpdateBaseTableViewCell.m */,
+				3F8116391A6EA222001CAB49 /* EPUpdateOpportunityTableViewCell.h */,
+				3F81163A1A6EA222001CAB49 /* EPUpdateOpportunityTableViewCell.m */,
+				3F81163C1A6EB18D001CAB49 /* EPUpdateCommonTableViewCell.h */,
+				3F81163D1A6EB18D001CAB49 /* EPUpdateCommonTableViewCell.m */,
+				3FB9858A1A6EEE9B0078CB86 /* EPUpdateAccessoryImageTableViewCell.h */,
+				3FB9858B1A6EEE9B0078CB86 /* EPUpdateAccessoryImageTableViewCell.m */,
+				3FB9858D1A6EF1600078CB86 /* EPUpdateQualifyTableViewCell.h */,
+				3FB9858E1A6EF1600078CB86 /* EPUpdateQualifyTableViewCell.m */,
+				3FAED1E41A6D85FD00E18FEA /* EPUpdateNoteTableViewCell.h */,
+				3FAED1E51A6D85FD00E18FEA /* EPUpdateNoteTableViewCell.m */,
 				3FB985901A6F00D50078CB86 /* EPMessageSummaryCell.h */,
 				3FB985911A6F00D50078CB86 /* EPMessageSummaryCell.m */,
 				3FB985931A6F04610078CB86 /* MessagesTableViewController.h */,
@@ -317,15 +317,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3F81163B1A6EA222001CAB49 /* EPImageLabelAccessoryViewCell.m in Sources */,
-				3FAED1E61A6D85FD00E18FEA /* EPTitleTextImageCell.m in Sources */,
+				3F81163B1A6EA222001CAB49 /* EPUpdateOpportunityTableViewCell.m in Sources */,
+				3FAED1E61A6D85FD00E18FEA /* EPUpdateNoteTableViewCell.m in Sources */,
 				3FB985AC1A7033D60078CB86 /* EPRightTextMessageCell.m in Sources */,
-				3F81163E1A6EB18D001CAB49 /* EPImageLabelActivityCell.m in Sources */,
-				3FB9858F1A6EF1600078CB86 /* EPImageLabelActivityLabelCell.m in Sources */,
+				3F81163E1A6EB18D001CAB49 /* EPUpdateCommonTableViewCell.m in Sources */,
+				3FB9858F1A6EF1600078CB86 /* EPUpdateQualifyTableViewCell.m in Sources */,
 				3FAED1B31A6D5E3600E18FEA /* AppDelegate.m in Sources */,
-				3FAED1D81A6D639C00E18FEA /* EPImageLabelCell.m in Sources */,
+				3FAED1D81A6D639C00E18FEA /* EPUpdateBaseTableViewCell.m in Sources */,
 				3FB9859B1A6F0B440078CB86 /* EPMessageLabel.m in Sources */,
-				3FB9858C1A6EEE9B0078CB86 /* EPImageLabelActivityImageCell.m in Sources */,
+				3FB9858C1A6EEE9B0078CB86 /* EPUpdateAccessoryImageTableViewCell.m in Sources */,
 				3FB985951A6F04610078CB86 /* MessagesTableViewController.m in Sources */,
 				3FB985AF1A7038190078CB86 /* EPRightTextGroupMessageCell.m in Sources */,
 				3FB985B21A703DD00078CB86 /* EPRightImageMessageCell.m in Sources */,

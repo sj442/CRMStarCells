@@ -7,11 +7,18 @@
 //
 
 #import "ImageLabelTableViewController.h"
-#import "EPImageLabelCell.h"
-#import "EPTitleTextImageCell.h"
-#import "EPImageLabelAccessoryViewCell.h"
-#import "EPImageLabelActivityLabelCell.h"
+#import "EPUpdateBaseTableViewCell.h"
+#import "EPUpdateOpportunityTableviewCell.h"
+#import "EPUpdateAccessoryImageTableViewCell.h"
+#import "EPUpdateQualifyTableViewCell.h"
+#import "EPUpdateNoteTableViewCell.h"
 #import "NSString+EP.h"
+
+static NSString* EPUpdateBaseTableViewCellIdentifier = @"EPUpdateBaseTableViewCell";
+static NSString* EPUpdateOpportunityTableViewCellIdentifier = @"EPUpdateOpportunityTableViewCell";
+static NSString* EPUpdateAccessoryImageTableViewCellIdentifier = @"EPUpdateAccessoryImageTableViewCell";
+static NSString* EPUpdateQualifyTableViewCellIdentifier = @"EPUpdateQualifyTableViewCell";
+static NSString* EPUpdateNoteTableViewCellIdentifier = @"EPUpdateNoteTableViewCell";
 
 @interface ImageLabelTableViewController ()
 
@@ -22,10 +29,10 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  [self.tableView registerClass:[EPImageLabelCell class] forCellReuseIdentifier:EPImageLabelCellIdentifier];
-  [self.tableView registerClass:[EPTitleTextImageCell class] forCellReuseIdentifier:EPTitleTextImageCellIdentifier];
-  [self.tableView registerClass:[EPImageLabelAccessoryViewCell class] forCellReuseIdentifier:EPImageLabelAccessoryViewCellIdentifier];
-  [self.tableView registerClass:[EPImageLabelActivityLabelCell class] forCellReuseIdentifier:EPImageLabelActivityLabelCellIdentifier];
+  [self.tableView registerClass:[EPUpdateOpportunityTableViewCell class] forCellReuseIdentifier:EPUpdateOpportunityTableViewCellIdentifier];
+  [self.tableView registerClass:[EPUpdateAccessoryImageTableViewCell class] forCellReuseIdentifier:EPUpdateAccessoryImageTableViewCellIdentifier];
+  [self.tableView registerClass:[EPUPdateQualifyTableViewCell class] forCellReuseIdentifier:EPUpdateQualifyTableViewCellIdentifier];
+  [self.tableView registerClass:[EPUpdateNoteTableViewCell class] forCellReuseIdentifier:EPUpdateNoteTableViewCellIdentifier];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -37,82 +44,155 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 5;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 1;
+    return 10;
 }
 
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  if (indexPath.section ==0) {
-  EPTitleTextImageCell *cell = [tableView dequeueReusableCellWithIdentifier:EPTitleTextImageCellIdentifier forIndexPath:indexPath];
-  if (!cell) {
-    cell = [[EPTitleTextImageCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:EPTitleTextImageCellIdentifier];
-  }
-    NSString *title = @"Aaliyah Cramer";
-    NSString *time = @"just now";
-    [cell configureWithTitle:title contentText:nil contentImage:[UIImage imageNamed:@"sampleContentImage.jpeg"] time:time];
-     return cell;
-  } else if (indexPath.section ==1) {
-    EPTitleTextImageCell *cell = [tableView dequeueReusableCellWithIdentifier:EPTitleTextImageCellIdentifier];
-    NSString *title = @"Aaliyah Cramer";
-    NSString *fullText = @"This sounded a very good reason, and Alice was quite pleased to know it. 'I never thought of that before!' She inquisitively said.";
-    NSString *time = @"just now";
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  NSString *title = @"Aaliyah Cramer";
+  NSString *time = @"just now";
+  NSString *fullText = @"This sounded a very good reason, and Alice was quite pleased to know it. 'I never thought of that before!' She inquisitively said.";
+  UIImage *image1 = [UIImage imageNamed:@"sampleContentImage.jpeg"];
+  UIImage *image2 = [UIImage imageNamed:@"sampleContentImage2.jpg"];
+  if (indexPath.row ==0) {
+       EPUpdateNoteTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:EPUpdateNoteTableViewCellIdentifier];
     if (!cell) {
-      cell = [[EPTitleTextImageCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:EPTitleTextImageCellIdentifier];
+      cell = [[EPUpdateNoteTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:EPUpdateNoteTableViewCellIdentifier];
     }
-    [cell configureWithTitle:title contentText:fullText contentImage:[UIImage imageNamed:@"sampleContentImage.jpeg"] time:time];
+    cell.type = 0;
+    cell.primaryLabel.text = title;
+    cell.contentLabel.text = fullText;
+    cell.timeLabel.text = time;
+    cell.contentImageView.image = nil;
     return cell;
-  } else if (indexPath.section ==2){
-    EPTitleTextImageCell *cell = [tableView dequeueReusableCellWithIdentifier:EPTitleTextImageCellIdentifier forIndexPath:indexPath];
-    if (!cell) {
-      cell = [[EPTitleTextImageCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:EPTitleTextImageCellIdentifier];
+  } else if (indexPath.row ==1) {
+      EPUpdateNoteTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:EPUpdateNoteTableViewCellIdentifier];
+      if (!cell) {
+        cell = [[EPUpdateNoteTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:EPUpdateNoteTableViewCellIdentifier];
+      }
+      cell.type = 0;
+      cell.primaryLabel.text = title;
+      cell.contentLabel.text = nil;
+      cell.timeLabel.text = time;
+      cell.contentImageView.image = image1;
+      return cell;
+    } else if (indexPath.row == 2) {
+      EPUpdateNoteTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:EPUpdateNoteTableViewCellIdentifier];
+      if (!cell) {
+        cell = [[EPUpdateNoteTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:EPUpdateNoteTableViewCellIdentifier];
+      }
+      cell.type = 0;
+      cell.primaryLabel.text = title;
+      cell.contentLabel.text = fullText;
+      cell.contentImageView.image = image2;
+      cell.timeLabel.text = @"1:43 PM";
+      return cell;
+    } else if (indexPath.row == 3) {
+      EPUpdateOpportunityTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:EPUpdateOpportunityTableViewCellIdentifier];
+      if (!cell) {
+        cell = [[EPUpdateOpportunityTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:EPUpdateOpportunityTableViewCellIdentifier];
+      }
+      cell.primaryLabel.text = title;
+      cell.nameLabel.text = @"GE Corporate Pilot";
+      cell.subNameLabel.text = @"General Electric Corporation";
+      cell.descriptionLabel.text = @"Amol Prabarahan, Jeanne Sully";
+      cell.accessoryLabel.text = @"$15K";
+      cell.timeLabel.text = @"12:46 PM";
+      return cell;
+    } else if (indexPath.row == 4) {
+      EPUPdateQualifyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:EPUpdateQualifyTableViewCellIdentifier];
+      if (!cell) {
+        cell = [[EPUPdateQualifyTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:EPUpdateQualifyTableViewCellIdentifier];
+      }
+      cell.primaryLabel.text= title;
+      cell.descriptionLabel.text = @"Qualified Peter Verrillo";
+      cell.timeLabel.text = @"1:50 AM";
+      [cell setScore:@3.5 maxScore:@4];
+      return cell;
+    } else if (indexPath.row == 5) {
+      EPUpdateAccessoryImageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:EPUpdateAccessoryImageTableViewCellIdentifier];
+      if (!cell) {
+        cell = [[EPUpdateAccessoryImageTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:EPUpdateAccessoryImageTableViewCellIdentifier];
+      }
+      cell.activityType= 2;
+      cell.descriptionLabel.text = @"called Peter Verrillo";
+      cell.timeLabel.text = @"1:45 PM";
+      cell.primaryLabel.text = @"Jennifer Marino";
+      return cell;
+    } else if (indexPath.row == 6) {
+      EPUpdateAccessoryImageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:EPUpdateAccessoryImageTableViewCellIdentifier];
+      if (!cell) {
+        cell = [[EPUpdateAccessoryImageTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:EPUpdateAccessoryImageTableViewCellIdentifier];
+      }
+      cell.activityType = 3;
+      cell.descriptionLabel.text = @"emailed Peter Verrillo";
+      cell.timeLabel.text = @"1:45 PM";
+      cell.primaryLabel.text = @"Jennifer Marino";
+      return cell;
+    } else if (indexPath.row == 7) {
+      EPUpdateAccessoryImageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:EPUpdateAccessoryImageTableViewCellIdentifier];
+      if (!cell) {
+        cell = [[EPUpdateAccessoryImageTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:EPUpdateAccessoryImageTableViewCellIdentifier];
+      }
+      cell.activityType = 4;
+      cell.descriptionLabel.text = @"Set Tasks for Peter Verrillo";
+      cell.timeLabel.text = @"1:45 PM";
+      cell.primaryLabel.text = @"Jennifer Marino";
+      return cell;
+    } else if (indexPath.row == 8) {
+      EPUpdateAccessoryImageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:EPUpdateAccessoryImageTableViewCellIdentifier];
+      if (!cell) {
+        cell = [[EPUpdateAccessoryImageTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:EPUpdateAccessoryImageTableViewCellIdentifier];
+      }
+      cell.activityType = 5;
+      cell.descriptionLabel.text = @"Meeting w/ Peter Verrillo";
+      cell.timeLabel.text = @"1:45 PM";
+      cell.primaryLabel.text = @"Jennifer Marino";
+      return cell;
+    } else {
+      EPUpdateNoteTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:EPUpdateNoteTableViewCellIdentifier];
+      if (!cell) {
+        cell = [[EPUpdateNoteTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:EPUpdateNoteTableViewCellIdentifier];
+      }
+      cell.type = 1;
+      cell.primaryLabel.text = @"John Brown, Chairman of the Board";
+      cell.contentLabel.text = fullText;
+      cell.contentImageView.image = nil;
+      cell.timeLabel.text = @"1:43 PM";
+      return cell;
     }
-    NSString *title = @"Aaliyah Cramer";
-    NSString *time = @"just now";
-    NSString *fullText = @"This sounded a very good reason, and Alice was quite pleased to know it. sdhds nbcsad shskdjh dashjdsa sdkhsjdfkhds dshdsdhdskl dcsdsv djhsdskjh sdfsdf dfsd dfsdsd vdfd kvjdklfjs";
-    [cell configureWithTitle:title contentText:fullText contentImage:nil time:time];
-    return cell;
-  } else if (indexPath.section ==3) {
-    EPImageLabelAccessoryViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:EPImageLabelAccessoryViewCellIdentifier];
-    if (!cell) {
-      cell = [[EPImageLabelAccessoryViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:EPImageLabelAccessoryViewCellIdentifier];
-    }
-    NSString *title = @"Aaliyah Cramer";
-    [cell configureWithTitle:title subTitle:@"GE Corporate Pilot" descriptionText:@"This sounded a very good reason, and Alice was quite pleased to know it. 'I never thought of that before!' She inquisitively said." accessoryText:@"$15K"];
-    return cell;
-  } else {
-    EPImageLabelActivityLabelCell *cell = [self.tableView dequeueReusableCellWithIdentifier:EPImageLabelActivityLabelCellIdentifier];
-    if (!cell) {
-      cell = [[EPImageLabelActivityLabelCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:EPImageLabelActivityLabelCellIdentifier];
-    }
-    NSString *title = @"Aaliyah Cramer";
-    [cell configureWithTitle:title activityText:@"Qualified Peter Verrillo" score:@3.5 OutOf:@"out of 4"];
-    return cell;
-  }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  if (indexPath.section ==0) {
-    return (17+18+11)+100+ (14+18) ;
-  } else if (indexPath.section == 1) {
-    NSString *fullText = @"This sounded a very good reason, and Alice was quite pleased to know it. 'I never thought of that before!' She inquisitively said.";
-    CGFloat height = [fullText heightForTextHavingWidth:[EPTitleTextImageCell contentLabelWidth] font:[UIFont systemFontOfSize:14] maxLines:3];
-    return (17+18+11)+11+100+ (14+18) +height;
-  } else if (indexPath.section ==2) {
-    NSString *fullText = @"This sounded a very good reason, and Alice was quite pleased to know it. sdhds nbcsad shskdjh dashjdsa sdkhsjdfkhds dshdsdhdskl dcsdsv djhsdskjh sdfsdf dfsd dfsdsd vdfd kvjdklfjs";
-    CGFloat height = [fullText heightForTextHavingWidth:[EPTitleTextImageCell contentLabelWidth] font:[UIFont systemFontOfSize:14] maxLines:4];
-    return (17+18+5) +height+ (14+18);
-  } else if (indexPath.section == 3) {
-    NSString *text = @"This sounded a very good reason, and Alice was quite pleased to know it. 'I never thought of that before!' She inquisitively said.";
-    CGFloat height = [text heightForTextHavingWidth:[EPImageLabelAccessoryViewCell contentLabelWidth] font:[UIFont systemFontOfSize:12] maxLines:2];
-    return (17+18+5) + 17+ 3 + height + (14+ 18);
+  NSString *fullText = @"This sounded a very good reason, and Alice was quite pleased to know it. 'I never thought of that before!' She inquisitively said.";
+  CGFloat height = [fullText heightForTextHavingWidth:[[EPUpdateNoteTableViewCell class] contentLabelWidthInTableViewWithWidth:CGRectGetWidth(self.tableView.frame)] font:[UIFont systemFontOfSize:12] maxLines:4];
+  if (indexPath.row == 0) {
+    return [[EPUpdateNoteTableViewCell class] recommnendedHeight]+height;
+  } else if (indexPath.row ==1) {
+    return [[EPUpdateNoteTableViewCell class] recommnendedHeight]+100;
+  } else if (indexPath.row ==2) {
+    height = [fullText heightForTextHavingWidth:[[EPUpdateNoteTableViewCell class] contentLabelWidthInTableViewWithWidth:CGRectGetWidth(self.tableView.frame)] font:[UIFont systemFontOfSize:12] maxLines:3];
+    return [[EPUpdateNoteTableViewCell class] recommnendedHeight]+100+ height;
+  } else if (indexPath.row ==3) {
+    return [[EPUpdateOpportunityTableViewCell class] recommendedHeight];
+  } else if (indexPath.row == 4) {
+    return [[EPUPdateQualifyTableViewCell class] recommendedHeight];
+  } else if (indexPath.row == 5) {
+    return [[EPUpdateAccessoryImageTableViewCell class] recommendedHeight];
+  } else if (indexPath.row == 6) {
+    return [[EPUpdateAccessoryImageTableViewCell class] recommendedHeight];
+  } else if (indexPath.row == 7) {
+    return [[EPUpdateAccessoryImageTableViewCell class] recommendedHeight];
+  } else if (indexPath.row == 8) {
+    return [[EPUpdateAccessoryImageTableViewCell class] recommendedHeight];
   } else {
-    return (18+11+17)+(14+18)+17;
+    return [[EPUpdateNoteTableViewCell class] recommnendedHeight]+height;
   }
 }
 
@@ -120,6 +200,5 @@
 {
   [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
-
 
 @end
