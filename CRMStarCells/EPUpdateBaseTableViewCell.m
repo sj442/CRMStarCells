@@ -64,6 +64,9 @@
 - (void)setupTypeLabel
 {
   UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(10, CGRectGetMaxY(self.userImageView.frame)+5.0f, 44, 24)];
+  [self.contentView addSubview:label];
+  self.typeLabel = label;
+  
   label.layer.cornerRadius = 3.0f;
   label.clipsToBounds = YES;
   label.backgroundColor = [UIColor blueColor];
@@ -71,8 +74,6 @@
   label.textColor = [UIColor whiteColor];
   label.textAlignment = NSTextAlignmentCenter;
   label.text = @"NOTE";
-  [self.contentView addSubview:label];
-  self.typeLabel = label;
 }
 
 - (void)setupPrimaryLabel

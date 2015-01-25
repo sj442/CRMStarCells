@@ -9,13 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "EPUpdateBaseTableViewCell.h"
 
-static NSString* EPImageLabelAccessoryViewCellIdentifier = @"ImageLabelAccessoryViewCell";
 
 @interface EPUpdateOpportunityTableViewCell : EPUpdateBaseTableViewCell
 
 @property (weak, nonatomic) UILabel *nameLabel;
+
 @property (weak, nonatomic) UILabel *subNameLabel;
+
 @property (weak, nonatomic) UILabel *descriptionLabel;
+
 @property (weak, nonatomic) UILabel *accessoryLabel;
 
 + (CGFloat)recommendedHeight;

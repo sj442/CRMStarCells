@@ -11,7 +11,7 @@
 @interface EPUpdateBaseTableViewCell : UITableViewCell
 
 /*
- 
+ base cell class for all update cells
 */
 @property (weak, nonatomic) UIImageView *userImageView;
 

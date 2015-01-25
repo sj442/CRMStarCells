@@ -29,17 +29,19 @@
   
   [self setTypeLabelText];
 
-  if (!(self.contentLabel.text == nil) && (self.contentImageView.image == nil)) {
+  if (!(self.contentLabel.text == nil || [self.contentLabel.text isEqualToString:@""]) && (self.contentImageView.image == nil)) {
     CGRect frame = self.contentLabel.frame;
     frame.origin.y = CGRectGetMaxY(self.primaryLabel.frame)+5;
     frame.size.height = CGRectGetHeight(self.contentView.frame) - CGRectGetMinY(frame) - CGRectGetHeight(self.timeLabel.frame) - 10 -10;
     self.contentLabel.frame = frame;
+    
     self.contentLabel.hidden = NO;
     self.contentLabel.numberOfLines = 4;
     self.contentImageView.hidden = YES;
-  } else if ((self.contentLabel.text == nil) && !(self.contentImageView.image == nil)) {
+  } else if ((self.contentLabel.text == nil || [self.contentLabel.text isEqualToString:@""]) && !(self.contentImageView.image == nil)) {
     self.contentLabel.hidden = YES;
     self.contentImageView.hidden = NO;
+    
     CGRect frame = self.contentImageView.frame;
     frame.origin.y = CGRectGetMaxY(self.primaryLabel.frame)+10;
     self.contentImageView.frame = frame;
@@ -47,9 +49,11 @@
     self.contentImageView.hidden = NO;
     self.contentLabel.hidden = NO;
     self.contentLabel.numberOfLines = 3;
+    
     CGRect frame = self.contentImageView.frame;
     frame.origin.y = CGRectGetHeight(self.contentView.frame) - 10 -16- 10- 100;
     self.contentImageView.frame = frame;
+    
     frame = self.contentLabel.frame;
     frame.origin.y = CGRectGetMaxY(self.primaryLabel.frame)+5;
     frame.size.height = CGRectGetHeight(self.contentView.frame) - CGRectGetHeight(self.contentImageView.frame) - CGRectGetMinY(self.contentLabel.frame) -5- 10-16-10;

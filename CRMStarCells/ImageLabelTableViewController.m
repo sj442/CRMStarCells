@@ -120,7 +120,7 @@ static NSString* EPUpdateNoteTableViewCellIdentifier = @"EPUpdateNoteTableViewCe
         cell = [[EPUpdateAccessoryImageTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:EPUpdateAccessoryImageTableViewCellIdentifier];
       }
       cell.activityType= 2;
-      cell.descriptionLabel.text = @"called Peter Verrillo";
+      cell.descriptionLabel.text = @"Called Peter Verrillo";
       cell.timeLabel.text = @"1:45 PM";
       cell.primaryLabel.text = @"Jennifer Marino";
       return cell;
@@ -130,7 +130,7 @@ static NSString* EPUpdateNoteTableViewCellIdentifier = @"EPUpdateNoteTableViewCe
         cell = [[EPUpdateAccessoryImageTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:EPUpdateAccessoryImageTableViewCellIdentifier];
       }
       cell.activityType = 3;
-      cell.descriptionLabel.text = @"emailed Peter Verrillo";
+      cell.descriptionLabel.text = @"Emailed Peter Verrillo";
       cell.timeLabel.text = @"1:45 PM";
       cell.primaryLabel.text = @"Jennifer Marino";
       return cell;

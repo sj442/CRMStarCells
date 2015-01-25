@@ -15,13 +15,18 @@
   self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
   if (self) {
     
-    self.typeLabel.text = @"QLFY";
-    
     [self setupScoreLabel];
     
     [self setupMaxScoreLabel];
   }
   return self;
+}
+
+- (void)layoutSubviews
+{
+  [super layoutSubviews];
+  
+  self.typeLabel.text = @"QLFY";
 }
 
 - (void)setupScoreLabel
