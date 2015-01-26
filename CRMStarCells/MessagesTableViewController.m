@@ -18,25 +18,23 @@
 #import "EPRightImageMessageCell.h"
 #import "EPRightImageGroupMessageCell.h"
 
+static NSString* EPMessageSummaryCellIdentifier = @"EPMessageSummaryCell";
+static NSString* EPLeftTextMessageCellIdentifier = @"EPLeftTextMessageCell";
+static NSString *EPLeftTextGroupMessageCellIdentifier = @"EPLeftTextGroupMessageCell";
+
 @interface MessagesTableViewController ()
 
 @end
 
 @implementation MessagesTableViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
   [super viewDidLoad];
   [self.tableView registerClass:[EPMessageSummaryCell class] forCellReuseIdentifier:EPMessageSummaryCellIdentifier];
   [self.tableView registerClass:[EPLeftTextMessageCell class] forCellReuseIdentifier:EPLeftTextMessageCellIdentifier];
   [self.tableView registerClass:[EPLeftTextGroupMessageCell class] forCellReuseIdentifier:EPLeftTextGroupMessageCellIdentifier];
-  [self.tableView registerClass:[EPLeftImageMessageCell class] forCellReuseIdentifier:EPLeftImageMessageCellIdentifier];
-  [self.tableView registerClass:[EPLeftImageGroupMessageCell class] forCellReuseIdentifier:EPLeftImageGroupMessageCellIdentifier];
-  [self.tableView registerClass:[EPRightTextMessageCell class] forCellReuseIdentifier:EPRightTextMessageCellIdentifier];
-  [self.tableView registerClass:[EPRightTextGroupMessageCell class] forCellReuseIdentifier:EPRightTextGroupMessageCellIdentifier];
-  [self.tableView registerClass:[EPRightImageMessageCell class] forCellReuseIdentifier:EPRightImageMessageCellIdentifier];
-  [self.tableView registerClass:[EPRightImageGroupMessageCell class] forCellReuseIdentifier:EPRightImageGroupMessageCellIdentifier];
   self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-  
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -80,57 +78,85 @@
     if (!cell) {
       cell = [[EPLeftTextMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:EPLeftTextMessageCellIdentifier];
     }
-    [cell configureWithProfileImage:nil time:@"1:09 PM" message:@"this much I thought proper to tell you kdjfslk sddj dskdln dhsjc dksljc dhsl  dlkdndjk dcsdklcjsdlkcd dchdjlslkch cdskhc"];
+    cell.chatCellType = EPLeftAlignedText;
+    cell.profileImageView.image = nil;
+    cell.dateLabel.text = @"1:09 PM";
+    cell.messageLabel.text = @"this much I thought proper to tell you kdjfslk sddj dskdln dhsjc dksljc dhsl  dlkdndjk dcsdklcjsdlkcd dchdjlslkch cdskhc";
     return cell;
   } else if (indexPath.row ==2) {
     EPLeftTextGroupMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:EPLeftTextGroupMessageCellIdentifier];
     if (!cell) {
       cell = [[EPLeftTextGroupMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:EPLeftTextGroupMessageCellIdentifier];
     }
-    [cell configureWithName:@"Sunayna Jain" profileImage:nil time:@"12:30 PM" message:@"fmds fsdsdgdfdasfrg ksdfjsdlkn vdljkasl;dxmsl;c sdjas;ldj dljasl;dksc dsjdsl;m jksdl;sdfjdlkjdlkvndkljd"];
+    cell.profileImageView.image = nil;
+    cell.dateLabel.text = @"1:09 PM";
+    cell.messageLabel.text = @"this much I thought proper to tell you kdjfslk sddj dskdln dhsjc dksljc dhsl  dlkdndjk dcsdklcjsdlkcd dchdjlslkch cdskhc";
+    cell.chatCellType = EPLeftAlignedText;
+    cell.nameLabel.text = @"Sunayna Jain";
     return cell;
   } else if (indexPath.row ==3) {
-    EPLeftImageMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:EPLeftImageMessageCellIdentifier];
+    EPLeftTextMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:EPLeftTextMessageCellIdentifier];
     if (!cell) {
-      cell = [[EPLeftImageMessageCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:EPLeftImageMessageCellIdentifier];
+      cell = [[EPLeftTextMessageCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:EPLeftTextMessageCellIdentifier];
     }
-    [cell configureWithProfileImage:nil time:@"1:40 PM" messageImage:[UIImage imageNamed:@"sampleContentImage.jpeg"]];
+    cell.profileImageView.image = nil;
+    cell.dateLabel.text = @"1:40 PM";
+    cell.messageImageView.image = [UIImage imageNamed:@"sampleContentImage.jpeg"];
+    cell.chatCellType = EPLeftAlignedImage;
     return cell;
   } else if (indexPath.row == 4) {
-    EPLeftImageGroupMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:EPLeftImageGroupMessageCellIdentifier];
+    EPLeftTextGroupMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:EPLeftTextGroupMessageCellIdentifier];
     if (!cell) {
-      cell = [[EPLeftImageGroupMessageCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:EPLeftImageGroupMessageCellIdentifier];
+      cell = [[EPLeftTextGroupMessageCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:EPLeftTextGroupMessageCellIdentifier];
     }
-    [cell configureWithName:@"Sunayna Jain" profileImage:nil time:@"15:35" messageImage:[UIImage imageNamed:@"sampleContentImage2.jpg"]];
+    cell.nameLabel.text = @"Sunayna Jain";
+    cell.dateLabel.text = @"10:56 AM";
+    cell.messageImageView.image = [UIImage imageNamed:@"sampleContentImage2.jpg"];
+    cell.chatCellType = EPLeftAlignedImage;
+    cell.profileImageView.image = nil;
     return cell;
   } else if (indexPath.row == 5){
-    EPRightTextMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:EPRightTextMessageCellIdentifier];
+    EPLeftTextMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:EPLeftTextMessageCellIdentifier];
     if (!cell) {
-      cell = [[EPRightTextMessageCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:EPRightTextMessageCellIdentifier];
+      cell = [[EPLeftTextMessageCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:EPLeftTextMessageCellIdentifier];
     }
-    [cell configureWithProfileImage:nil time:@"12:46 PM" message:@"fmds fsdsdgdfdasfrg ksdfjsdlkn vdljkasl;dxmsl;c sdjas;ldj dljasl;dksc dsjdsl;m jksdl;sdfjdlkjdlkvndkljd"];
+    cell.chatCellType = EPRightAlignedText;
+    cell.profileImageView.image = nil;
+    cell.dateLabel.text = @"12:46 PM";
+    cell.messageLabel.text = @"this much I thought proper to tell you kdjfslk sddj dskdln dhsjc dksljc dhsl  dlkdndjk dcsdklcjsdlkcd dchdjlslkch cdskhc";
     return cell;
   }
   else if (indexPath.row == 6) {
-    EPRightTextGroupMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:EPRightTextGroupMessageCellIdentifier];
+    EPLeftTextGroupMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:EPLeftTextGroupMessageCellIdentifier];
     if (!cell) {
-      cell = [[EPRightTextGroupMessageCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:EPRightTextGroupMessageCellIdentifier];
+      cell = [[EPLeftTextGroupMessageCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:EPLeftTextGroupMessageCellIdentifier];
     }
-    [cell configureWithName:@"Sunayna Jain" profileImage:nil time:@"13:55 PM" message:@"fmds fsdsdgdfdasfrg ksdfjsdlkn vdljkasl;dxmsl;c sdjas;ldj dljasl;dksc dsjdsl;m jksdl;sdfjdlkjdlkvndkljd"];
+    cell.chatCellType = EPRightAlignedText;
+    cell.nameLabel.text = @"Sunayna Jain";
+    cell.profileImageView.image = nil;
+    cell.dateLabel.text = @"1:55 PM";
+    cell.messageLabel.text = @"this much I thought proper to tell you kdjfslk sddj dskdln dhsjc dksljc dhsl  dlkdndjk dcsdklcjsdlkcd dchdjlslkch cdskhc";
     return cell;
   } else if (indexPath.row == 7) {
-    EPRightImageMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:EPRightImageMessageCellIdentifier];
+    EPLeftTextMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:EPLeftTextMessageCellIdentifier];
     if (!cell) {
-      cell = [[EPRightImageMessageCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:EPRightImageMessageCellIdentifier];
+      cell = [[EPLeftTextMessageCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:EPLeftTextMessageCellIdentifier];
     }
-    [cell configureWithProfileImage:nil time:@"12:57 PM" messageImage:[UIImage imageNamed:@"sampleContentImage2.jpg"]];
+    cell.chatCellType = EPRightAlignedImage;
+    cell.profileImageView.image = nil;
+    cell.dateLabel.text = @"12:57 PM";
+    cell.messageImageView.image = [UIImage imageNamed:@"sampleContentImage2.jpg"];
     return cell;
   } else {
-    EPRightImageGroupMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:EPRightImageGroupMessageCellIdentifier];
+    EPLeftTextGroupMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:EPLeftTextGroupMessageCellIdentifier];
     if (!cell) {
-      cell = [[EPRightImageGroupMessageCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:EPRightImageGroupMessageCellIdentifier];
+      cell = [[EPLeftTextGroupMessageCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:EPLeftTextGroupMessageCellIdentifier];
     }
-    [cell configureWithName:@"Sunayna Jain" profileImage:nil time:@"9:24 PM" messageImage:[UIImage imageNamed:@"sampleContentImage.jpeg"]];
+    cell.nameLabel.text = @"Sunayna Jain";
+    cell.profileImageView.image = nil;
+    cell.dateLabel.text = @"12:35 PM";
+    cell.messageImageView.image = [UIImage imageNamed:@"sampleContentImage.jpeg"];
+    cell.chatCellType = EPRightAlignedImage;
     return cell;
   }
 }
@@ -139,13 +165,13 @@
 {
   if (indexPath.section ==0) {
     return 15+22+9+32+10;
-  } else if (indexPath.row ==1) {
+  } else if (indexPath.row ==1 || indexPath.row ==5) {
     NSString *message = @"this much I thought proper to tell you kdjfslk sddj dskdln dhsjc dksljc dhsl  dlkdndjk dcsdklcjsdlkcd dchdjlslkch cdskhc";
-    CGFloat height = [message heightForTextHavingWidth:[EPLeftTextMessageCell messageLabelWidth]-20 font:[UIFont systemFontOfSize:13]];
+    CGFloat height = [message heightForTextHavingWidth:[[EPLeftTextMessageCell class] contentLabelWidthInTableViewWithWidth:CGRectGetWidth(self.tableView.frame)] font:[UIFont systemFontOfSize:13]];
     return MAX(15+44+5+16+5, 15+height+15+20);
-  } else if (indexPath.row ==2) {
-    NSString *message = @"fmds fsdsdgdfdasfrg ksdfjsdlkn vdljkasl;dxmsl;c sdjas;ldj dljasl;dksc dsjdsl;m jksdl;sdfjdlkjdlkvndkljd";
-    CGFloat height = [message heightForTextHavingWidth:[EPLeftTextMessageCell messageLabelWidth]-20 font:[UIFont systemFontOfSize:13]];
+  } else if (indexPath.row ==2 || indexPath.row ==6) {
+    NSString *message = @"this much I thought proper to tell you kdjfslk sddj dskdln dhsjc dksljc dhsl  dlkdndjk dcsdklcjsdlkcd dchdjlslkch cdskhc";
+    CGFloat height = [message heightForTextHavingWidth:[[EPLeftTextMessageCell class] contentLabelWidthInTableViewWithWidth:CGRectGetWidth(self.tableView.frame)] font:[UIFont systemFontOfSize:13]];
     return MAX(15+44+5+16+5, 5+14+2+height+15+20);
   } else if (indexPath.row == 3){
     return 15+100+15;
@@ -156,7 +182,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  NSLog(@"did select %ld", (long)indexPath.row);
+  [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section

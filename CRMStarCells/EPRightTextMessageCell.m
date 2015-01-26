@@ -15,11 +15,11 @@
   self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
   if (self) {
     CGRect frame = self.profileImageView.frame;
-    frame.origin.x = self.contentWidth -59;
+    frame.origin.x = CGRectGetWidth(self.contentView.frame) -59;
     self.profileImageView.frame =frame;
     frame = self.dateLabel.frame;
     self.dateLabel.textAlignment = NSTextAlignmentRight;
-    frame.origin.x = self.contentWidth - 69;
+    frame.origin.x = CGRectGetWidth(self.contentView.frame) - 69;
     self.dateLabel.frame = frame;
     frame = self.messageLabel.frame;
     frame.origin.x = 15;

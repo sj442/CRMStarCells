@@ -9,8 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "EPMessageLabel.h"
 
-static NSString* EPMessageSummaryCellIdentifier = @"MessageSummary";
-
 @interface EPMessageSummaryCell : UITableViewCell
 
 @property (weak, nonatomic) UIView *dotView;

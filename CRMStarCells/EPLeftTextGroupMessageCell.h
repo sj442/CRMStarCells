@@ -10,13 +10,8 @@
 #import "EPMessageLabel.h"
 #import "EPLeftTextMessageCell.h"
 
-static NSString* EPLeftTextGroupMessageCellIdentifier = @"LeftTextGroupMessageCellIdentifier";
-
 @interface EPLeftTextGroupMessageCell : EPLeftTextMessageCell
 
 @property (weak, nonatomic) UILabel *nameLabel;
-
-- (void)configureWithName:(NSString *)name profileImage:(UIImage *)image time:(NSString *)timeString message:(NSString *)message;
-
 
 @end

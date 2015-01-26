@@ -15,24 +15,49 @@
 {
   self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
   if (self) {
-    UILabel *name = [[UILabel alloc]initWithFrame:CGRectMake(79, 5, 100, 14)];
-    name.font= [UIFont systemFontOfSize:10];
-    name.textColor = [UIColor grayColor];
-    [self.contentView addSubview:name];
-    self.nameLabel = name;
+    
+    [self setupNameLabel];
   }
   return self;
 }
 
-- (void)configureWithName:(NSString *)name profileImage:(UIImage *)image time:(NSString *)timeString message:(NSString *)message
+- (void)setupNameLabel
 {
-  [super configureWithProfileImage:image time:timeString message:message];
-  self.nameLabel.text = name;
-  CGRect frame = self.messageLabel.frame;
-  frame.origin.y = CGRectGetMaxY(self.nameLabel.frame) +2;
-  CGFloat messageHeight = [message heightForTextHavingWidth:self.contentWidth-69-15-20 font:[UIFont systemFontOfSize:13]];
-  frame.size.height = messageHeight+20;
-  self.messageLabel.frame = frame;
+  UILabel *name = [UILabel new];
+  [self.contentView addSubview:name];
+  self.nameLabel = name;
+  
+  name.font= [UIFont systemFontOfSize:10];
+  name.textColor = [UIColor grayColor];
+  name.textAlignment = NSTextAlignmentLeft;
+  
+  CGRect frame = CGRectZero;
+  frame.origin.x = 79;
+  frame.origin.y = 5;
+  frame.size.width = 100;
+  frame.size.height = 14;
+  self.nameLabel.frame = frame;
+}
+
+- (void)layoutSubviews
+{
+  [super layoutSubviews];
+  
+  if (self.chatCellType == EPRightAlignedImage || self.chatCellType == EPRightAlignedText) {
+    CGRect frame = self.nameLabel.frame;
+    frame.origin.x = CGRectGetWidth(self.contentView.frame) -179;
+    self.nameLabel.frame = frame;
+    
+    self.nameLabel.textAlignment = NSTextAlignmentRight;
+  }
+  
+    CGRect frame = self.messageImageView.frame;
+    frame.origin.y = CGRectGetMaxY(self.nameLabel.frame)+2;
+    self.messageImageView.frame = frame;
+    
+    frame = self.messageLabel.frame;
+    frame.origin.y = CGRectGetMaxY(self.nameLabel.frame)+2;
+    self.messageLabel.frame = frame;
 }
 
 @end

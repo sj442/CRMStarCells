@@ -9,18 +9,25 @@
 #import <UIKit/UIKit.h>
 #import "EPMessageLabel.h"
 
-static NSString* EPLeftTextMessageCellIdentifier = @"LeftTextMessageCellIdentifier";
+typedef NS_ENUM(NSInteger, EPChatCellType) {
+  EPLeftAlignedText,
+  EPRightAlignedText,
+  EPLeftAlignedImage,
+  EPRightAlignedImage
+};
 
 @interface EPLeftTextMessageCell : UITableViewCell
 
 @property (weak, nonatomic) UIImageView *profileImageView;
+
 @property (weak, nonatomic) UILabel *dateLabel;
+
 @property (weak, nonatomic) EPMessageLabel *messageLabel;
-@property CGFloat contentWidth;
 
-+(CGFloat)messageLabelWidth;
+@property (weak, nonatomic) UIImageView *messageImageView;
 
-- (void)configureWithProfileImage:(UIImage *)image time:(NSString *)timeString message:(NSString *)message;
+@property (nonatomic) EPChatCellType chatCellType;
 
++ (CGFloat)contentLabelWidthInTableViewWithWidth:(CGFloat)width;
 
 @end
