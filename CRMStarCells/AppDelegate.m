@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "ImageLabelTableViewController.h"
 #import  "MessagesTableViewController.h"
+#import "EPSwipeCellTableViewController.h"
 
 @interface AppDelegate ()
 
@@ -26,7 +27,8 @@
   
   MessagesTableViewController *messagesTVC = [[MessagesTableViewController alloc]init];
   //ImageLabelTableViewController *tableVC = [[ImageLabelTableViewController alloc]init];
-  self.window.rootViewController = messagesTVC;
+  EPSwipeCellTableViewController *swipeTVC = [[EPSwipeCellTableViewController alloc]init];
+  self.window.rootViewController = swipeTVC;
   return YES;
 }
 

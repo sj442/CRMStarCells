@@ -50,7 +50,7 @@
     
     self.nameLabel.textAlignment = NSTextAlignmentRight;
   }
-  
+
     CGRect frame = self.messageImageView.frame;
     frame.origin.y = CGRectGetMaxY(self.nameLabel.frame)+2;
     self.messageImageView.frame = frame;
