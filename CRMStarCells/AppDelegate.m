@@ -24,9 +24,9 @@
   self.window.backgroundColor = [UIColor whiteColor];
   [self.window makeKeyAndVisible];
   
-  //MessagesTableViewController *messagesTVC = [[MessagesTableViewController alloc]init];
-  ImageLabelTableViewController *tableVC = [[ImageLabelTableViewController alloc]init];
-  self.window.rootViewController = tableVC;
+  MessagesTableViewController *messagesTVC = [[MessagesTableViewController alloc]init];
+  //ImageLabelTableViewController *tableVC = [[ImageLabelTableViewController alloc]init];
+  self.window.rootViewController = messagesTVC;
   return YES;
 }
 

@@ -70,7 +70,10 @@
     if (!cell) {
       cell = [[EPMessageSummaryCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:EPMessageSummaryCellIdentifier];
     }
-    [cell configureWithName:@"Anna Blum" message:@"Hi!dsdkjdaskdhs djhaskj" time:@"Sunday" read:NO];
+    cell.nameLabel.text = @"Anna Blum";
+    cell.messageLabel.text = @"fgfd fds gd vdfdv ddsfdg";
+    cell.timeLabel.text = @"Sunday";
+    cell.dotView.hidden = NO;
     return cell;
   } else if (indexPath.row == 1) {
     EPLeftTextMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:EPLeftTextMessageCellIdentifier];

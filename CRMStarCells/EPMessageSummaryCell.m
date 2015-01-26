@@ -13,43 +13,91 @@
 {
   self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
   if (self) {
-    self.contentwidth = [[UIScreen mainScreen] bounds].size.width;
-    UIView *dotView = [[UIView alloc]initWithFrame:CGRectMake(8, 21, 10, 10)];
-    dotView.backgroundColor = [UIColor greenColor];
-    dotView.layer.cornerRadius = 5;
-    dotView.clipsToBounds = YES;
-    [self.contentView addSubview:dotView];
-    self.dotView = dotView;
-    UILabel *name = [[UILabel alloc]initWithFrame:CGRectMake(25, 15, 150, 22)];
-    name.font = [UIFont systemFontOfSize:18];
-    [self.contentView addSubview:name];
-    self.nameLabel = name;
-    UILabel *message = [[UILabel alloc]initWithFrame:CGRectMake(25, CGRectGetMaxY(self.nameLabel.frame)+4, self.contentwidth-40, 44)];
-    message.font = [UIFont systemFontOfSize:12];
-    message.numberOfLines = 2;
-    message.textAlignment = NSTextAlignmentLeft;
-    [self.contentView addSubview:message];
-    self.messageLabel = message;
-    UILabel *time = [[UILabel alloc]initWithFrame:CGRectMake(self.contentwidth-90, 10, 80, 13)];
-    time.font = [UIFont systemFontOfSize:9];
-    time.textAlignment = NSTextAlignmentRight;
-    [self.contentView addSubview:time];
-    self.timeLabel = time;
+    
+    [self setupDotView];
+    
+    [self setupNameLabel];
+    
+    [self setupMessageLabel];
+    
+    [self setupTimeLabel];
   }
   return self;
 }
 
-- (void)configureWithName:(NSString *)name message:(NSString *)message time:(NSString *)time read:(BOOL)isRead
+- (void)setupDotView
 {
-  self.nameLabel.text = name;
-  self.messageLabel.text = message;
-  [self.messageLabel sizeToFit];
-  self.timeLabel.text = time;
-  self.dotView.hidden = isRead;
+  UIView *dotView = [UIView new];
+  [self.contentView addSubview:dotView];
+  self.dotView = dotView;
+
+  dotView.backgroundColor = [UIColor greenColor];
+  dotView.layer.cornerRadius = 5;
+  dotView.clipsToBounds = YES;
+  
+  CGRect frame = CGRectZero;
+  frame.origin.x = 8;
+  frame.origin.y = 21;
+  frame.size.width = 10;
+  frame.size.height = 10;
+  self.dotView.frame = frame;
+ }
+
+- (void)setupNameLabel
+{
+  UILabel *name = [UILabel new];
+  [self.contentView addSubview:name];
+  self.nameLabel = name;
+  
+  name.font = [UIFont systemFontOfSize:18];
+  
+  CGRect frame = CGRectZero;
+  frame.origin.x = 25;
+  frame.origin.y = 15;
+  frame.size.width = CGRectGetWidth(self.contentView.frame) - 15 - 25;
+  frame.size.height = 22;
+  self.nameLabel.frame = frame;
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
+- (void)setupMessageLabel
+{
+  UILabel *message = [UILabel new];
+  [self.contentView addSubview:message];
+  self.messageLabel = message;
+  
+  message.font = [UIFont systemFontOfSize:12];
+  message.numberOfLines = 2;
+  message.textAlignment = NSTextAlignmentLeft;
+  
+  CGRect frame = CGRectZero;
+  frame.origin.x = 25;
+  frame.origin.y = CGRectGetMaxY(self.nameLabel.frame)+4;
+  frame.size.width = CGRectGetWidth(self.contentView.frame) - 40-25;
+  frame.size.height = 44;
+  self.messageLabel.frame = frame;
 }
+
+- (void)setupTimeLabel
+{
+  UILabel *time = [UILabel new];
+  [self.contentView addSubview:time];
+  self.timeLabel = time;
+
+  time.font = [UIFont systemFontOfSize:9];
+  time.textAlignment = NSTextAlignmentRight;
+  
+  CGRect frame = CGRectZero;
+  frame.origin.x = CGRectGetWidth(self.contentView.frame) - 90;
+  frame.origin.y = 10;
+  frame.size.width = 80;
+  frame.size.height = 13;
+  self.timeLabel.frame = frame;
+}
+
+- (void)layoutSubviews
+{
+  [self.messageLabel sizeToFit];
+}
+
 
 @end
