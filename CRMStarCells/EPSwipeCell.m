@@ -12,6 +12,8 @@
 
 @property (strong, nonatomic) UIPanGestureRecognizer *panGesture;
 
+@property (weak, nonatomic) UIView *containerView;
+
 @property (weak, nonatomic) UIView *myContentView;
 
 @property (weak, nonatomic) UIView *buttonView;
@@ -34,7 +36,6 @@
   if (self) {
     
     [self setupRightButtons];
-    
     [self setupGestureRecognizer];
   }
   return  self;
@@ -42,7 +43,6 @@
 
 - (void)setupRightButtons
 {
-  self.contentView.backgroundColor = [UIColor greenColor];
   UIView *myContentView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 100)];
   myContentView.backgroundColor = [UIColor redColor];
   [self.contentView addSubview:myContentView];
@@ -73,6 +73,11 @@
   UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(swiped:)];
   [self.contentView addGestureRecognizer:pan];
   self.panGesture = pan;
+}
+
+- (void)buttonViewTapped:(id)sender
+{
+  
 }
 
 - (void)swiped:(UIPanGestureRecognizer *)pan
@@ -151,7 +156,10 @@
           frame.origin.x = CGRectGetMaxX(self.button2.frame);
           frame.size.width = 80;
           self.button3.frame = frame;
-        } completion:nil];
+        } completion:^(BOOL finished) {
+          UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(buttonViewTapped:)];
+          [self.buttonView addGestureRecognizer:pan];
+        }];
       }
     }
   }

@@ -21,8 +21,7 @@ static NSString* EPSWipeCellIdentifier = @"EPSwipeCell";
   
   [super viewDidLoad];
   
-  [self.tableView registerClass:[EPSwipeCell class] forCellReuseIdentifier:EPSWipeCellIdentifier];
-  
+  [self.tableView registerClass:[EPSwipeCell class] forCellReuseIdentifier:EPSWipeCellIdentifier];  
   // Uncomment the following line to preserve selection between presentations.
   // self.clearsSelectionOnViewWillAppear = NO;
   
