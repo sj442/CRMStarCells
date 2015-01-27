@@ -7,9 +7,11 @@
 //
 
 #import "EPSwipeCellTableViewController.h"
+#import "SwipeScrollViewCell.h"
 #import "EPSwipeCell.h"
 
 static NSString* EPSWipeCellIdentifier = @"EPSwipeCell";
+static NSString* SwipeScrollViewCellIdentifier = @"SwipeScrollViewCell";
 
 @interface EPSwipeCellTableViewController ()
 
@@ -21,7 +23,10 @@ static NSString* EPSWipeCellIdentifier = @"EPSwipeCell";
   
   [super viewDidLoad];
   
-  [self.tableView registerClass:[EPSwipeCell class] forCellReuseIdentifier:EPSWipeCellIdentifier];  
+  [self.tableView registerClass:[EPSwipeCell class] forCellReuseIdentifier:EPSWipeCellIdentifier];
+  
+  [self.tableView registerClass:[SwipeScrollViewCell class] forCellReuseIdentifier:SwipeScrollViewCellIdentifier];
+  
   // Uncomment the following line to preserve selection between presentations.
   // self.clearsSelectionOnViewWillAppear = NO;
   
@@ -53,10 +58,6 @@ static NSString* EPSWipeCellIdentifier = @"EPSwipeCell";
     cell = [[EPSwipeCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:EPSWipeCellIdentifier];
   }
   return cell;
-    
-    // Configure the cell...
-    
-    return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
