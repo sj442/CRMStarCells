@@ -12,6 +12,8 @@
 
 @property (strong, nonatomic) UIPanGestureRecognizer *panGesture;
 
+@property (strong, nonatomic) UITapGestureRecognizer *tapGesture;
+
 @property (weak, nonatomic) UIView *containerView;
 
 @property (weak, nonatomic) UIView *myContentView;
@@ -37,6 +39,7 @@
     
     [self setupRightButtons];
     [self setupGestureRecognizer];
+    self.buttonViewOpen = NO;
   }
   return  self;
 }
@@ -73,11 +76,6 @@
   UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(swiped:)];
   [self.contentView addGestureRecognizer:pan];
   self.panGesture = pan;
-}
-
-- (void)buttonViewTapped:(id)sender
-{
-  
 }
 
 - (void)swiped:(UIPanGestureRecognizer *)pan
@@ -140,7 +138,10 @@
           frame.origin.x = CGRectGetMaxX(self.button2.frame);
           frame.size.width = 80;
           self.button3.frame = frame;
-        } completion:nil];
+        } completion:^(BOOL finished) {
+          self.buttonViewOpen = NO;
+          [self.contentView removeGestureRecognizer:self.tapGesture];
+        }];
       } else { //moving left
         [UIView animateWithDuration:0.1f delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
           [self.contentView setCenter:CGPointMake(-80, 50)];
@@ -157,11 +158,35 @@
           frame.size.width = 80;
           self.button3.frame = frame;
         } completion:^(BOOL finished) {
-          UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(buttonViewTapped:)];
-          [self.buttonView addGestureRecognizer:pan];
+          self.buttonViewOpen = YES;
+          UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(closeButtonView:)];
+          [self.contentView addGestureRecognizer:tap];
+          self.tapGesture = tap;
         }];
       }
     }
   }
+
+- (void)closeButtonView:(UITapGestureRecognizer *)tap
+{
+  [UIView animateWithDuration:0.1f delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
+    [self.contentView setCenter:CGPointMake(160, 50)];
+    CGRect frame = self.button1.frame;
+    frame.origin.x = 0;
+    frame.size.width = 80;
+    self.button1.frame =frame;
+    frame =self.button2.frame;
+    frame.origin.x = CGRectGetMaxX(self.button1.frame);
+    frame.size.width = 80;
+    self.button2.frame = frame;
+    frame = self.button3.frame;
+    frame.origin.x = CGRectGetMaxX(self.button2.frame);
+    frame.size.width = 80;
+    self.button3.frame = frame;
+  } completion:^(BOOL finished) {
+    self.buttonViewOpen = NO;
+    [self.contentView removeGestureRecognizer:self.tapGesture];
+  }];
+}
 
 @end

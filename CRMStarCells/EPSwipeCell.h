@@ -10,4 +10,6 @@
 
 @interface EPSwipeCell : UITableViewCell
 
+@property BOOL buttonViewOpen;
+
 @end
