@@ -14,6 +14,8 @@
 
 @property (weak, nonatomic) UIView *myContentView;
 
+@property (weak, nonatomic) UIView *buttonView;
+
 @property (weak, nonatomic) UIButton *button1;
 
 @property (weak, nonatomic) UIButton *button2;
@@ -40,28 +42,30 @@
 
 - (void)setupRightButtons
 {
-  UIView *myContentView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.contentView.frame), 100)];
+  self.contentView.backgroundColor = [UIColor greenColor];
+  UIView *myContentView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 100)];
   myContentView.backgroundColor = [UIColor redColor];
   [self.contentView addSubview:myContentView];
   self.myContentView = myContentView;
-  UIButton *button3 = [[UIButton alloc]initWithFrame:CGRectMake(CGRectGetWidth(self.myContentView.frame), 0, 80, 100)];
-  [button3 setTitle:@"More" forState:UIControlStateNormal];
-  button3.backgroundColor = [UIColor orangeColor];
-  [button3 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-  [self.contentView addSubview:button3];
-  self.button3 = button3;
-  UIButton *button2 = [[UIButton alloc]initWithFrame:CGRectMake(CGRectGetWidth(self.button3.frame)+CGRectGetWidth(self.myContentView.frame), 0, 80, 100)];
+  UIView *buttonView = [[UIView alloc]initWithFrame:CGRectMake(320, 0, 240, 100)];
+  [self.contentView addSubview:buttonView];
+  self.buttonView = buttonView;
+  self.buttonView.backgroundColor = [UIColor blackColor];
+  UIButton *button1 = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.buttonView.frame)/3, 100)];
+  button1.backgroundColor = [UIColor orangeColor];
+  [button1 setTitle:@"More" forState:UIControlStateNormal];
+  [self.buttonView addSubview:button1];
+  self.button1 = button1;
+  UIButton *button2 = [[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMaxX(self.button1.frame), 0, CGRectGetWidth(self.buttonView.frame)/3, 100)];
+  [self.buttonView addSubview:button2];
   [button2 setTitle:@"Flag" forState:UIControlStateNormal];
   button2.backgroundColor = [UIColor yellowColor];
-  [button2 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-  [self.contentView addSubview:button2];
   self.button2 = button2;
-  UIButton *button1 = [[UIButton alloc]initWithFrame:CGRectMake(CGRectGetWidth(self.button2.frame)+CGRectGetWidth(self.button3.frame)+CGRectGetWidth(self.myContentView.frame), 0, 80, 100)];
-  [button1 setTitle:@"Archive" forState:UIControlStateNormal];
-  button1.backgroundColor = [UIColor grayColor];
-  [button1 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-  [self.contentView addSubview:button1];
-  self.button1 = button1;
+  UIButton *button3 = [[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMaxX(self.button2.frame), 0, CGRectGetWidth(self.buttonView.frame)/3, 100)];
+  button3.backgroundColor = [UIColor grayColor];
+  [button3 setTitle:@"Archive" forState:UIControlStateNormal];
+  [self.buttonView addSubview:button3];
+  self.button3 = button3;
 }
 
 - (void)setupGestureRecognizer
@@ -79,70 +83,77 @@
   }
   if (pan.state == UIGestureRecognizerStateChanged) {
     CGPoint translatedPoint = [pan locationInView:self.contentView];
-    CGFloat distanceMoved = abs(translatedPoint.x-self.startPoint.x);
-    [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+    CGFloat distanceMoved = (translatedPoint.x-self.startPoint.x);
     [UIView animateWithDuration:0.1f animations:^{
-      CGFloat centerX = self.contentView.center.x;
-      [self.contentView setCenter:CGPointMake(centerX +translatedPoint.x-self.startPoint.x, 50)];
-      CGRect frame = self.button3.frame;
-      frame.origin.x = self.contentView.frame.origin.x +320;
-      frame.origin.y = 0;
-      frame.size.width = distanceMoved/3;
-      frame.size.height  = 100;
-      self.button3.frame = frame;
-      frame = self.button2.frame;
-      frame.origin.x = self.contentView.frame.origin.x +320+distanceMoved/3;
-      frame.origin.y = 0;
-      frame.size.width = distanceMoved/3;
-      frame.size.height  = 100;
-      self.button2.frame = frame;
-      frame = self.button1.frame;
-      frame.origin.x = self.contentView.frame.origin.x +320+(distanceMoved*2)/3;
-      frame.origin.y = 0;
-      frame.size.width = distanceMoved/3;
-      frame.size.height = 100;
-      self.button1.frame = frame;
-    } completion:^(BOOL finished) {
-    }];
+        if (distanceMoved>0) {
+          CGFloat centerX = self.contentView.center.x;
+          [self.contentView setCenter:CGPointMake(MIN(160,centerX +distanceMoved), 50)];
+          CGRect frame = self.button1.frame;
+          frame.origin.x = 0;
+          frame.size.width = (320 - CGRectGetMaxX(self.contentView.frame))/3;
+          self.button1.frame =frame;
+          frame =self.button2.frame;
+          frame.origin.x = CGRectGetMaxX(self.button1.frame);
+          frame.size.width = (320 - CGRectGetMaxX(self.contentView.frame))/3;
+          self.button2.frame = frame;
+          frame = self.button3.frame;
+          frame.origin.x = CGRectGetMaxX(self.button2.frame);
+          frame.size.width = (320 - CGRectGetMaxX(self.contentView.frame))/3;
+          self.button3.frame = frame;
+        } else {
+          CGFloat centerX = self.contentView.center.x;
+          [self.contentView setCenter:CGPointMake(MAX(-240,centerX +distanceMoved), 50)];
+          CGRect frame = self.button1.frame;
+          frame.origin.x = 0;
+          frame.size.width = (320 - CGRectGetMaxX(self.contentView.frame))/3;
+          self.button1.frame =frame;
+          frame =self.button2.frame;
+          frame.origin.x = CGRectGetMaxX(self.button1.frame);
+          frame.size.width = (320 - CGRectGetMaxX(self.contentView.frame))/3;
+          self.button2.frame = frame;
+          frame = self.button3.frame;
+          frame.origin.x = CGRectGetMaxX(self.button2.frame);
+          frame.size.width = (320 - CGRectGetMaxX(self.contentView.frame))/3;
+          self.button3.frame = frame;
+        }
+    } completion:nil];
   }
     if (pan.state == UIGestureRecognizerStateEnded) {
       CGFloat velocityX = [pan velocityInView:self.contentView].x;
       if (velocityX>0) {//moving right
-        [UIView animateWithDuration:0.1f delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        [UIView animateWithDuration:0.1f delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
           [self.contentView setCenter:CGPointMake(160, 50)];
-          CGRect frame = self.button3.frame;
-          frame.origin.x = CGRectGetWidth(self.myContentView.frame);
+          CGRect frame = self.button1.frame;
+          frame.origin.x = 0;
           frame.size.width = 80;
-          self.button3.frame = frame;
-          frame = self.button2.frame;
-          frame.origin.x = CGRectGetWidth(self.button3.frame)+CGRectGetWidth(self.myContentView.frame);
-          frame.size.width = 80;
-          self.button2.frame = frame;
-          frame = self.button1.frame;
-          frame.origin.x = CGRectGetWidth(self.button2.frame)+ CGRectGetWidth(self.button3.frame)+CGRectGetWidth(self.myContentView.frame);
-          frame.size.width = 80;
-          self.button1.frame = frame;
-        } completion:^(BOOL finished) {
-        }];
-      } else { //moving left
-        [UIView animateWithDuration:0.1f delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-          [self.contentView setCenter:CGPointMake(-80, 50)];
-          CGRect frame = self.button3.frame;
-          frame.origin.x = CGRectGetMaxX(self.myContentView.frame);
-          frame.size.width = 80;
-          self.button3.frame = frame;
-          frame = self.button2.frame;
-          frame.origin.x = CGRectGetWidth(self.button2.frame)+ CGRectGetWidth(self.button3.frame)+CGRectGetWidth(self.myContentView.frame);
+          self.button1.frame =frame;
+          frame =self.button2.frame;
+          frame.origin.x = CGRectGetMaxX(self.button1.frame);
           frame.size.width = 80;
           self.button2.frame = frame;
-          frame = self.button1.frame;
+          frame = self.button3.frame;
           frame.origin.x = CGRectGetMaxX(self.button2.frame);
           frame.size.width = 80;
-          self.button1.frame = frame;
-        } completion:^(BOOL finished) {
-        }];
+          self.button3.frame = frame;
+        } completion:nil];
+      } else { //moving left
+        [UIView animateWithDuration:0.1f delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
+          [self.contentView setCenter:CGPointMake(-80, 50)];
+          CGRect frame = self.button1.frame;
+          frame.origin.x = 0;
+          frame.size.width = 80;
+          self.button1.frame =frame;
+          frame =self.button2.frame;
+          frame.origin.x = CGRectGetMaxX(self.button1.frame);
+          frame.size.width = 80;
+          self.button2.frame = frame;
+          frame = self.button3.frame;
+          frame.origin.x = CGRectGetMaxX(self.button2.frame);
+          frame.size.width = 80;
+          self.button3.frame = frame;
+        } completion:nil];
       }
     }
-}
+  }
 
 @end
