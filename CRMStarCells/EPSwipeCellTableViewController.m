@@ -28,6 +28,18 @@ static NSString* SwipeScrollViewCellIdentifier = @"SwipeScrollViewCell";
   [self.tableView registerClass:[SwipeScrollViewCell class] forCellReuseIdentifier:SwipeScrollViewCellIdentifier];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+  [super viewDidAppear:animated];
+  
+  CGRect frame = self.tableView.frame;
+  frame.origin.x = 0;
+  frame.origin.y = 0;
+  frame.size.width = 560;
+  frame.size.height = self.view.frame.size.height;
+  self.tableView.frame = frame;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
