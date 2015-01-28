@@ -26,6 +26,8 @@
 
 @property (weak, nonatomic) UIButton *button3;
 
+@property (weak, nonatomic) UIView *leftButtonView;
+
 @property CGPoint startPoint;
 
 @end
@@ -39,33 +41,42 @@
     
     [self setupRightButtons];
     [self setupGestureRecognizer];
-    self.buttonViewOpen = NO;
   }
   return  self;
 }
 
 - (void)setupRightButtons
 {
-  UIView *myContentView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 100)];
-  myContentView.backgroundColor = [UIColor redColor];
-  [self.contentView addSubview:myContentView];
-  self.myContentView = myContentView;
-  UIView *buttonView = [[UIView alloc]initWithFrame:CGRectMake(320, 0, 240, 100)];
+  UIView *buttonView = [[UIView alloc]initWithFrame:CGRectMake(80, 0, 240, 100)];
   [self.contentView addSubview:buttonView];
   self.buttonView = buttonView;
   self.buttonView.backgroundColor = [UIColor blackColor];
+  
+  UIView *leftButtonView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 240, 100)];
+  leftButtonView.backgroundColor = [UIColor blueColor];
+  [self.contentView addSubview:leftButtonView];
+  self.leftButtonView = leftButtonView;
+  
+  UIView *myContentView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 100)];
+  myContentView.backgroundColor = [UIColor redColor];
+  [self.contentView addSubview:myContentView];
+  [self.contentView bringSubviewToFront:myContentView];
+  self.myContentView = myContentView;
+  
   UIButton *button1 = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.buttonView.frame)/3, 100)];
   button1.backgroundColor = [UIColor orangeColor];
   [button1 setTitle:@"More" forState:UIControlStateNormal];
   [self.buttonView addSubview:button1];
   [button1 addTarget:self action:@selector(button1Tapped:) forControlEvents:UIControlEventTouchUpInside];
   self.button1 = button1;
+  
   UIButton *button2 = [[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMaxX(self.button1.frame), 0, CGRectGetWidth(self.buttonView.frame)/3, 100)];
   [self.buttonView addSubview:button2];
   [button2 setTitle:@"Flag" forState:UIControlStateNormal];
   button2.backgroundColor = [UIColor yellowColor];
   [button2 addTarget:self action:@selector(button2Tapped:) forControlEvents:UIControlEventTouchUpInside];
   self.button2 = button2;
+  
   UIButton *button3 = [[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMaxX(self.button2.frame), 0, CGRectGetWidth(self.buttonView.frame)/3, 100)];
   button3.backgroundColor = [UIColor grayColor];
   [button3 setTitle:@"Archive" forState:UIControlStateNormal];
@@ -106,6 +117,30 @@
     CGPoint translatedPoint = [pan locationInView:self.myContentView];
     CGFloat distanceMoved = (translatedPoint.x-self.startPoint.x);
     [UIView animateWithDuration:0.1f animations:^{
+      if (distanceMoved>0) //right swipe
+      {
+        if (self.righButtonViewOpen) {
+          //close right button view
+          self.leftButtonView.hidden = YES;
+          self.buttonView.hidden = NO;
+        } else {
+          //open left button view
+          self.leftButtonView.hidden = NO;
+          self.buttonView.hidden = YES;
+        }
+        
+      } else { //left swipe
+        if (self.leftButtonViewOpen) {
+          //close left button view
+          self.leftButtonView.hidden = NO;
+          self.buttonView.hidden = YES;
+        } else {
+          //open right button view
+          self.leftButtonView.hidden = YES;
+          self.buttonView.hidden = NO;
+        }
+      }
+
       if (distanceMoved>0) {
         CGFloat centerX = self.myContentView.center.x;
         [self.myContentView setCenter:CGPointMake(MIN(160,centerX +distanceMoved), 50)];
@@ -126,10 +161,17 @@
         CGFloat centerX = self.myContentView.center.x;
         [self.myContentView setCenter:CGPointMake(MAX(-80,centerX +distanceMoved), 50)];
         [self.buttonView setCenter:CGPointMake(MAX(200, self.buttonView.center.x + distanceMoved), 50)];
+        CGFloat xOrigin;
+        if (self.buttonView.center.x <=200) {
+          CGFloat buttonWidthVisible = 320 - CGRectGetMaxX(self.myContentView.frame);
+          xOrigin = 240- buttonWidthVisible;
+        } else {
+          xOrigin = 0;
+        }
         CGRect frame = self.button1.frame;
-        frame.origin.x = 0;
+        frame.origin.x = xOrigin;
         frame.size.width = (320 - CGRectGetMaxX(self.myContentView.frame))/3;
-        self.button1.frame =frame;
+        self.button1.frame = frame;
         frame =self.button2.frame;
         frame.origin.x = CGRectGetMaxX(self.button1.frame);
         frame.size.width = (320 - CGRectGetMaxX(self.myContentView.frame))/3;
@@ -139,7 +181,8 @@
         frame.size.width = (320 - CGRectGetMaxX(self.myContentView.frame))/3;
         self.button3.frame = frame;
       }
-    } completion:nil];
+    } completion:^(BOOL finished) {
+    }];
   }
   if (pan.state == UIGestureRecognizerStateEnded) {
     CGFloat velocityX = [pan velocityInView:self.contentView].x;
@@ -160,7 +203,7 @@
         frame.size.width = 80;
         self.button3.frame = frame;
       } completion:^(BOOL finished) {
-        self.buttonViewOpen = NO;
+        self.righButtonViewOpen = NO;
         [self.contentView removeGestureRecognizer:self.tapGesture];
       }];
     } else { //moving left
@@ -180,7 +223,7 @@
         frame.size.width = 80;
         self.button3.frame = frame;
       } completion:^(BOOL finished) {
-        self.buttonViewOpen = YES;
+        self.righButtonViewOpen = YES;
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(closeButtonView:)];
         [self.contentView addGestureRecognizer:tap];
         self.tapGesture = tap;
@@ -207,7 +250,7 @@
     frame.size.width = 80;
     self.button3.frame = frame;
   } completion:^(BOOL finished) {
-    self.buttonViewOpen = NO;
+    self.righButtonViewOpen = NO;
     [self.contentView removeGestureRecognizer:self.tapGesture];
   }];
 }

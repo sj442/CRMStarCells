@@ -31,13 +31,6 @@ static NSString* SwipeScrollViewCellIdentifier = @"SwipeScrollViewCell";
 - (void)viewDidAppear:(BOOL)animated
 {
   [super viewDidAppear:animated];
-  
-  CGRect frame = self.tableView.frame;
-  frame.origin.x = 0;
-  frame.origin.y = 0;
-  frame.size.width = 560;
-  frame.size.height = self.view.frame.size.height;
-  self.tableView.frame = frame;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -59,7 +52,7 @@ static NSString* SwipeScrollViewCellIdentifier = @"SwipeScrollViewCell";
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath
 {
   EPSwipeCell *cell = (EPSwipeCell *)[tableView cellForRowAtIndexPath:indexPath];
-  if (cell.buttonViewOpen) {
+  if (cell.leftButtonViewOpen || cell.righButtonViewOpen) {
     return NO;
   }
   return YES;
