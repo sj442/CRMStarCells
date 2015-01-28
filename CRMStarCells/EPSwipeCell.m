@@ -131,7 +131,7 @@
     [UIView animateWithDuration:0.1f animations:^{
       if (distanceMoved>0) //right swipe
       {
-        if (self.rightViewWillClose || self.righButtonViewOpen) {
+        if (self.rightViewWillClose || self.rightViewWillOpen||  self.righButtonViewOpen) {
           self.rightViewWillClose = YES;
           self.leftViewWillClose = NO;
           self.leftViewWillOpen = NO;
@@ -163,10 +163,13 @@
           self.rightViewWillOpen = NO;
           self.leftButtonView.hidden = NO;
           self.buttonView.hidden = YES;
+          CGFloat centerX = self.myContentView.center.x;
+          [self.myContentView setCenter:CGPointMake(MIN(400,centerX +distanceMoved), 50)];
+          [self.leftButtonView setCenter:CGPointMake(MIN(120, self.leftButtonView.center.x + distanceMoved), 50)];
         }
         
       } else { //left swipe
-        if (self.leftButtonViewOpen || self.leftViewWillClose) {
+        if (self.leftButtonViewOpen || self.leftViewWillClose || self.leftViewWillOpen) {
           //close left button view
           self.leftButtonView.hidden = NO;
           self.buttonView.hidden = YES;
@@ -174,6 +177,9 @@
           self.rightViewWillOpen = NO;
           self.leftViewWillOpen = NO;
           self.rightViewWillClose = NO;
+          CGFloat centerX = self.myContentView.center.x;
+          [self.myContentView setCenter:CGPointMake(MAX(160,centerX +distanceMoved), 50)];
+          [self.leftButtonView setCenter:CGPointMake(MAX(-120, self.leftButtonView.center.x + distanceMoved), 50)];
         } else {
           //open right button view
           self.leftButtonView.hidden = YES;
@@ -231,10 +237,20 @@
         self.righButtonViewOpen = NO;
         [self.contentView removeGestureRecognizer:self.tapGesture];
       }];
-    } else if (velocityX>0 && self.rightViewWillClose && !self.leftViewWillOpen ){
-      
-    } else if (velocityX<0 && self.leftViewWillClose && !self.rightViewWillOpen){
-      
+    } else if (velocityX>0 && self.leftViewWillOpen && !self.rightViewWillClose ){ //open left button view
+      [UIView animateWithDuration:0.1f animations:^{
+        [self.myContentView setCenter:CGPointMake(400, 50)];
+        [self.leftButtonView setCenter:CGPointMake(120, 50)];
+      } completion:^(BOOL finished) {
+        self.leftButtonViewOpen = YES;
+      }];
+    } else if (velocityX<0 && self.leftViewWillClose && !self.rightViewWillOpen){ //close left button view
+      [UIView animateWithDuration:0.1f animations:^{
+        [self.myContentView setCenter:CGPointMake(160, 50)];
+        [self.leftButtonView setCenter:CGPointMake(-120, 50)];
+      } completion:^(BOOL finished) {
+        self.leftButtonViewOpen = NO;
+      }];
     } else if (velocityX<0 && self.rightViewWillOpen && !self.leftViewWillClose) { //moving left
       [UIView animateWithDuration:0.1f delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
         [self.myContentView setCenter:CGPointMake(-80, 50)];
