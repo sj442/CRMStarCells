@@ -52,10 +52,10 @@
   self.buttonView = buttonView;
   self.buttonView.backgroundColor = [UIColor blackColor];
   
-  UIView *leftButtonView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 240, 100)];
-  leftButtonView.backgroundColor = [UIColor blueColor];
-  [self.contentView addSubview:leftButtonView];
-  self.leftButtonView = leftButtonView;
+//  UIView *leftButtonView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 240, 100)];
+//  leftButtonView.backgroundColor = [UIColor blueColor];
+//  [self.contentView addSubview:leftButtonView];
+//  self.leftButtonView = leftButtonView;
   
   UIView *myContentView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 100)];
   myContentView.backgroundColor = [UIColor redColor];
@@ -116,120 +116,119 @@
   if (pan.state == UIGestureRecognizerStateChanged) {
     CGPoint translatedPoint = [pan locationInView:self.myContentView];
     CGFloat distanceMoved = (translatedPoint.x-self.startPoint.x);
-    [UIView animateWithDuration:0.1f animations:^{
-      if (distanceMoved>0) //right swipe
-      {
-        if (self.righButtonViewOpen) {
-          //close right button view
-          self.leftButtonView.hidden = YES;
-          self.buttonView.hidden = NO;
-        } else {
-          //open left button view
-          self.leftButtonView.hidden = NO;
-          self.buttonView.hidden = YES;
-        }
-        
-      } else { //left swipe
-        if (self.leftButtonViewOpen) {
-          //close left button view
-          self.leftButtonView.hidden = NO;
-          self.buttonView.hidden = YES;
-        } else {
-          //open right button view
-          self.leftButtonView.hidden = YES;
-          self.buttonView.hidden = NO;
-        }
-      }
-
-      if (distanceMoved>0) {
-        CGFloat centerX = self.myContentView.center.x;
-        [self.myContentView setCenter:CGPointMake(MIN(160,centerX +distanceMoved), 50)];
-        [self.buttonView setCenter:CGPointMake(MIN(440, self.buttonView.center.x + distanceMoved), 50)];
-        CGRect frame = self.button1.frame;
-        frame.origin.x = 0;
-        frame.size.width = (320 - CGRectGetMaxX(self.myContentView.frame))/3;
-        self.button1.frame =frame;
-        frame =self.button2.frame;
-        frame.origin.x = CGRectGetMaxX(self.button1.frame);
-        frame.size.width = (320 - CGRectGetMaxX(self.myContentView.frame))/3;
-        self.button2.frame = frame;
-        frame = self.button3.frame;
-        frame.origin.x = CGRectGetMaxX(self.button2.frame);
-        frame.size.width = (320 - CGRectGetMaxX(self.myContentView.frame))/3;
-        self.button3.frame = frame;
-      } else {
-        CGFloat centerX = self.myContentView.center.x;
-        [self.myContentView setCenter:CGPointMake(MAX(-80,centerX +distanceMoved), 50)];
-        [self.buttonView setCenter:CGPointMake(MAX(200, self.buttonView.center.x + distanceMoved), 50)];
-        CGFloat xOrigin;
-        if (self.buttonView.center.x <=200) {
-          CGFloat buttonWidthVisible = 320 - CGRectGetMaxX(self.myContentView.frame);
-          xOrigin = 240- buttonWidthVisible;
-        } else {
-          xOrigin = 0;
-        }
-        CGRect frame = self.button1.frame;
-        frame.origin.x = xOrigin;
-        frame.size.width = (320 - CGRectGetMaxX(self.myContentView.frame))/3;
-        self.button1.frame = frame;
-        frame =self.button2.frame;
-        frame.origin.x = CGRectGetMaxX(self.button1.frame);
-        frame.size.width = (320 - CGRectGetMaxX(self.myContentView.frame))/3;
-        self.button2.frame = frame;
-        frame = self.button3.frame;
-        frame.origin.x = CGRectGetMaxX(self.button2.frame);
-        frame.size.width = (320 - CGRectGetMaxX(self.myContentView.frame))/3;
-        self.button3.frame = frame;
-      }
-    } completion:^(BOOL finished) {
-    }];
+    if (distanceMoved>0) {
+      [self willCloseRightButtonViewByDistance:distanceMoved];
+    } else {
+      [self willOpenRightButtonViewByDistance:distanceMoved];
+    }
   }
   if (pan.state == UIGestureRecognizerStateEnded) {
     CGFloat velocityX = [pan velocityInView:self.contentView].x;
     if (velocityX>0) {//moving right
-      [UIView animateWithDuration:0.1f delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
-        [self.myContentView setCenter:CGPointMake(160, 50)];
-        [self.buttonView setCenter:CGPointMake(440, 50)];
-        CGRect frame = self.button1.frame;
-        frame.origin.x = 0;
-        frame.size.width = 80;
-        self.button1.frame =frame;
-        frame =self.button2.frame;
-        frame.origin.x = CGRectGetMaxX(self.button1.frame);
-        frame.size.width = 80;
-        self.button2.frame = frame;
-        frame = self.button3.frame;
-        frame.origin.x = CGRectGetMaxX(self.button2.frame);
-        frame.size.width = 80;
-        self.button3.frame = frame;
-      } completion:^(BOOL finished) {
-        self.righButtonViewOpen = NO;
-        [self.contentView removeGestureRecognizer:self.tapGesture];
-      }];
+      [self didCloseRightButtonView];
     } else { //moving left
-      [UIView animateWithDuration:0.1f delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
-        [self.myContentView setCenter:CGPointMake(-80, 50)];
-        [self.buttonView setCenter:CGPointMake(200, 50)];
-        CGRect frame = self.button1.frame;
-        frame.origin.x = 0;
-        frame.size.width = 80;
-        self.button1.frame =frame;
-        frame =self.button2.frame;
-        frame.origin.x = CGRectGetMaxX(self.button1.frame);
-        frame.size.width = 80;
-        self.button2.frame = frame;
-        frame = self.button3.frame;
-        frame.origin.x = CGRectGetMaxX(self.button2.frame);
-        frame.size.width = 80;
-        self.button3.frame = frame;
-      } completion:^(BOOL finished) {
-        self.righButtonViewOpen = YES;
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(closeButtonView:)];
-        [self.contentView addGestureRecognizer:tap];
-        self.tapGesture = tap;
-      }];
+      [self didOpenRightButtonView];
     }
   }
+}
+
+- (void)didOpenRightButtonView
+{
+  [UIView animateWithDuration:0.1f delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
+    [self.myContentView setCenter:CGPointMake(-80, 50)];
+    [self.buttonView setCenter:CGPointMake(200, 50)];
+    CGRect frame = self.button1.frame;
+    frame.origin.x = 0;
+    frame.size.width = 80;
+    self.button1.frame =frame;
+    frame =self.button2.frame;
+    frame.origin.x = CGRectGetMaxX(self.button1.frame);
+    frame.size.width = 80;
+    self.button2.frame = frame;
+    frame = self.button3.frame;
+    frame.origin.x = CGRectGetMaxX(self.button2.frame);
+    frame.size.width = 80;
+    self.button3.frame = frame;
+  } completion:^(BOOL finished) {
+    self.righButtonViewOpen = YES;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(closeButtonView:)];
+    [self.contentView addGestureRecognizer:tap];
+    self.tapGesture = tap;
+  }];
+}
+
+- (void)didCloseRightButtonView
+{
+  [UIView animateWithDuration:0.1f delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
+    [self.myContentView setCenter:CGPointMake(160, 50)];
+    [self.buttonView setCenter:CGPointMake(440, 50)];
+    CGRect frame = self.button1.frame;
+    frame.origin.x = 0;
+    frame.size.width = 80;
+    self.button1.frame =frame;
+    frame =self.button2.frame;
+    frame.origin.x = CGRectGetMaxX(self.button1.frame);
+    frame.size.width = 80;
+    self.button2.frame = frame;
+    frame = self.button3.frame;
+    frame.origin.x = CGRectGetMaxX(self.button2.frame);
+    frame.size.width = 80;
+    self.button3.frame = frame;
+  } completion:^(BOOL finished) {
+    self.righButtonViewOpen = NO;
+    [self.contentView removeGestureRecognizer:self.tapGesture];
+  }];
+}
+
+- (void)willOpenRightButtonViewByDistance:(CGFloat)distanceMoved
+{
+  [UIView animateWithDuration:0.1f animations:^{
+    CGFloat centerX = self.myContentView.center.x;
+    [self.myContentView setCenter:CGPointMake(MAX(-80,centerX +distanceMoved), 50)];
+    [self.buttonView setCenter:CGPointMake(MAX(200, self.buttonView.center.x + distanceMoved), 50)];
+    CGFloat xOrigin;
+    if (self.buttonView.center.x <=200) {
+      CGFloat buttonWidthVisible = 320 - CGRectGetMaxX(self.myContentView.frame);
+      xOrigin = 240- buttonWidthVisible;
+    } else {
+      xOrigin = 0;
+    }
+    CGRect frame = self.button1.frame;
+    frame.origin.x = xOrigin;
+    frame.size.width = (320 - CGRectGetMaxX(self.myContentView.frame))/3;
+    self.button1.frame = frame;
+    frame =self.button2.frame;
+    frame.origin.x = CGRectGetMaxX(self.button1.frame);
+    frame.size.width = (320 - CGRectGetMaxX(self.myContentView.frame))/3;
+    self.button2.frame = frame;
+    frame = self.button3.frame;
+    frame.origin.x = CGRectGetMaxX(self.button2.frame);
+    frame.size.width = (320 - CGRectGetMaxX(self.myContentView.frame))/3;
+    self.button3.frame = frame;
+  } completion:^(BOOL finished) {
+  }];
+}
+
+- (void)willCloseRightButtonViewByDistance:(CGFloat)distanceMoved
+{
+  [UIView animateWithDuration:0.1f animations:^{
+    CGFloat centerX = self.myContentView.center.x;
+    [self.myContentView setCenter:CGPointMake(MIN(160,centerX +distanceMoved), 50)];
+    [self.buttonView setCenter:CGPointMake(MIN(440, self.buttonView.center.x + distanceMoved), 50)];
+    CGRect frame = self.button1.frame;
+    frame.origin.x = 0;
+    frame.size.width = (320 - CGRectGetMaxX(self.myContentView.frame))/3;
+    self.button1.frame =frame;
+    frame =self.button2.frame;
+    frame.origin.x = CGRectGetMaxX(self.button1.frame);
+    frame.size.width = (320 - CGRectGetMaxX(self.myContentView.frame))/3;
+    self.button2.frame = frame;
+    frame = self.button3.frame;
+    frame.origin.x = CGRectGetMaxX(self.button2.frame);
+    frame.size.width = (320 - CGRectGetMaxX(self.myContentView.frame))/3;
+    self.button3.frame = frame;
+  } completion:^(BOOL finished) {
+  }];
 }
 
 - (void)closeButtonView:(UITapGestureRecognizer *)tap
