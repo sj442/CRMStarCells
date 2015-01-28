@@ -52,10 +52,10 @@
   self.buttonView = buttonView;
   self.buttonView.backgroundColor = [UIColor blackColor];
   
-//  UIView *leftButtonView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 240, 100)];
-//  leftButtonView.backgroundColor = [UIColor blueColor];
-//  [self.contentView addSubview:leftButtonView];
-//  self.leftButtonView = leftButtonView;
+  UIView *leftButtonView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 240, 100)];
+  leftButtonView.backgroundColor = [UIColor blueColor];
+  [self.contentView addSubview:leftButtonView];
+  self.leftButtonView = leftButtonView;
   
   UIView *myContentView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 100)];
   myContentView.backgroundColor = [UIColor redColor];
@@ -105,6 +105,14 @@
   UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(swiped:)];
   [self.contentView addGestureRecognizer:pan];
   self.panGesture = pan;
+  
+  CGRect frame = self.buttonView.frame;
+  frame.origin.x = 320;
+  self.buttonView.frame = frame;
+  
+  frame = self.leftButtonView.frame;
+  frame.origin.x = -240;
+  self.leftButtonView.frame =frame;
 }
 
 - (void)swiped:(UIPanGestureRecognizer *)pan
@@ -112,22 +120,27 @@
   if (pan.state == UIGestureRecognizerStateBegan) {
     CGPoint startPoint = [pan locationInView:self.myContentView];
     self.startPoint = startPoint;
+    NSLog(@"start point x %f", self.startPoint.x);
   }
   if (pan.state == UIGestureRecognizerStateChanged) {
     CGPoint translatedPoint = [pan locationInView:self.myContentView];
     CGFloat distanceMoved = (translatedPoint.x-self.startPoint.x);
     if (distanceMoved>0) {
-      [self willCloseRightButtonViewByDistance:distanceMoved];
+     // [self willCloseRightButtonViewByDistance:distanceMoved];
+      [self willOpenLeftButtonViewByDistance:distanceMoved];
     } else {
-      [self willOpenRightButtonViewByDistance:distanceMoved];
+      //[self willOpenRightButtonViewByDistance:distanceMoved];
+      [self willCloseLeftButtonViewByDistance:distanceMoved];
     }
   }
   if (pan.state == UIGestureRecognizerStateEnded) {
     CGFloat velocityX = [pan velocityInView:self.contentView].x;
     if (velocityX>0) {//moving right
-      [self didCloseRightButtonView];
+    //  [self didCloseRightButtonView];
+      [self didOpenLeftButtonView];
     } else { //moving left
-      [self didOpenRightButtonView];
+     // [self didOpenRightButtonView];
+      [self didCloseLeftButtonView];
     }
   }
 }
@@ -157,6 +170,24 @@
   }];
 }
 
+- (void)didOpenLeftButtonView
+{
+  [UIView animateWithDuration:0.1f animations:^{
+    [self.myContentView setCenter:CGPointMake(400, 50)];
+    [self.leftButtonView setCenter:CGPointMake(120, 50)];
+  } completion:^(BOOL finished) {
+  }];
+}
+
+- (void)didCloseLeftButtonView
+{
+  [UIView animateWithDuration:0.1f animations:^{
+    [self.myContentView setCenter:CGPointMake(160, 50)];
+    [self.leftButtonView setCenter:CGPointMake(-120, 50)];
+  } completion:^(BOOL finished) {
+  }];
+}
+
 - (void)didCloseRightButtonView
 {
   [UIView animateWithDuration:0.1f delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
@@ -180,21 +211,36 @@
   }];
 }
 
+- (void)willOpenLeftButtonViewByDistance:(CGFloat)distanceMoved //right swipe, distance moved >0
+{
+  [UIView animateWithDuration:0.1f animations:^{
+    CGFloat centerX = self.myContentView.center.x;
+    [self.myContentView setCenter:CGPointMake(MIN(440,centerX +distanceMoved), 50)];
+    [self.leftButtonView setCenter:CGPointMake(MIN(120, self.leftButtonView.center.x + distanceMoved), 50)];
+    NSLog(@"0 left button view center %f", self.leftButtonView.center.x);
+  } completion:^(BOOL finished) {
+  }];
+}
+
+- (void)willCloseLeftButtonViewByDistance:(CGFloat)distanceMoved //left swipe, distance moved <0
+{
+  [UIView animateWithDuration:0.1f animations:^{
+    CGFloat centerX = self.myContentView.center.x;
+    [self.myContentView setCenter:CGPointMake(MAX(160,centerX +distanceMoved), 50)];
+    [self.leftButtonView setCenter:CGPointMake(MAX(-120, self.leftButtonView.center.x + distanceMoved), 50)];
+    NSLog(@"1 left button view center %f", self.leftButtonView.center.x);
+  } completion:^(BOOL finished) {
+  }];
+}
+
 - (void)willOpenRightButtonViewByDistance:(CGFloat)distanceMoved
 {
   [UIView animateWithDuration:0.1f animations:^{
     CGFloat centerX = self.myContentView.center.x;
     [self.myContentView setCenter:CGPointMake(MAX(-80,centerX +distanceMoved), 50)];
     [self.buttonView setCenter:CGPointMake(MAX(200, self.buttonView.center.x + distanceMoved), 50)];
-    CGFloat xOrigin;
-    if (self.buttonView.center.x <=200) {
-      CGFloat buttonWidthVisible = 320 - CGRectGetMaxX(self.myContentView.frame);
-      xOrigin = 240- buttonWidthVisible;
-    } else {
-      xOrigin = 0;
-    }
     CGRect frame = self.button1.frame;
-    frame.origin.x = xOrigin;
+    frame.origin.x = 0;
     frame.size.width = (320 - CGRectGetMaxX(self.myContentView.frame))/3;
     self.button1.frame = frame;
     frame =self.button2.frame;
