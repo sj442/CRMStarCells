@@ -25,7 +25,7 @@
   self.window.backgroundColor = [UIColor whiteColor];
   [self.window makeKeyAndVisible];
   
-  MessagesTableViewController *messagesTVC = [[MessagesTableViewController alloc]init];
+ // MessagesTableViewController *messagesTVC = [[MessagesTableViewController alloc]init];
   //ImageLabelTableViewController *tableVC = [[ImageLabelTableViewController alloc]init];
   EPSwipeCellTableViewController *swipeTVC = [[EPSwipeCellTableViewController alloc]init];
   self.window.rootViewController = swipeTVC;

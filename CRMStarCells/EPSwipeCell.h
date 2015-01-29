@@ -28,4 +28,6 @@
 
 @property  (nonatomic) NSInteger numberOfLeftButtons;
 
++ (CGFloat)cellHeight;
+
 @end
