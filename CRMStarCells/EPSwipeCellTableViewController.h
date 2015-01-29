@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "EPSwipeCell.h"
 
-@interface EPSwipeCellTableViewController : UITableViewController
+@interface EPSwipeCellTableViewController : UITableViewController <EPSWipeCellDelegate>
 
 @end

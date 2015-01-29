@@ -6,9 +6,20 @@
 //  Copyright (c) 2015 Enhatch. All rights reserved.
 //
 
+@protocol EPSWipeCellDelegate
+
+- (void)leftButtonTappedWithIndex:(id)index;
+
+- (void)rightButtonTappedWithIndex:(id)index;
+
+@end
+
+
 #import <UIKit/UIKit.h>
 
 @interface EPSwipeCell : UITableViewCell
+
+@property (weak) id <EPSWipeCellDelegate> delegate;
 
 @property BOOL righButtonViewOpen;
 

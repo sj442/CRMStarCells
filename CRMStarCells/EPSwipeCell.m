@@ -14,6 +14,8 @@
 
 @property (strong, nonatomic) UITapGestureRecognizer *tapGesture;
 
+@property (strong, nonatomic) UITapGestureRecognizer *leftTapGesture;
+
 @property (weak, nonatomic) UIView *myContentView;
 
 @property (weak, nonatomic) UIView *buttonView;
@@ -61,8 +63,6 @@
   if (!self.cellContentsDrawn) {
     NSArray *rightColors = @[[UIColor orangeColor], [UIColor yellowColor], [UIColor grayColor]];
     NSArray *rightTitles = @[@"More", @"Flag", @"Archive"];
-    self.numberOfLeftButtons = 1;
-    self.numberOfRightButtons = 2;
     self.leftButtonWidth = 80*self.numberOfLeftButtons;
     self.rightButtonWidth = 80*self.numberOfRightButtons;
     UIView *buttonView = [[UIView alloc]initWithFrame:CGRectMake(self.cellWidth-self.rightButtonWidth, 0, self.rightButtonWidth, self.cellHeight)];
@@ -104,12 +104,14 @@
 
 - (void)rightButtonTapped:(id)sender
 {
-  
+  UIButton *button = (UIButton*)sender;
+  [self.delegate rightButtonTappedWithIndex:[NSNumber numberWithInt:button.tag-100]];
 }
 
 - (void)leftButtonTapped:(id)sender
 {
-  
+  UIButton *button = (UIButton*)sender;
+  [self.delegate leftButtonTappedWithIndex:[NSNumber numberWithInt:button.tag -200]];
 }
 
 - (void)setupGestureRecognizer
@@ -144,15 +146,15 @@
       self.totalDistance +=distanceMoved;
     }
     if (self.totalDistance>0) { //right swipe
-      if (self.righButtonViewOpen) {
+      if (self.righButtonViewOpen && self.numberOfRightButtons>0) {
         [self willCloseRightButtonViewByDistance:distanceMoved];
-      } else {
+      } else if (self.numberOfLeftButtons>0){
         [self willOpenLeftButtonViewByDistance:distanceMoved];
       }
     } else { //left swipe
-      if (self.leftButtonViewOpen) {
+      if (self.leftButtonViewOpen && self.numberOfLeftButtons>0) {
         [self willCloseLeftButtonViewByDistance:distanceMoved];
-      } else {
+      } else if (self.numberOfRightButtons>0) {
         [self willOpenRightButtonViewByDistance:distanceMoved];
       }
     }
@@ -160,17 +162,16 @@
   if (pan.state == UIGestureRecognizerStateEnded) {
     CGFloat velocityX = [pan velocityInView:self.myContentView].x;
     if (velocityX>=0) {//moving right
-      if (self.righButtonViewOpen) {
+      if (self.righButtonViewOpen && self.numberOfRightButtons>0) {
         [self didCloseRightButtonView];
-      } else {
+      } else if (self.numberOfLeftButtons) {
         [self didOpenLeftButtonView];
       }
     } else { //moving left
-      if (self.leftButtonViewOpen) {
+      if (self.leftButtonViewOpen && self.numberOfLeftButtons >0) {
         [self didCloseLeftButtonView];
-      } else {
+      } else if (self.numberOfRightButtons>0){
         [self didOpenRightButtonView];
-        
       }
     }
   }
@@ -209,6 +210,9 @@
       button.frame = frame;
     }
   } completion:^(BOOL finished) {
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(closeLeftButtonView:)];
+    [self.contentView addGestureRecognizer:tap];
+    self.leftTapGesture = tap;
     NSLog(@"did open left button view");
   }];
 }
@@ -228,6 +232,7 @@
   } completion:^(BOOL finished) {
     self.leftButtonViewOpen = NO;
     NSLog(@"did close left button view");
+    [self.contentView removeGestureRecognizer:self.leftTapGesture];
   }];
 }
 
@@ -326,22 +331,14 @@
   }];
 }
 
+- (void)closeLeftButtonView:(UITapGestureRecognizer *)tap
+{
+  [self didCloseLeftButtonView];
+}
+
 - (void)closeButtonView:(UITapGestureRecognizer *)tap
 {
-  [UIView animateWithDuration:0.1f delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
-    [self.myContentView setCenter:CGPointMake(self.cellWidth/2, self.cellHeight/2)];
-    [self.buttonView setCenter:CGPointMake(self.cellWidth+self.rightButtonWidth/2, self.cellHeight/2)];
-    for (int i=0; i<self.numberOfRightButtons; i++) {
-      UIButton *button = (UIButton *)[self.buttonView viewWithTag:100+i];
-      CGRect frame = button.frame;
-      frame.origin.x = i*80;
-      frame.size.width = 80;
-      button.frame = frame;
-    }
-  } completion:^(BOOL finished) {
-    self.righButtonViewOpen = NO;
-    [self.contentView removeGestureRecognizer:self.tapGesture];
-  }];
+  [self didCloseRightButtonView];
 }
 
 @end

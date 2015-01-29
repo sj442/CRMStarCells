@@ -7,11 +7,8 @@
 //
 
 #import "EPSwipeCellTableViewController.h"
-#import "SwipeScrollViewCell.h"
-#import "EPSwipeCell.h"
 
 static NSString* EPSWipeCellIdentifier = @"EPSwipeCell";
-static NSString* SwipeScrollViewCellIdentifier = @"SwipeScrollViewCell";
 
 @interface EPSwipeCellTableViewController ()
 
@@ -24,8 +21,6 @@ static NSString* SwipeScrollViewCellIdentifier = @"SwipeScrollViewCell";
   [super viewDidLoad];
   
   [self.tableView registerClass:[EPSwipeCell class] forCellReuseIdentifier:EPSWipeCellIdentifier];
-  
-  [self.tableView registerClass:[SwipeScrollViewCell class] forCellReuseIdentifier:SwipeScrollViewCellIdentifier];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -63,12 +58,15 @@ static NSString* SwipeScrollViewCellIdentifier = @"SwipeScrollViewCell";
   if (!cell) {
     cell = [[EPSwipeCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:EPSWipeCellIdentifier];
   }
+  cell.delegate = self;
+  cell.numberOfLeftButtons = 3;
+  cell.numberOfRightButtons = 2;
   return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  return 100;
+  return 80;
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -78,6 +76,18 @@ static NSString* SwipeScrollViewCellIdentifier = @"SwipeScrollViewCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
   [tableView deselectRowAtIndexPath:indexPath animated:NO];
+  
+}
+
+#pragma mark - EPSwipeCell Delegate
+
+- (void)leftButtonTappedWithIndex:(id)index
+{
+  
+}
+
+- (void)rightButtonTappedWithIndex:(id)index
+{
   
 }
 
