@@ -6,16 +6,15 @@
 //  Copyright (c) 2015 Enhatch. All rights reserved.
 //
 
-@protocol EPSWipeCellDelegate
+#import <UIKit/UIKit.h>
 
-- (void)leftButtonTappedWithIndex:(id)index;
+@protocol EPSWipeCellDelegate <NSObject>
 
-- (void)rightButtonTappedWithIndex:(id)index;
+- (void)leftButtonTappedWithIndex:(NSInteger)index;
+
+- (void)rightButtonTappedWithIndex:(NSInteger)index;
 
 @end
-
-
-#import <UIKit/UIKit.h>
 
 @interface EPSwipeCell : UITableViewCell
 

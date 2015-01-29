@@ -81,12 +81,12 @@ static NSString* EPSWipeCellIdentifier = @"EPSwipeCell";
 
 #pragma mark - EPSwipeCell Delegate
 
-- (void)leftButtonTappedWithIndex:(id)index
+- (void)leftButtonTappedWithIndex:(NSInteger)index
 {
   
 }
 
-- (void)rightButtonTappedWithIndex:(id)index
+- (void)rightButtonTappedWithIndex:(NSInteger)index
 {
   
 }
