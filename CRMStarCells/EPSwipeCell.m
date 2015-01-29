@@ -30,6 +30,10 @@
 
 @property CGFloat cellHeight;
 
+@property CGFloat cellWidth;
+
+@property BOOL cellContentsDrawn;
+
 @end
 
 @implementation EPSwipeCell
@@ -39,8 +43,6 @@
   self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
   if (self) {
     
-    [self setupButtons];
-    [self setupGestureRecognizer];
   }
   return  self;
 }
@@ -48,51 +50,56 @@
 - (void)layoutSubviews
 {
   [super layoutSubviews];
+  self.cellHeight = CGRectGetHeight(self.contentView.frame);
+  self.cellWidth = CGRectGetWidth(self.contentView.frame);
+  [self setupButtons];
+  [self setupGestureRecognizer];
 }
 
 - (void)setupButtons
 {
-  NSArray *rightColors = @[[UIColor orangeColor], [UIColor yellowColor], [UIColor grayColor]];
-  NSArray *rightTitles = @[@"More", @"Flag", @"Archive"];
-  self.numberOfLeftButtons = 2;
-  self.numberOfRightButtons = 2;
-  self.leftButtonWidth = 80*self.numberOfLeftButtons;
-  self.rightButtonWidth = 80*self.numberOfRightButtons;
-  UIView *buttonView = [[UIView alloc]initWithFrame:CGRectMake(320-self.rightButtonWidth, 0, self.rightButtonWidth, 100)];
-  [self.contentView addSubview:buttonView];
-  self.buttonView = buttonView;
-  self.buttonView.backgroundColor = [UIColor blackColor];
-  
-  UIView *leftButtonView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.leftButtonWidth, 100)];
-  leftButtonView.backgroundColor = [UIColor blueColor];
-  [self.contentView addSubview:leftButtonView];
-  self.leftButtonView = leftButtonView;
-  
-  UIView *myContentView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 100)];
-  myContentView.backgroundColor = [UIColor redColor];
-  [self.contentView addSubview:myContentView];
-  [self.contentView bringSubviewToFront:myContentView];
-  self.myContentView = myContentView;
-  
-  for (int i = 0; i<self.numberOfRightButtons; i++) {
-    UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(80*i, 0, 80, 100)];
-    [button setTitle:rightTitles[i] forState:UIControlStateNormal];
-    button.backgroundColor = rightColors[i];
-    button.tag = 100+i;
-    [self.buttonView addSubview:button];
-    [button addTarget:self action:@selector(rightButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+  if (!self.cellContentsDrawn) {
+    NSArray *rightColors = @[[UIColor orangeColor], [UIColor yellowColor], [UIColor grayColor]];
+    NSArray *rightTitles = @[@"More", @"Flag", @"Archive"];
+    self.numberOfLeftButtons = 1;
+    self.numberOfRightButtons = 2;
+    self.leftButtonWidth = 80*self.numberOfLeftButtons;
+    self.rightButtonWidth = 80*self.numberOfRightButtons;
+    UIView *buttonView = [[UIView alloc]initWithFrame:CGRectMake(self.cellWidth-self.rightButtonWidth, 0, self.rightButtonWidth, self.cellHeight)];
+    [self.contentView addSubview:buttonView];
+    self.buttonView = buttonView;
+    self.buttonView.backgroundColor = [UIColor blackColor];
+    
+    UIView *leftButtonView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.leftButtonWidth, self.cellHeight)];
+    leftButtonView.backgroundColor = [UIColor blueColor];
+    [self.contentView addSubview:leftButtonView];
+    self.leftButtonView = leftButtonView;
+    
+    UIView *myContentView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.cellWidth, self.cellHeight)];
+    myContentView.backgroundColor = [UIColor redColor];
+    [self.contentView addSubview:myContentView];
+    [self.contentView bringSubviewToFront:myContentView];
+    self.myContentView = myContentView;
+    
+    for (int i = 0; i<self.numberOfRightButtons; i++) {
+      UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(80*i, 0, 80, self.cellHeight)];
+      [button setTitle:rightTitles[i] forState:UIControlStateNormal];
+      button.backgroundColor = rightColors[i];
+      button.tag = 100+i;
+      [self.buttonView addSubview:button];
+      [button addTarget:self action:@selector(rightButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    
+    for (int i = 0; i<self.numberOfLeftButtons; i++) {
+      UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(80*i, 0, 80, self.cellHeight)];
+      [button setTitle:rightTitles[i] forState:UIControlStateNormal];
+      button.backgroundColor = rightColors[i];
+      button.tag = 200+i;
+      [self.leftButtonView addSubview:button];
+      [button addTarget:self action:@selector(leftButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    self.cellContentsDrawn = YES;
   }
-  
-  for (int i = 0; i<self.numberOfLeftButtons; i++) {
-    UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(80*i, 0, 80, 100)];
-    [button setTitle:rightTitles[i] forState:UIControlStateNormal];
-    button.backgroundColor = rightColors[i];
-    button.tag = 200+i;
-    [self.leftButtonView addSubview:button];
-    [button addTarget:self action:@selector(leftButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
-  }
-
-  
 }
 
 - (void)rightButtonTapped:(id)sender
@@ -112,7 +119,7 @@
   self.panGesture = pan;
   
   CGRect frame = self.buttonView.frame;
-  frame.origin.x = 320;
+  frame.origin.x = self.cellWidth;
   self.buttonView.frame = frame;
   
   frame = self.leftButtonView.frame;
@@ -163,7 +170,7 @@
         [self didCloseLeftButtonView];
       } else {
         [self didOpenRightButtonView];
-
+        
       }
     }
   }
@@ -172,8 +179,8 @@
 - (void)didOpenRightButtonView
 {
   [UIView animateWithDuration:0.1f delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
-    [self.myContentView setCenter:CGPointMake(160-self.rightButtonWidth, 50)];
-    [self.buttonView setCenter:CGPointMake(320-self.rightButtonWidth/2, 50)];
+    [self.myContentView setCenter:CGPointMake(self.cellWidth/2-self.rightButtonWidth, self.cellHeight/2)];
+    [self.buttonView setCenter:CGPointMake(self.cellWidth-self.rightButtonWidth/2, self.cellHeight/2)];
     for (int i=0; i<self.numberOfRightButtons; i++) {
       UIButton *button = (UIButton *)[self.buttonView viewWithTag:100+i];
       CGRect frame = button.frame;
@@ -192,8 +199,8 @@
 - (void)didOpenLeftButtonView
 {
   [UIView animateWithDuration:0.1f animations:^{
-    [self.myContentView setCenter:CGPointMake(160+self.leftButtonWidth, 50)];
-    [self.leftButtonView setCenter:CGPointMake(self.leftButtonWidth/2, 50)];
+    [self.myContentView setCenter:CGPointMake(self.cellWidth/2+self.leftButtonWidth, self.cellHeight/2)];
+    [self.leftButtonView setCenter:CGPointMake(self.leftButtonWidth/2, self.cellHeight/2)];
     for (int i=0; i<self.numberOfLeftButtons; i++) {
       UIButton *button = (UIButton *)[self.leftButtonView viewWithTag:200+i];
       CGRect frame = button.frame;
@@ -209,8 +216,8 @@
 - (void)didCloseLeftButtonView
 {
   [UIView animateWithDuration:0.1f animations:^{
-    [self.myContentView setCenter:CGPointMake(160, 50)];
-    [self.leftButtonView setCenter:CGPointMake(-self.leftButtonWidth/2, 50)];
+    [self.myContentView setCenter:CGPointMake(self.cellWidth/2, self.cellHeight/2)];
+    [self.leftButtonView setCenter:CGPointMake(-self.leftButtonWidth/2, self.cellHeight/2)];
     for (int i=0; i<self.numberOfLeftButtons; i++) {
       UIButton *button = (UIButton *)[self.leftButtonView viewWithTag:200+i];
       CGRect frame = button.frame;
@@ -228,8 +235,8 @@
 {
   NSLog(@"did close right button view");
   [UIView animateWithDuration:0.1f delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
-    [self.myContentView setCenter:CGPointMake(160, 50)];
-    [self.buttonView setCenter:CGPointMake(320+self.rightButtonWidth/2, 50)];
+    [self.myContentView setCenter:CGPointMake(self.cellWidth/2, self.cellHeight/2)];
+    [self.buttonView setCenter:CGPointMake(self.cellWidth+self.rightButtonWidth/2, self.cellHeight/2)];
     for (int i=0; i<self.numberOfRightButtons; i++) {
       UIButton *button = (UIButton *)[self.buttonView viewWithTag:100+i];
       CGRect frame = button.frame;
@@ -248,9 +255,9 @@
   NSLog(@"will open left button view");
   [UIView animateWithDuration:0.1f animations:^{
     CGFloat centerX = self.myContentView.center.x;
-    [self.myContentView setCenter:CGPointMake(MIN(320+self.leftButtonWidth/2,centerX +distanceMoved), 50)];
+    [self.myContentView setCenter:CGPointMake(MIN(self.cellWidth+self.leftButtonWidth/2,centerX +distanceMoved), self.cellHeight/2)];
     NSLog(@"my contentview center x %f", self.myContentView.center.x);
-    [self.leftButtonView setCenter:CGPointMake(MIN(self.leftButtonWidth/2, self.leftButtonView.center.x + distanceMoved), 50)];
+    [self.leftButtonView setCenter:CGPointMake(MIN(self.leftButtonWidth/2, self.leftButtonView.center.x + distanceMoved), self.cellHeight/2)];
     NSLog(@"left button view x %f", self.leftButtonView.center.x);
     for (int i=0; i<self.numberOfLeftButtons; i++) {
       UIButton *button = (UIButton *)[self.leftButtonView viewWithTag:200+i];
@@ -268,8 +275,8 @@
 {
   [UIView animateWithDuration:0.1f animations:^{
     CGFloat centerX = self.myContentView.center.x;
-    [self.myContentView setCenter:CGPointMake(MAX(160,centerX +distanceMoved), 50)];
-    [self.leftButtonView setCenter:CGPointMake(MAX(-self.leftButtonWidth/2, self.leftButtonView.center.x + distanceMoved), 50)];
+    [self.myContentView setCenter:CGPointMake(MAX(self.cellWidth/2,centerX +distanceMoved), self.cellHeight/2)];
+    [self.leftButtonView setCenter:CGPointMake(MAX(-self.leftButtonWidth/2, self.leftButtonView.center.x + distanceMoved), self.cellHeight/2)];
     for (int i=0; i<self.numberOfLeftButtons; i++) {
       UIButton *button = (UIButton *)[self.leftButtonView viewWithTag:200+i];
       CGRect frame = button.frame;
@@ -287,13 +294,13 @@
   NSLog(@"will open right button view");
   [UIView animateWithDuration:0.1f animations:^{
     CGFloat centerX = self.myContentView.center.x;
-    [self.myContentView setCenter:CGPointMake(MAX(-self.rightButtonWidth/self.numberOfRightButtons,centerX +distanceMoved), 50)];
-    [self.buttonView setCenter:CGPointMake(MAX(320-self.rightButtonWidth/2, self.buttonView.center.x + distanceMoved), 50)];
+    [self.myContentView setCenter:CGPointMake(MAX(-self.rightButtonWidth/self.numberOfRightButtons,centerX +distanceMoved), self.cellHeight/2)];
+    [self.buttonView setCenter:CGPointMake(MAX(self.cellWidth-self.rightButtonWidth/2, self.buttonView.center.x + distanceMoved), self.cellHeight/2)];
     for (int i=0; i<self.numberOfRightButtons; i++) {
       UIButton *button = (UIButton *)[self.buttonView viewWithTag:100+i];
       CGRect frame = button.frame;
-      frame.origin.x = (320 - CGRectGetMaxX(self.myContentView.frame))/self.numberOfRightButtons*i;
-      frame.size.width = (320 - CGRectGetMaxX(self.myContentView.frame))/self.numberOfRightButtons;
+      frame.origin.x = (self.cellWidth - CGRectGetMaxX(self.myContentView.frame))/self.numberOfRightButtons*i;
+      frame.size.width = (self.cellWidth - CGRectGetMaxX(self.myContentView.frame))/self.numberOfRightButtons;
       button.frame = frame;
     }
   } completion:^(BOOL finished) {
@@ -306,13 +313,13 @@
   NSLog(@"will close right button view");
   [UIView animateWithDuration:0.1f animations:^{
     CGFloat centerX = self.myContentView.center.x;
-    [self.myContentView setCenter:CGPointMake(MIN(160,centerX +distanceMoved), 50)];
-    [self.buttonView setCenter:CGPointMake(MIN(320+self.rightButtonWidth/2, self.buttonView.center.x + distanceMoved), 50)];
+    [self.myContentView setCenter:CGPointMake(MIN(self.cellWidth/2,centerX +distanceMoved), self.cellHeight/2)];
+    [self.buttonView setCenter:CGPointMake(MIN(self.cellWidth+self.rightButtonWidth/2, self.buttonView.center.x + distanceMoved), self.cellHeight/2)];
     for (int i=0; i<self.numberOfRightButtons; i++) {
       UIButton *button = (UIButton *)[self.buttonView viewWithTag:100+i];
       CGRect frame = button.frame;
-      frame.origin.x = (320 - CGRectGetMaxX(self.myContentView.frame))/self.numberOfRightButtons*i;
-      frame.size.width = (320 - CGRectGetMaxX(self.myContentView.frame))/self.numberOfRightButtons;
+      frame.origin.x = (self.cellWidth - CGRectGetMaxX(self.myContentView.frame))/self.numberOfRightButtons*i;
+      frame.size.width = (self.cellWidth - CGRectGetMaxX(self.myContentView.frame))/self.numberOfRightButtons;
       button.frame = frame;
     }
   } completion:^(BOOL finished) {
@@ -322,8 +329,8 @@
 - (void)closeButtonView:(UITapGestureRecognizer *)tap
 {
   [UIView animateWithDuration:0.1f delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
-    [self.myContentView setCenter:CGPointMake(160, 50)];
-    [self.buttonView setCenter:CGPointMake(320+self.rightButtonWidth/2, 50)];
+    [self.myContentView setCenter:CGPointMake(self.cellWidth/2, self.cellHeight/2)];
+    [self.buttonView setCenter:CGPointMake(self.cellWidth+self.rightButtonWidth/2, self.cellHeight/2)];
     for (int i=0; i<self.numberOfRightButtons; i++) {
       UIButton *button = (UIButton *)[self.buttonView viewWithTag:100+i];
       CGRect frame = button.frame;
