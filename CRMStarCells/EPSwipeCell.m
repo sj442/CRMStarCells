@@ -28,6 +28,8 @@
 
 @property CGFloat leftButtonWidth;
 
+@property CGFloat cellHeight;
+
 @end
 
 @implementation EPSwipeCell
@@ -43,11 +45,16 @@
   return  self;
 }
 
+- (void)layoutSubviews
+{
+  [super layoutSubviews];
+}
+
 - (void)setupButtons
 {
   NSArray *rightColors = @[[UIColor orangeColor], [UIColor yellowColor], [UIColor grayColor]];
   NSArray *rightTitles = @[@"More", @"Flag", @"Archive"];
-  self.numberOfLeftButtons = 1;
+  self.numberOfLeftButtons = 2;
   self.numberOfRightButtons = 2;
   self.leftButtonWidth = 80*self.numberOfLeftButtons;
   self.rightButtonWidth = 80*self.numberOfRightButtons;
@@ -75,9 +82,25 @@
     [self.buttonView addSubview:button];
     [button addTarget:self action:@selector(rightButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
   }
+  
+  for (int i = 0; i<self.numberOfLeftButtons; i++) {
+    UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(80*i, 0, 80, 100)];
+    [button setTitle:rightTitles[i] forState:UIControlStateNormal];
+    button.backgroundColor = rightColors[i];
+    button.tag = 200+i;
+    [self.leftButtonView addSubview:button];
+    [button addTarget:self action:@selector(leftButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+  }
+
+  
 }
 
 - (void)rightButtonTapped:(id)sender
+{
+  
+}
+
+- (void)leftButtonTapped:(id)sender
 {
   
 }
@@ -169,8 +192,15 @@
 - (void)didOpenLeftButtonView
 {
   [UIView animateWithDuration:0.1f animations:^{
-    [self.myContentView setCenter:CGPointMake(320+self.leftButtonWidth/3, 50)];
+    [self.myContentView setCenter:CGPointMake(160+self.leftButtonWidth, 50)];
     [self.leftButtonView setCenter:CGPointMake(self.leftButtonWidth/2, 50)];
+    for (int i=0; i<self.numberOfLeftButtons; i++) {
+      UIButton *button = (UIButton *)[self.leftButtonView viewWithTag:200+i];
+      CGRect frame = button.frame;
+      frame.origin.x = i*80;
+      frame.size.width = 80;
+      button.frame = frame;
+    }
   } completion:^(BOOL finished) {
     NSLog(@"did open left button view");
   }];
@@ -180,7 +210,14 @@
 {
   [UIView animateWithDuration:0.1f animations:^{
     [self.myContentView setCenter:CGPointMake(160, 50)];
-    [self.leftButtonView setCenter:CGPointMake(-120, 50)];
+    [self.leftButtonView setCenter:CGPointMake(-self.leftButtonWidth/2, 50)];
+    for (int i=0; i<self.numberOfLeftButtons; i++) {
+      UIButton *button = (UIButton *)[self.leftButtonView viewWithTag:200+i];
+      CGRect frame = button.frame;
+      frame.origin.x = i*80;
+      frame.size.width = 80;
+      button.frame = frame;
+    }
   } completion:^(BOOL finished) {
     self.leftButtonViewOpen = NO;
     NSLog(@"did close left button view");
@@ -215,6 +252,13 @@
     NSLog(@"my contentview center x %f", self.myContentView.center.x);
     [self.leftButtonView setCenter:CGPointMake(MIN(self.leftButtonWidth/2, self.leftButtonView.center.x + distanceMoved), 50)];
     NSLog(@"left button view x %f", self.leftButtonView.center.x);
+    for (int i=0; i<self.numberOfLeftButtons; i++) {
+      UIButton *button = (UIButton *)[self.leftButtonView viewWithTag:200+i];
+      CGRect frame = button.frame;
+      frame.origin.x = self.leftButtonWidth- CGRectGetMinX(self.myContentView.frame)+CGRectGetMinX(self.myContentView.frame)/self.numberOfLeftButtons*i;
+      frame.size.width = CGRectGetMinX(self.myContentView.frame)/self.numberOfLeftButtons;
+      button.frame = frame;
+    }
   } completion:^(BOOL finished) {
     self.leftButtonViewOpen = YES;
   }];
@@ -226,6 +270,13 @@
     CGFloat centerX = self.myContentView.center.x;
     [self.myContentView setCenter:CGPointMake(MAX(160,centerX +distanceMoved), 50)];
     [self.leftButtonView setCenter:CGPointMake(MAX(-self.leftButtonWidth/2, self.leftButtonView.center.x + distanceMoved), 50)];
+    for (int i=0; i<self.numberOfLeftButtons; i++) {
+      UIButton *button = (UIButton *)[self.leftButtonView viewWithTag:200+i];
+      CGRect frame = button.frame;
+      frame.origin.x = self.leftButtonWidth- CGRectGetMinX(self.myContentView.frame)+CGRectGetMinX(self.myContentView.frame)/self.numberOfLeftButtons*i;
+      frame.size.width = CGRectGetMinX(self.myContentView.frame)/self.numberOfLeftButtons;
+      button.frame = frame;
+    }
   } completion:^(BOOL finished) {
     NSLog(@"will close left button view");
   }];
