@@ -30,6 +30,8 @@
 
 @property CGFloat leftButtonWidth;
 
+@property CGFloat buttonWidth;
+
 @property CGFloat cellHeight;
 
 @property CGFloat cellWidth;
@@ -44,7 +46,6 @@
 {
   self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
   if (self) {
-    
   }
   return  self;
 }
@@ -60,10 +61,13 @@
 - (void)setupButtons
 {
   if (!self.cellContentsDrawn) {
-    NSArray *rightColors = @[[UIColor orangeColor], [UIColor yellowColor], [UIColor grayColor]];
-    NSArray *rightTitles = @[@"More", @"Flag", @"Archive"];
-    self.leftButtonWidth = 80*self.numberOfLeftButtons;
-    self.rightButtonWidth = 80*self.numberOfRightButtons;
+    self.numberOfLeftButtons = MIN(self.numberOfLeftButtons, 4);
+    self.numberOfRightButtons = MIN(self.numberOfRightButtons, 4);
+    UIColor *rightColor = [UIColor blueColor];
+    UIColor *leftColor = [UIColor greenColor];
+    self.buttonWidth = 58;
+    self.leftButtonWidth = self.buttonWidth*self.numberOfLeftButtons;
+    self.rightButtonWidth = self.buttonWidth*self.numberOfRightButtons;
     UIView *buttonView = [[UIView alloc]initWithFrame:CGRectMake(self.cellWidth-self.rightButtonWidth, 0, self.rightButtonWidth, self.cellHeight)];
     [self.contentView addSubview:buttonView];
     self.rightButtonView = buttonView;
@@ -78,38 +82,27 @@
     self.myContentView = myContentView;
     
     for (int i = 0; i<self.numberOfRightButtons; i++) {
-      UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(80*i, 0, 80, self.cellHeight)];
-      [button setTitle:rightTitles[i] forState:UIControlStateNormal];
-      button.backgroundColor = rightColors[i];
+      UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(self.buttonWidth*i, 0, self.buttonWidth, self.cellHeight)];
+      [button setTitle:[NSString stringWithFormat:@"%d",i+1] forState:UIControlStateNormal];
+      button.backgroundColor = rightColor;
+      button.alpha = 1 - 0.15*(self.numberOfRightButtons-i-1);
       button.tag = 100+i;
       [self.rightButtonView addSubview:button];
       [button addTarget:self action:@selector(rightButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
     }
     
     for (int i = 0; i<self.numberOfLeftButtons; i++) {
-      UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(80*i, 0, 80, self.cellHeight)];
-      [button setTitle:rightTitles[i] forState:UIControlStateNormal];
-      button.backgroundColor = rightColors[i];
+      UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(self.buttonWidth*i, 0, self.buttonWidth, self.cellHeight)];
+      [button setTitle:[NSString stringWithFormat:@"%d",i+1] forState:UIControlStateNormal];
+      button.backgroundColor = leftColor;
       button.tag = 200+i;
+      button.alpha = (1- 0.15*i);
       [self.leftButtonView addSubview:button];
       [button addTarget:self action:@selector(leftButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
-      
-      [self setupGestureRecognizer];
     }
+    [self setupGestureRecognizer];
     self.cellContentsDrawn = YES;
   }
-}
-
-- (void)rightButtonTapped:(id)sender
-{
-  UIButton *button = (UIButton*)sender;
-  [self.delegate rightButtonTappedWithIndex:button.tag -100];
-}
-
-- (void)leftButtonTapped:(id)sender
-{
-  UIButton *button = (UIButton*)sender;
-  [self.delegate leftButtonTappedWithIndex:button.tag-200];
 }
 
 - (void)setupGestureRecognizer
@@ -123,7 +116,7 @@
   self.rightButtonView.frame = frame;
   
   frame = self.leftButtonView.frame;
-  frame.origin.x = -80*self.numberOfLeftButtons;
+  frame.origin.x = -self.buttonWidth*self.numberOfLeftButtons;
   self.leftButtonView.frame =frame;
 }
 
@@ -183,8 +176,8 @@
     for (int i=0; i<self.numberOfRightButtons; i++) {
       UIButton *button = (UIButton *)[self.rightButtonView viewWithTag:100+i];
       CGRect frame = button.frame;
-      frame.origin.x = i*80;
-      frame.size.width = 80;
+      frame.origin.x = i*self.buttonWidth;
+      frame.size.width = self.buttonWidth;
       button.frame = frame;
     }
   } completion:^(BOOL finished) {
@@ -203,8 +196,8 @@
     for (int i=0; i<self.numberOfLeftButtons; i++) {
       UIButton *button = (UIButton *)[self.leftButtonView viewWithTag:200+i];
       CGRect frame = button.frame;
-      frame.origin.x = i*80;
-      frame.size.width = 80;
+      frame.origin.x = i*self.buttonWidth;
+      frame.size.width = self.buttonWidth;
       button.frame = frame;
     }
   } completion:^(BOOL finished) {
@@ -223,8 +216,8 @@
     for (int i=0; i<self.numberOfLeftButtons; i++) {
       UIButton *button = (UIButton *)[self.leftButtonView viewWithTag:200+i];
       CGRect frame = button.frame;
-      frame.origin.x = i*80;
-      frame.size.width = 80;
+      frame.origin.x = i*self.buttonWidth;
+      frame.size.width = self.buttonWidth;
       button.frame = frame;
     }
   } completion:^(BOOL finished) {
@@ -236,32 +229,29 @@
 
 - (void)didCloseRightButtonView
 {
-  NSLog(@"did close right button view");
   [UIView animateWithDuration:0.1f delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
     [self.myContentView setCenter:CGPointMake(self.cellWidth/2, self.cellHeight/2)];
     [self.rightButtonView setCenter:CGPointMake(self.cellWidth+self.rightButtonWidth/2, self.cellHeight/2)];
     for (int i=0; i<self.numberOfRightButtons; i++) {
       UIButton *button = (UIButton *)[self.rightButtonView viewWithTag:100+i];
       CGRect frame = button.frame;
-      frame.origin.x = i*80;
-      frame.size.width = 80;
+      frame.origin.x = i*self.buttonWidth;
+      frame.size.width = self.buttonWidth;
       button.frame = frame;
     }
   } completion:^(BOOL finished) {
     self.righButtonViewOpen = NO;
     [self.contentView removeGestureRecognizer:self.tapGesture];
+    NSLog(@"did close right button view");
   }];
 }
 
 - (void)willOpenLeftButtonViewByDistance:(CGFloat)distanceMoved //right swipe, distance moved >0
 {
-  NSLog(@"will open left button view");
   [UIView animateWithDuration:0.1f animations:^{
     CGFloat centerX = self.myContentView.center.x;
     [self.myContentView setCenter:CGPointMake(MIN(self.cellWidth+self.leftButtonWidth/2,centerX +distanceMoved), self.cellHeight/2)];
-    NSLog(@"my contentview center x %f", self.myContentView.center.x);
     [self.leftButtonView setCenter:CGPointMake(MIN(self.leftButtonWidth/2, self.leftButtonView.center.x + distanceMoved), self.cellHeight/2)];
-    NSLog(@"left button view x %f", self.leftButtonView.center.x);
     for (int i=0; i<self.numberOfLeftButtons; i++) {
       UIButton *button = (UIButton *)[self.leftButtonView viewWithTag:200+i];
       CGRect frame = button.frame;
@@ -271,6 +261,7 @@
     }
   } completion:^(BOOL finished) {
     self.leftButtonViewOpen = YES;
+    NSLog(@"will open left button view");
   }];
 }
 
@@ -294,7 +285,6 @@
 
 - (void)willOpenRightButtonViewByDistance:(CGFloat)distanceMoved
 {
-  NSLog(@"will open right button view");
   [UIView animateWithDuration:0.1f animations:^{
     CGFloat centerX = self.myContentView.center.x;
     [self.myContentView setCenter:CGPointMake(MAX(-self.rightButtonWidth/self.numberOfRightButtons,centerX +distanceMoved), self.cellHeight/2)];
@@ -308,12 +298,12 @@
     }
   } completion:^(BOOL finished) {
     self.righButtonViewOpen = YES;
+    NSLog(@"will open right button view");
   }];
 }
 
 - (void)willCloseRightButtonViewByDistance:(CGFloat)distanceMoved
 {
-  NSLog(@"will close right button view");
   [UIView animateWithDuration:0.1f animations:^{
     CGFloat centerX = self.myContentView.center.x;
     [self.myContentView setCenter:CGPointMake(MIN(self.cellWidth/2,centerX +distanceMoved), self.cellHeight/2)];
@@ -326,6 +316,7 @@
       button.frame = frame;
     }
   } completion:^(BOOL finished) {
+    NSLog(@"will close right button view");
   }];
 }
 
@@ -337,6 +328,18 @@
 - (void)closeButtonView:(UITapGestureRecognizer *)tap
 {
   [self didCloseRightButtonView];
+}
+
+- (void)rightButtonTapped:(id)sender
+{
+  UIButton *button = (UIButton*)sender;
+  [self.delegate rightButtonTappedWithIndex:button.tag -100];
+}
+
+- (void)leftButtonTapped:(id)sender
+{
+  UIButton *button = (UIButton*)sender;
+  [self.delegate leftButtonTappedWithIndex:button.tag-200];
 }
 
 @end

@@ -59,8 +59,8 @@ static NSString* EPSWipeCellIdentifier = @"EPSwipeCell";
     cell = [[EPSwipeCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:EPSWipeCellIdentifier];
   }
   cell.delegate = self;
-  cell.numberOfLeftButtons = 3;
-  cell.numberOfRightButtons = 2;
+  cell.numberOfLeftButtons = 5;
+  cell.numberOfRightButtons = 5;
   return cell;
 }
 
@@ -83,12 +83,32 @@ static NSString* EPSWipeCellIdentifier = @"EPSwipeCell";
 
 - (void)leftButtonTappedWithIndex:(NSInteger)index
 {
-  
+  switch (index) {
+    case 0:
+      NSLog(@"left button 1 tapped");
+      break;
+    case 1:
+      NSLog(@"left button 2 tapped");
+      break;
+    case 2:
+      NSLog(@"left button 3 tapped");
+      break;
+  }
 }
 
 - (void)rightButtonTappedWithIndex:(NSInteger)index
 {
-  
+  switch (index) {
+    case 0:
+      NSLog(@"right button 1 tapped");
+      break;
+    case 1:
+      NSLog(@"right button 2 tapped");
+      break;
+    case 2:
+      NSLog(@"right button 3 tapped");
+      break;
+  }
 }
 
 @end
