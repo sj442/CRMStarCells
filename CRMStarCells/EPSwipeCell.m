@@ -47,11 +47,11 @@
 {
   NSArray *rightColors = @[[UIColor orangeColor], [UIColor yellowColor], [UIColor grayColor]];
   NSArray *rightTitles = @[@"More", @"Flag", @"Archive"];
-  self.numberOfLeftButtons = 3;
-  self.numberOfRightButtons = 3;
+  self.numberOfLeftButtons = 1;
+  self.numberOfRightButtons = 2;
   self.leftButtonWidth = 80*self.numberOfLeftButtons;
   self.rightButtonWidth = 80*self.numberOfRightButtons;
-  UIView *buttonView = [[UIView alloc]initWithFrame:CGRectMake(80, 0, self.rightButtonWidth, 100)];
+  UIView *buttonView = [[UIView alloc]initWithFrame:CGRectMake(320-self.rightButtonWidth, 0, self.rightButtonWidth, 100)];
   [self.contentView addSubview:buttonView];
   self.buttonView = buttonView;
   self.buttonView.backgroundColor = [UIColor blackColor];
@@ -75,24 +75,6 @@
     [self.buttonView addSubview:button];
     [button addTarget:self action:@selector(rightButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
   }
-  
-//  UIButton *button1 = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.buttonView.frame)/3, 100)];
-//  button1.backgroundColor = [UIColor orangeColor];
-//  [button1 setTitle:@"More" forState:UIControlStateNormal];
-//  [self.buttonView addSubview:button1];
-//  self.button1 = button1;
-//  
-//  UIButton *button2 = [[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMaxX(self.button1.frame), 0, CGRectGetWidth(self.buttonView.frame)/3, 100)];
-//  [self.buttonView addSubview:button2];
-//  [button2 setTitle:@"Flag" forState:UIControlStateNormal];
-//  button2.backgroundColor = [UIColor yellowColor];
-//  self.button2 = button2;
-//  
-//  UIButton *button3 = [[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMaxX(self.button2.frame), 0, CGRectGetWidth(self.buttonView.frame)/3, 100)];
-//  button3.backgroundColor = [UIColor grayColor];
-//  [button3 setTitle:@"Archive" forState:UIControlStateNormal];
-//  [self.buttonView addSubview:button3];
-//  self.button3 = button3;
 }
 
 - (void)rightButtonTapped:(id)sender
@@ -167,7 +149,7 @@
 - (void)didOpenRightButtonView
 {
   [UIView animateWithDuration:0.1f delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
-    [self.myContentView setCenter:CGPointMake(-self.rightButtonWidth/3, 50)];
+    [self.myContentView setCenter:CGPointMake(160-self.rightButtonWidth, 50)];
     [self.buttonView setCenter:CGPointMake(320-self.rightButtonWidth/2, 50)];
     for (int i=0; i<self.numberOfRightButtons; i++) {
       UIButton *button = (UIButton *)[self.buttonView viewWithTag:100+i];
@@ -176,18 +158,6 @@
       frame.size.width = 80;
       button.frame = frame;
     }
-//    CGRect frame = self.button1.frame;
-//    frame.origin.x = 0;
-//    frame.size.width = 80;
-//    self.button1.frame =frame;
-//    frame =self.button2.frame;
-//    frame.origin.x = CGRectGetMaxX(self.button1.frame);
-//    frame.size.width = 80;
-//    self.button2.frame = frame;
-//    frame = self.button3.frame;
-//    frame.origin.x = CGRectGetMaxX(self.button2.frame);
-//    frame.size.width = 80;
-//    self.button3.frame = frame;
   } completion:^(BOOL finished) {
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(closeButtonView:)];
     [self.contentView addGestureRecognizer:tap];
@@ -199,8 +169,8 @@
 - (void)didOpenLeftButtonView
 {
   [UIView animateWithDuration:0.1f animations:^{
-    [self.myContentView setCenter:CGPointMake(400, 50)];
-    [self.leftButtonView setCenter:CGPointMake(120, 50)];
+    [self.myContentView setCenter:CGPointMake(320+self.leftButtonWidth/3, 50)];
+    [self.leftButtonView setCenter:CGPointMake(self.leftButtonWidth/2, 50)];
   } completion:^(BOOL finished) {
     NSLog(@"did open left button view");
   }];
@@ -221,7 +191,7 @@
 {
   NSLog(@"did close right button view");
   [UIView animateWithDuration:0.1f delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
-    [self.myContentView setCenter:CGPointMake(self.rightButtonWidth*2/3, 50)];
+    [self.myContentView setCenter:CGPointMake(160, 50)];
     [self.buttonView setCenter:CGPointMake(320+self.rightButtonWidth/2, 50)];
     for (int i=0; i<self.numberOfRightButtons; i++) {
       UIButton *button = (UIButton *)[self.buttonView viewWithTag:100+i];
@@ -230,18 +200,6 @@
       frame.size.width = 80;
       button.frame = frame;
     }
-//    CGRect frame = self.button1.frame;
-//    frame.origin.x = 0;
-//    frame.size.width = 80;
-//    self.button1.frame =frame;
-//    frame =self.button2.frame;
-//    frame.origin.x = CGRectGetMaxX(self.button1.frame);
-//    frame.size.width = 80;
-//    self.button2.frame = frame;
-//    frame = self.button3.frame;
-//    frame.origin.x = CGRectGetMaxX(self.button2.frame);
-//    frame.size.width = 80;
-//    self.button3.frame = frame;
   } completion:^(BOOL finished) {
     self.righButtonViewOpen = NO;
     [self.contentView removeGestureRecognizer:self.tapGesture];
@@ -278,7 +236,7 @@
   NSLog(@"will open right button view");
   [UIView animateWithDuration:0.1f animations:^{
     CGFloat centerX = self.myContentView.center.x;
-    [self.myContentView setCenter:CGPointMake(MAX(-self.rightButtonWidth/3,centerX +distanceMoved), 50)];
+    [self.myContentView setCenter:CGPointMake(MAX(-self.rightButtonWidth/self.numberOfRightButtons,centerX +distanceMoved), 50)];
     [self.buttonView setCenter:CGPointMake(MAX(320-self.rightButtonWidth/2, self.buttonView.center.x + distanceMoved), 50)];
     for (int i=0; i<self.numberOfRightButtons; i++) {
       UIButton *button = (UIButton *)[self.buttonView viewWithTag:100+i];
@@ -287,18 +245,6 @@
       frame.size.width = (320 - CGRectGetMaxX(self.myContentView.frame))/self.numberOfRightButtons;
       button.frame = frame;
     }
-//    CGRect frame = self.button1.frame;
-//    frame.origin.x = 0;
-//    frame.size.width = (320 - CGRectGetMaxX(self.myContentView.frame))/3;
-//    self.button1.frame = frame;
-//    frame =self.button2.frame;
-//    frame.origin.x = CGRectGetMaxX(self.button1.frame);
-//    frame.size.width = (320 - CGRectGetMaxX(self.myContentView.frame))/3;
-//    self.button2.frame = frame;
-//    frame = self.button3.frame;
-//    frame.origin.x = CGRectGetMaxX(self.button2.frame);
-//    frame.size.width = (320 - CGRectGetMaxX(self.myContentView.frame))/3;
-//    self.button3.frame = frame;
   } completion:^(BOOL finished) {
     self.righButtonViewOpen = YES;
   }];
@@ -318,18 +264,6 @@
       frame.size.width = (320 - CGRectGetMaxX(self.myContentView.frame))/self.numberOfRightButtons;
       button.frame = frame;
     }
-//    CGRect frame = self.button1.frame;
-//    frame.origin.x = 0;
-//    frame.size.width = (320 - CGRectGetMaxX(self.myContentView.frame))/3;
-//    self.button1.frame =frame;
-//    frame =self.button2.frame;
-//    frame.origin.x = CGRectGetMaxX(self.button1.frame);
-//    frame.size.width = (320 - CGRectGetMaxX(self.myContentView.frame))/3;
-//    self.button2.frame = frame;
-//    frame = self.button3.frame;
-//    frame.origin.x = CGRectGetMaxX(self.button2.frame);
-//    frame.size.width = (320 - CGRectGetMaxX(self.myContentView.frame))/3;
-//    self.button3.frame = frame;
   } completion:^(BOOL finished) {
   }];
 }
@@ -337,7 +271,7 @@
 - (void)closeButtonView:(UITapGestureRecognizer *)tap
 {
   [UIView animateWithDuration:0.1f delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
-    [self.myContentView setCenter:CGPointMake(self.rightButtonWidth*2/3, 50)];
+    [self.myContentView setCenter:CGPointMake(160, 50)];
     [self.buttonView setCenter:CGPointMake(320+self.rightButtonWidth/2, 50)];
     for (int i=0; i<self.numberOfRightButtons; i++) {
       UIButton *button = (UIButton *)[self.buttonView viewWithTag:100+i];
@@ -346,21 +280,6 @@
       frame.size.width = 80;
       button.frame = frame;
     }
-
-//    [self.myContentView setCenter:CGPointMake(160, 50)];
-//    [self.buttonView setCenter:CGPointMake(440, 50)];
-//    CGRect frame = self.button1.frame;
-//    frame.origin.x = 0;
-//    frame.size.width = 80;
-//    self.button1.frame =frame;
-//    frame =self.button2.frame;
-//    frame.origin.x = CGRectGetMaxX(self.button1.frame);
-//    frame.size.width = 80;
-//    self.button2.frame = frame;
-//    frame = self.button3.frame;
-//    frame.origin.x = CGRectGetMaxX(self.button2.frame);
-//    frame.size.width = 80;
-//    self.button3.frame = frame;
   } completion:^(BOOL finished) {
     self.righButtonViewOpen = NO;
     [self.contentView removeGestureRecognizer:self.tapGesture];
