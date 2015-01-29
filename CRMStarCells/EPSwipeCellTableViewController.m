@@ -59,8 +59,8 @@ static NSString* EPSWipeCellIdentifier = @"EPSwipeCell";
     cell = [[EPSwipeCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:EPSWipeCellIdentifier];
   }
   cell.delegate = self;
-  cell.numberOfLeftButtons = 5;
-  cell.numberOfRightButtons = 5;
+  cell.numberOfLeftButtons = 3;
+  cell.numberOfRightButtons = 3;
   return cell;
 }
 

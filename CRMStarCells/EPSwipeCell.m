@@ -46,63 +46,74 @@
 {
   self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
   if (self) {
+    [self setupButtons];
+    [self setupGestureRecognizer];
   }
   return  self;
 }
 
-- (void)layoutSubviews
+- (void)setNumberOfLeftButtons:(NSInteger)numberOfLeftButtons
 {
-  [super layoutSubviews];
-  self.cellHeight = CGRectGetHeight(self.contentView.frame);
-  self.cellWidth = CGRectGetWidth(self.contentView.frame);
-  [self setupButtons];
+  if (self.numberOfLeftButtons == numberOfLeftButtons) {
+    return;
+  }
+  _numberOfLeftButtons = numberOfLeftButtons;
+  self.leftButtonWidth = self.buttonWidth*numberOfLeftButtons;
+  CGRect frame = self.leftButtonView.frame;
+  frame.origin.x = -self.buttonWidth*numberOfLeftButtons;
+  frame.size.width = self.buttonWidth*numberOfLeftButtons;
+  self.leftButtonView.frame =frame;
+  
+  for (int i = 0; i<_numberOfLeftButtons; i++) {
+    UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(self.buttonWidth*i, 0,self.buttonWidth, self.cellHeight)];
+    [button setTitle:[NSString stringWithFormat:@"%d",i+1] forState:UIControlStateNormal];
+    button.backgroundColor = [UIColor greenColor];
+    button.tag = 200+i;
+    button.alpha = (1- 0.15*i);
+    [self.leftButtonView addSubview:button];
+    [button addTarget:self action:@selector(leftButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+  }
+}
+
+- (void)setNumberOfRightButtons:(NSInteger)numberOfRightButtons
+{
+  if (self.numberOfRightButtons == numberOfRightButtons) {
+    return;
+  }
+  _numberOfRightButtons = numberOfRightButtons;
+  self.rightButtonWidth = self.buttonWidth*numberOfRightButtons;
+  CGRect frame = self.rightButtonView.frame;
+  frame.origin.x = self.cellWidth;
+  frame.size.width = self.buttonWidth*numberOfRightButtons;
+  self.rightButtonView.frame = frame;
+  for (int i = 0; i<self.numberOfRightButtons; i++) {
+    UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(self.buttonWidth*i, 0, self.buttonWidth, self.cellHeight)];
+    [button setTitle:[NSString stringWithFormat:@"%d",i+1] forState:UIControlStateNormal];
+    button.backgroundColor = [UIColor blueColor];
+    button.alpha = 1 - 0.15*(self.numberOfRightButtons-i-1);
+    button.tag = 100+i;
+    [self.rightButtonView addSubview:button];
+    [button addTarget:self action:@selector(rightButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+  }
 }
 
 - (void)setupButtons
 {
-  if (!self.cellContentsDrawn) {
-    self.numberOfLeftButtons = MIN(self.numberOfLeftButtons, 4);
-    self.numberOfRightButtons = MIN(self.numberOfRightButtons, 4);
-    UIColor *rightColor = [UIColor blueColor];
-    UIColor *leftColor = [UIColor greenColor];
-    self.buttonWidth = 58;
-    self.leftButtonWidth = self.buttonWidth*self.numberOfLeftButtons;
-    self.rightButtonWidth = self.buttonWidth*self.numberOfRightButtons;
-    UIView *buttonView = [[UIView alloc]initWithFrame:CGRectMake(self.cellWidth-self.rightButtonWidth, 0, self.rightButtonWidth, self.cellHeight)];
-    [self.contentView addSubview:buttonView];
-    self.rightButtonView = buttonView;
-    
-    UIView *leftButtonView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.leftButtonWidth, self.cellHeight)];
-    [self.contentView addSubview:leftButtonView];
-    self.leftButtonView = leftButtonView;
-    
-    UIView *myContentView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.cellWidth, self.cellHeight)];
-    [self.contentView addSubview:myContentView];
-    [self.contentView bringSubviewToFront:myContentView];
-    self.myContentView = myContentView;
-    
-    for (int i = 0; i<self.numberOfRightButtons; i++) {
-      UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(self.buttonWidth*i, 0, self.buttonWidth, self.cellHeight)];
-      [button setTitle:[NSString stringWithFormat:@"%d",i+1] forState:UIControlStateNormal];
-      button.backgroundColor = rightColor;
-      button.alpha = 1 - 0.15*(self.numberOfRightButtons-i-1);
-      button.tag = 100+i;
-      [self.rightButtonView addSubview:button];
-      [button addTarget:self action:@selector(rightButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
-    }
-    
-    for (int i = 0; i<self.numberOfLeftButtons; i++) {
-      UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(self.buttonWidth*i, 0, self.buttonWidth, self.cellHeight)];
-      [button setTitle:[NSString stringWithFormat:@"%d",i+1] forState:UIControlStateNormal];
-      button.backgroundColor = leftColor;
-      button.tag = 200+i;
-      button.alpha = (1- 0.15*i);
-      [self.leftButtonView addSubview:button];
-      [button addTarget:self action:@selector(leftButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
-    }
-    [self setupGestureRecognizer];
-    self.cellContentsDrawn = YES;
-  }
+  self.cellWidth = 320;
+  self.cellHeight = 80;
+  self.buttonWidth = 58;
+  UIView *buttonView = [[UIView alloc]initWithFrame:CGRectMake(self.cellWidth-240, 0, 240, self.cellHeight)];
+  [self.contentView addSubview:buttonView];
+  self.rightButtonView = buttonView;
+  
+  UIView *leftButtonView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 240, self.cellHeight)];
+  [self.contentView addSubview:leftButtonView];
+  self.leftButtonView = leftButtonView;
+  
+  UIView *myContentView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.cellWidth, self.cellHeight)];
+  [self.contentView addSubview:myContentView];
+  [self.contentView bringSubviewToFront:myContentView];
+  self.myContentView = myContentView;
 }
 
 - (void)setupGestureRecognizer
@@ -110,15 +121,8 @@
   UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(swiped:)];
   [self.contentView addGestureRecognizer:pan];
   self.panGesture = pan;
-  
-  CGRect frame = self.rightButtonView.frame;
-  frame.origin.x = self.cellWidth;
-  self.rightButtonView.frame = frame;
-  
-  frame = self.leftButtonView.frame;
-  frame.origin.x = -self.buttonWidth*self.numberOfLeftButtons;
-  self.leftButtonView.frame =frame;
 }
+
 
 - (void)swiped:(UIPanGestureRecognizer *)pan
 {
@@ -293,7 +297,9 @@
       UIButton *button = (UIButton *)[self.rightButtonView viewWithTag:100+i];
       CGRect frame = button.frame;
       frame.origin.x = (self.cellWidth - CGRectGetMaxX(self.myContentView.frame))/self.numberOfRightButtons*i;
+      NSLog(@"button %d origin x %f", i, frame.origin.x);
       frame.size.width = (self.cellWidth - CGRectGetMaxX(self.myContentView.frame))/self.numberOfRightButtons;
+      NSLog(@"button %d width x %f", i, frame.size.width);
       button.frame = frame;
     }
   } completion:^(BOOL finished) {

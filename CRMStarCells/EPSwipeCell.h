@@ -24,8 +24,8 @@
 
 @property BOOL leftButtonViewOpen;
 
-@property NSInteger numberOfRightButtons;
+@property (nonatomic) NSInteger numberOfRightButtons;
 
-@property NSInteger numberOfLeftButtons;
+@property  (nonatomic) NSInteger numberOfLeftButtons;
 
 @end
