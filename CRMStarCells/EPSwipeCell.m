@@ -55,7 +55,6 @@
   self.cellHeight = CGRectGetHeight(self.contentView.frame);
   self.cellWidth = CGRectGetWidth(self.contentView.frame);
   [self setupButtons];
-  [self setupGestureRecognizer];
 }
 
 - (void)setupButtons
@@ -94,6 +93,8 @@
       button.tag = 200+i;
       [self.leftButtonView addSubview:button];
       [button addTarget:self action:@selector(leftButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+      
+      [self setupGestureRecognizer];
     }
     self.cellContentsDrawn = YES;
   }
