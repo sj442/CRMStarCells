@@ -60,7 +60,7 @@ static NSString* EPSWipeCellIdentifier = @"EPSwipeCell";
   }
   cell.delegate = self;
   cell.numberOfLeftButtons = 3;
-  cell.numberOfRightButtons = 3;
+  cell.numberOfRightButtons = 4;
   return cell;
 }
 

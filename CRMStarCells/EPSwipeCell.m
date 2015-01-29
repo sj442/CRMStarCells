@@ -55,6 +55,8 @@ static CGFloat cellHeight = 80.0f;
   return cellHeight;
 }
 
+#pragma mark - Setters
+
 - (void)setNumberOfLeftButtons:(NSInteger)numberOfLeftButtons
 {
   if (self.numberOfLeftButtons == numberOfLeftButtons) {
@@ -100,20 +102,55 @@ static CGFloat cellHeight = 80.0f;
   }
 }
 
+#pragma mark - Layout
+
 - (void)setupButtons
 {
   self.cellWidth = [UIScreen mainScreen].bounds.size.width;
   self.buttonWidth = 58;
   
-  UIView *buttonView = [[UIView alloc]initWithFrame:CGRectMake(self.cellWidth-240, 0, 240, cellHeight)];
+  [self setupRightButtonView];
+  
+  [self setupLeftButtonView];
+  
+  [self setupMyContentView];
+}
+
+- (void)setupRightButtonView
+{
+  UIView *buttonView = [UIView new];
+  CGRect frame = buttonView.frame;
+  frame.origin.x = self.cellWidth-240;
+  frame.origin.y = 0;
+  frame.size.width = 240;
+  frame.size.height = cellHeight;
+  buttonView.frame = frame;
   [self.contentView addSubview:buttonView];
   self.rightButtonView = buttonView;
-  
-  UIView *leftButtonView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 240, cellHeight)];
+}
+
+- (void)setupLeftButtonView
+{
+  UIView *leftButtonView = [UIView new];
+  CGRect frame = leftButtonView.frame;
+  frame.origin.x = 0;
+  frame.origin.y = 0;
+  frame.size.width = 240;
+  frame.size.height = cellHeight;
+  leftButtonView.frame = frame;
   [self.contentView addSubview:leftButtonView];
   self.leftButtonView = leftButtonView;
-  
+}
+
+- (void)setupMyContentView
+{
   UIView *myContentView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.cellWidth, cellHeight)];
+  CGRect frame = myContentView.frame;
+  frame.origin.x = 0;
+  frame.origin.y = 0;
+  frame.size.width = self.cellWidth;
+  frame.size.height = cellHeight;
+  myContentView.frame = frame;
   [self.contentView addSubview:myContentView];
   [self.contentView bringSubviewToFront:myContentView];
   self.myContentView = myContentView;
@@ -126,6 +163,7 @@ static CGFloat cellHeight = 80.0f;
   self.panGesture = pan;
 }
 
+#pragma mark - Gesture Recognizer Methods
 
 - (void)swiped:(UIPanGestureRecognizer *)pan
 {
@@ -328,6 +366,8 @@ static CGFloat cellHeight = 80.0f;
     NSLog(@"will close right button view");
   }];
 }
+
+#pragma mark - Action Methods
 
 - (void)closeLeftButtonView:(UITapGestureRecognizer *)tap
 {
