@@ -39,13 +39,13 @@
   self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
   if (self) {
     
-    [self setupRightButtons];
+    [self setupButtons];
     [self setupGestureRecognizer];
   }
   return  self;
 }
 
-- (void)setupRightButtons
+- (void)setupButtons
 {
   UIView *buttonView = [[UIView alloc]initWithFrame:CGRectMake(80, 0, 240, 100)];
   [self.contentView addSubview:buttonView];
@@ -120,27 +120,39 @@
   if (pan.state == UIGestureRecognizerStateBegan) {
     CGPoint startPoint = [pan locationInView:self.myContentView];
     self.startPoint = startPoint;
-    NSLog(@"start point x %f", self.startPoint.x);
   }
   if (pan.state == UIGestureRecognizerStateChanged) {
     CGPoint translatedPoint = [pan locationInView:self.myContentView];
     CGFloat distanceMoved = (translatedPoint.x-self.startPoint.x);
-    if (distanceMoved>0) {
-     // [self willCloseRightButtonViewByDistance:distanceMoved];
-      [self willOpenLeftButtonViewByDistance:distanceMoved];
-    } else {
-      //[self willOpenRightButtonViewByDistance:distanceMoved];
-      [self willCloseLeftButtonViewByDistance:distanceMoved];
+    if (distanceMoved>0) { //right swipe
+      if (self.righButtonViewOpen) {
+        [self willCloseRightButtonViewByDistance:distanceMoved];
+      } else {
+        [self willOpenLeftButtonViewByDistance:distanceMoved];
+      }
+    } else { //left swipe
+      if (self.leftButtonViewOpen) {
+        [self willCloseLeftButtonViewByDistance:distanceMoved];
+      } else {
+        [self willOpenRightButtonViewByDistance:distanceMoved];
+      }
     }
   }
   if (pan.state == UIGestureRecognizerStateEnded) {
     CGFloat velocityX = [pan velocityInView:self.contentView].x;
     if (velocityX>0) {//moving right
-    //  [self didCloseRightButtonView];
-      [self didOpenLeftButtonView];
+      if (self.righButtonViewOpen) {
+        [self didCloseRightButtonView];
+      } else {
+        [self didOpenLeftButtonView];
+      }
     } else { //moving left
-     // [self didOpenRightButtonView];
-      [self didCloseLeftButtonView];
+      if (self.leftButtonViewOpen) {
+        [self didCloseLeftButtonView];
+      } else {
+        [self didOpenRightButtonView];
+
+      }
     }
   }
 }
@@ -185,6 +197,7 @@
     [self.myContentView setCenter:CGPointMake(160, 50)];
     [self.leftButtonView setCenter:CGPointMake(-120, 50)];
   } completion:^(BOOL finished) {
+    self.leftButtonViewOpen = NO;
   }];
 }
 
@@ -217,8 +230,8 @@
     CGFloat centerX = self.myContentView.center.x;
     [self.myContentView setCenter:CGPointMake(MIN(440,centerX +distanceMoved), 50)];
     [self.leftButtonView setCenter:CGPointMake(MIN(120, self.leftButtonView.center.x + distanceMoved), 50)];
-    NSLog(@"0 left button view center %f", self.leftButtonView.center.x);
   } completion:^(BOOL finished) {
+    self.leftButtonViewOpen = YES;
   }];
 }
 
@@ -228,7 +241,6 @@
     CGFloat centerX = self.myContentView.center.x;
     [self.myContentView setCenter:CGPointMake(MAX(160,centerX +distanceMoved), 50)];
     [self.leftButtonView setCenter:CGPointMake(MAX(-120, self.leftButtonView.center.x + distanceMoved), 50)];
-    NSLog(@"1 left button view center %f", self.leftButtonView.center.x);
   } completion:^(BOOL finished) {
   }];
 }
@@ -252,6 +264,7 @@
     frame.size.width = (320 - CGRectGetMaxX(self.myContentView.frame))/3;
     self.button3.frame = frame;
   } completion:^(BOOL finished) {
+    self.righButtonViewOpen = YES;
   }];
 }
 
