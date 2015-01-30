@@ -12,8 +12,6 @@ static CGFloat cellHeight = 80.0f;
 
 @interface EPSwipeCell ()
 
-@property (strong, nonatomic) UIPanGestureRecognizer *panGesture;
-
 @property (strong, nonatomic) UITapGestureRecognizer *tapGesture;
 
 @property (strong, nonatomic) UITapGestureRecognizer *leftTapGesture;
@@ -160,7 +158,21 @@ static CGFloat cellHeight = 80.0f;
 {
   UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(swiped:)];
   [self.contentView addGestureRecognizer:pan];
+  pan.delegate = self;
   self.panGesture = pan;
+}
+
+- (void)resetButtonViews
+{
+  CGRect frame = self.rightButtonView.frame;
+  frame.origin.x = self.cellWidth;
+  self.rightButtonView.frame = frame;
+  
+  frame = self.leftButtonView.frame;
+  frame.origin.x = -self.buttonWidth*self.numberOfLeftButtons;
+  self.leftButtonView.frame =frame;
+  self.leftButtonViewOpen = NO;
+  self.righButtonViewOpen = NO;
 }
 
 #pragma mark - Gesture Recognizer Methods
@@ -182,13 +194,13 @@ static CGFloat cellHeight = 80.0f;
       self.totalDistance +=distanceMoved;
     }
     if (self.totalDistance>0) { //right swipe
-      if (self.righButtonViewOpen && self.numberOfRightButtons>0) {
+      if (self.righButtonViewOpen && self.numberOfRightButtons>0 && !self.leftButtonViewOpen) {
         [self willCloseRightButtonViewByDistance:distanceMoved];
       } else if (self.numberOfLeftButtons>0){
         [self willOpenLeftButtonViewByDistance:distanceMoved];
       }
     } else { //left swipe
-      if (self.leftButtonViewOpen && self.numberOfLeftButtons>0) {
+      if (self.leftButtonViewOpen && self.numberOfLeftButtons>0 && !self.righButtonViewOpen) {
         [self willCloseLeftButtonViewByDistance:distanceMoved];
       } else if (self.numberOfRightButtons>0) {
         [self willOpenRightButtonViewByDistance:distanceMoved];
@@ -196,18 +208,20 @@ static CGFloat cellHeight = 80.0f;
     }
   }
   if (pan.state == UIGestureRecognizerStateEnded) {
-    CGFloat velocityX = [pan velocityInView:self.myContentView].x;
-    if (velocityX>=0) {//moving right
-      if (self.righButtonViewOpen && self.numberOfRightButtons>0) {
-        [self didCloseRightButtonView];
-      } else if (self.numberOfLeftButtons) {
-        [self didOpenLeftButtonView];
-      }
-    } else { //moving left
-      if (self.leftButtonViewOpen && self.numberOfLeftButtons >0) {
-        [self didCloseLeftButtonView];
-      } else if (self.numberOfRightButtons>0){
-        [self didOpenRightButtonView];
+        CGFloat velocityX = [pan velocityInView:self.myContentView].x;
+    if (self.leftButtonViewOpen || self.righButtonViewOpen) {
+      if (velocityX>=0) {//moving right
+        if (self.righButtonViewOpen && self.numberOfRightButtons>0 && !self.leftButtonViewOpen) {
+          [self didCloseRightButtonView];
+        } else if (self.numberOfLeftButtons) {
+          [self didOpenLeftButtonView];
+        }
+      } else { //moving left
+        if (self.leftButtonViewOpen && self.numberOfLeftButtons >0 && !self.righButtonViewOpen) {
+          [self didCloseLeftButtonView];
+        } else if (self.numberOfRightButtons>0){
+          [self didOpenRightButtonView];
+        }
       }
     }
   }
@@ -338,9 +352,7 @@ static CGFloat cellHeight = 80.0f;
       UIButton *button = (UIButton *)[self.rightButtonView viewWithTag:100+i];
       CGRect frame = button.frame;
       frame.origin.x = (self.cellWidth - CGRectGetMaxX(self.myContentView.frame))/self.numberOfRightButtons*i;
-      NSLog(@"button %d origin x %f", i, frame.origin.x);
       frame.size.width = (self.cellWidth - CGRectGetMaxX(self.myContentView.frame))/self.numberOfRightButtons;
-      NSLog(@"button %d width x %f", i, frame.size.width);
       button.frame = frame;
     }
   } completion:^(BOOL finished) {
@@ -389,6 +401,13 @@ static CGFloat cellHeight = 80.0f;
 {
   UIButton *button = (UIButton*)sender;
   [self.delegate leftButtonTappedWithIndex:button.tag-200];
+}
+
+#pragma mark - UIGestureRecognizerDelegate
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+  return YES;
 }
 
 @end

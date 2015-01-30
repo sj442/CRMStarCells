@@ -37,6 +37,8 @@
 		3FB985AF1A7038190078CB86 /* EPRightTextGroupMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB985AE1A7038190078CB86 /* EPRightTextGroupMessageCell.m */; };
 		3FB985B21A703DD00078CB86 /* EPRightImageMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB985B11A703DD00078CB86 /* EPRightImageMessageCell.m */; };
 		3FB985B51A703E740078CB86 /* EPRightImageGroupMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB985B41A703E740078CB86 /* EPRightImageGroupMessageCell.m */; };
+		3FEB98E81A7AE13200411BE5 /* EPTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FEB98E71A7AE13200411BE5 /* EPTableView.m */; };
+		3FEB98EB1A7AE1C600411BE5 /* EPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FEB98EA1A7AE1C600411BE5 /* EPViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,6 +109,10 @@
 		3FB985B11A703DD00078CB86 /* EPRightImageMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPRightImageMessageCell.m; sourceTree = "<group>"; };
 		3FB985B31A703E740078CB86 /* EPRightImageGroupMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EPRightImageGroupMessageCell.h; sourceTree = "<group>"; };
 		3FB985B41A703E740078CB86 /* EPRightImageGroupMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPRightImageGroupMessageCell.m; sourceTree = "<group>"; };
+		3FEB98E61A7AE13200411BE5 /* EPTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EPTableView.h; sourceTree = "<group>"; };
+		3FEB98E71A7AE13200411BE5 /* EPTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPTableView.m; sourceTree = "<group>"; };
+		3FEB98E91A7AE1C600411BE5 /* EPViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EPViewController.h; sourceTree = "<group>"; };
+		3FEB98EA1A7AE1C600411BE5 /* EPViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,6 +194,10 @@
 				3FB985B41A703E740078CB86 /* EPRightImageGroupMessageCell.m */,
 				3F3239B81A76C41A003A088B /* EPSwipeCell.h */,
 				3F3239B91A76C41A003A088B /* EPSwipeCell.m */,
+				3FEB98E61A7AE13200411BE5 /* EPTableView.h */,
+				3FEB98E71A7AE13200411BE5 /* EPTableView.m */,
+				3FEB98E91A7AE1C600411BE5 /* EPViewController.h */,
+				3FEB98EA1A7AE1C600411BE5 /* EPViewController.m */,
 				3F574E701A783FEB00ADAC9B /* SwipeScrollViewCell.h */,
 				3F574E711A783FEB00ADAC9B /* SwipeScrollViewCell.m */,
 				3F3239BB1A76C70B003A088B /* EPSwipeCellTableViewController.h */,
@@ -335,6 +345,7 @@
 				3F81163B1A6EA222001CAB49 /* EPUpdateOpportunityTableViewCell.m in Sources */,
 				3F3239BA1A76C41A003A088B /* EPSwipeCell.m in Sources */,
 				3FAED1E61A6D85FD00E18FEA /* EPUpdateNoteTableViewCell.m in Sources */,
+				3FEB98EB1A7AE1C600411BE5 /* EPViewController.m in Sources */,
 				3FB985AC1A7033D60078CB86 /* EPRightTextMessageCell.m in Sources */,
 				3F81163E1A6EB18D001CAB49 /* EPUpdateCommonTableViewCell.m in Sources */,
 				3FB9858F1A6EF1600078CB86 /* EPUpdateQualifyTableViewCell.m in Sources */,
@@ -349,6 +360,7 @@
 				3FB985A11A70102D0078CB86 /* EPLeftTextGroupMessageCell.m in Sources */,
 				3FB985B51A703E740078CB86 /* EPRightImageGroupMessageCell.m in Sources */,
 				3FB985A41A7027650078CB86 /* EPLeftImageMessageCell.m in Sources */,
+				3FEB98E81A7AE13200411BE5 /* EPTableView.m in Sources */,
 				3FB9859E1A6FFE000078CB86 /* EPLeftTextMessageCell.m in Sources */,
 				3F574E721A783FEB00ADAC9B /* SwipeScrollViewCell.m in Sources */,
 				3FAED1DE1A6D78EA00E18FEA /* NSString+EP.m in Sources */,

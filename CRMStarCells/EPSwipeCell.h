@@ -16,7 +16,7 @@
 
 @end
 
-@interface EPSwipeCell : UITableViewCell
+@interface EPSwipeCell : UITableViewCell <UIGestureRecognizerDelegate>
 
 @property (weak) id <EPSWipeCellDelegate> delegate;
 
@@ -28,6 +28,11 @@
 
 @property  (nonatomic) NSInteger numberOfLeftButtons;
 
+@property (strong, nonatomic) UIPanGestureRecognizer *panGesture;
+
 + (CGFloat)cellHeight;
+
+- (void)resetButtonViews;
+
 
 @end

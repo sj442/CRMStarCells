@@ -41,7 +41,7 @@ static NSString* EPSWipeCellIdentifier = @"EPSwipeCell";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 3;
+    return 50;
 }
 
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath
@@ -50,7 +50,7 @@ static NSString* EPSWipeCellIdentifier = @"EPSwipeCell";
   if (cell.leftButtonViewOpen || cell.righButtonViewOpen) {
     return NO;
   }
-  return YES;
+  return NO;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -61,6 +61,7 @@ static NSString* EPSWipeCellIdentifier = @"EPSwipeCell";
   cell.delegate = self;
   cell.numberOfLeftButtons = 3;
   cell.numberOfRightButtons = 4;
+  [cell resetButtonViews];
   return cell;
 }
 
@@ -76,7 +77,6 @@ static NSString* EPSWipeCellIdentifier = @"EPSwipeCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
   [tableView deselectRowAtIndexPath:indexPath animated:NO];
-  
 }
 
 #pragma mark - EPSwipeCell Delegate
@@ -109,6 +109,25 @@ static NSString* EPSWipeCellIdentifier = @"EPSwipeCell";
       NSLog(@"right button 3 tapped");
       break;
   }
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+  NSArray *visibleCells = self.tableView.visibleCells;
+  for (EPSwipeCell *cell in visibleCells) {
+    if (!cell.leftButtonViewOpen && !cell.righButtonViewOpen) {
+      cell.panGesture.enabled = NO;
+    }
+  }
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+  NSArray *visibleCells = self.tableView.visibleCells;
+  for (EPSwipeCell *cell in visibleCells) {
+    cell.panGesture.enabled = YES;
+  }
+
 }
 
 @end

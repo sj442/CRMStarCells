@@ -10,6 +10,7 @@
 #import "ImageLabelTableViewController.h"
 #import  "MessagesTableViewController.h"
 #import "EPSwipeCellTableViewController.h"
+#import "EPViewController.h"
 
 @interface AppDelegate ()
 

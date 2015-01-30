@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "EPSwipeCell.h"
 
-@interface EPSwipeCellTableViewController : UITableViewController <EPSWipeCellDelegate>
+@interface EPSwipeCellTableViewController : UITableViewController <EPSWipeCellDelegate, UIGestureRecognizerDelegate, UIScrollViewDelegate>
 
 @end
